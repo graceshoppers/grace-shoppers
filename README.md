@@ -9,8 +9,8 @@
 ## Sprints
 _Each sprint will have several main goals, followed by tasks which we need to accomplish, and issues on the project board that everyone can tackle_
 
-* Sprint 1: Basic functionality for all visitors + CRUD (for adding, deleting, editing products)
-  * Period: 4/25 - 5/2
+* **Sprint 1:** Basic functionality for all visitors + CRUD (for adding, deleting, editing products)
+  * _Period: 4/25 - 5/2_
   * Goals:
     * Anyone can browse home page(which for now can just be a catalog page serving all products)
     * Anyone can do a text search in seach bar fo specific product
@@ -39,8 +39,8 @@ _Each sprint will have several main goals, followed by tasks which we need to ac
       * Home/Landing Page component
       * Nav component
 
-* Sprint 2: Users Authentication (Unknown, Customer, Admin), additional functionalities, styles
-  * Period: 5/3 - 5/9
+* **Sprint 2:** Users Authentication (Unknown, Customer, Admin), additional functionalities, styles
+  * _Period: 5/3 - 5/9_
   * Goals:
     * Unknown:
       * can browse all pages and products
@@ -57,8 +57,8 @@ _Each sprint will have several main goals, followed by tasks which we need to ac
       * can see all pending orders and manipulate orders
   * Issues:
 
-* Sprint 3: Finalize styling, additional functionality
-  * Period: 5/10 - 5/14
+* **Sprint 3:** Finalize styling, additional functionality
+  * _Period: 5/10 - 5/14_
   * Goals:
   * Tasks:
   * Issues:
