@@ -1,6 +1,5 @@
 import React from "react";
-import SearchBar from "./SearchBar";
-import Nav from "./Nav";
+import Navbar from "./Nav";
 import addToCart from "../redux-store/store";
 import connect from "react-redux";
 import SingleProduct from "./SingleProduct";
@@ -9,11 +8,10 @@ import Link from "react-router-dom";
 const Catalog = props => {
   return (
     <div>
-      <SearchBar />
-      <Nav />
-      {props.product.map(product => {
+      <Navbar />
+      {props.products.map(product => {
         // CHECK ROUTES
-        <Link to="/products/:product">
+        <Link to={`/product/${id}`}>
           <SingleProduct key={product.id} product={product} />
         </Link>;
       })}

@@ -1,14 +1,12 @@
-import React from "react";
-import SearchBar from "./SearchBar";
-import Nav from "./Nav";
-import addToCart from "../redux-store/store";
-import connect from "react-redux";
+import React from 'react';
+import Navbar from './Nav';
+import addToCart from '../redux-store/store';
+import connect from 'react-redux';
 
 const SingleProduct = props => {
   return (
     <div>
-      <SearchBar />
-      <Nav />
+      <Navbar />
       {props.product}
       {props.product.name}
       {props.product.description}
@@ -20,5 +18,5 @@ const SingleProduct = props => {
 
 export default connect(
   null,
-  { addToCart }
+  {addToCart}
 )(SingleProduct);
