@@ -5,6 +5,7 @@
 * To Start:
   * npm install
   * npm run start:dev
+  * npm run seed
 
 ## Sprints
 _Each sprint will have several main goals, followed by tasks which we need to accomplish, and issues on the project board that everyone can tackle_

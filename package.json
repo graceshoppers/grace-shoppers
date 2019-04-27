@@ -34,7 +34,8 @@
     "postinstall": "npm run webpack",
     "webpack": "webpack",
     "webpack:dev": "npm run webpack -- --mode=development --watch",
-    "start:dev": "npm run webpack:dev & DATABASE_URL=postgres://localhost/graceshoppers nodemon server/server.js --ignore src/ --ignore dist/",
+    "start:dev": "npm run webpack:dev & DATABASE_URI=postgres://localhost/graceshoppers nodemon server/server.js --ignore src/ --ignore dist/",
+    "seed": "node server/db/seed/index.js",
     "heroku-postbuild": "webpack -p"
   },
   "author": "",
