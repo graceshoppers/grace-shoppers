@@ -5,7 +5,6 @@ const connection = require('./database');
 const User = require('./models/users-model');
 const Category = require('./models/categories-model');
 const Product = require('./models/products-model');
-const Order = require('./models/order-model');
 const Review = require('./models/reviews-model');
 
 Category.hasMany(Product);
