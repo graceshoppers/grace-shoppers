@@ -31,3 +31,13 @@ router.post('/', async (req, res, next) => {
     next(err);
   }
 });
+
+router.put('/:id', async (req, res, next) => {
+  try {
+    await Product.update(req.body, {where: {id: req.params.id * 1}});
+    const updatedProduct = Product.findByPk(req.params.id * 1);
+    res.status(200).json(updatedProduct);
+  } catch (err) {
+    next(err);
+  }
+});
