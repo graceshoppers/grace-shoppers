@@ -1,9 +1,14 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const {connection} = require('./db/index');
+const {
+  methods: {syncAndSeed},
+} = require('./db/index');
 
 const PORT = process.env.PORT || 3000;
+
+//seed our db
+syncAndSeed();
 
 //static middleware
 app.use(express.static(path.join(__dirname, 'public')));
