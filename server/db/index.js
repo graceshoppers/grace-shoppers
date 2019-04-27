@@ -15,6 +15,7 @@ const syncAndSeed = () => {
 }
 
 module.exports = {
+    connection,
     models: {
         User,
         Category,
