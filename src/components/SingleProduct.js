@@ -4,19 +4,20 @@ import addToCart from '../redux-store/store';
 import connect from 'react-redux';
 
 const SingleProduct = props => {
+  const {product}=props
   return (
     <div>
       <Navbar />
-      {props.product}
-      {props.product.name}
-      {props.product.description}
-      {props.product.imageUrl}
+      {product.name}
+      {product.description}
+      {product.imageUrl}
       <button onClick={props.addToCart}>ADD TO CART</button>;
     </div>
   );
 };
 
-export default connect(
-  null,
-  {addToCart}
-)(SingleProduct);
+// export default connect(
+//   null,
+//   {addToCart}
+// )(SingleProduct);
+export default SingleProduct
