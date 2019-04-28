@@ -4,7 +4,7 @@ import Navbar from './Nav';
 
 const Home = props => {
   return (
-    <div className = 'master-container'>
+    <div className='master-container'>
       <Navbar />
     </div>
   );
