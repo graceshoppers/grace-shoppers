@@ -25,7 +25,7 @@ export default ({ item, displayTopBorder }) => {
             <div className='col-md-2'>Delete</div>
             <div className='col-md-4'>Save for later</div>
             <div className='col-md-3' />
-            <div className='col-md-3 d-flex flex-row-reverse'>Quantity: 2</div>
+            <div className='col-md-3 d-flex flex-row-reverse'>Quantity: 1</div>
           </div>
         </div>
       </div>

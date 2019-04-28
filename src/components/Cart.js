@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+// import PropTypes from 'prop-types';
 import CartItem, { parseCost } from './CartItem';
 
 const Cart = () => {
@@ -43,10 +44,11 @@ const Cart = () => {
   const totalCost = items.reduce((acc, next) => acc + next.unitCost, 0);
   return (
     <div className='cart-container'>
-      <div className='row d-flex flex-row align-items-center'>
+      <div className='row d-flex flex-row'>
         {/* 
-            Shopping cart list 
-
+        ------------------
+        Shopping cart list 
+        ------------------
         */}
         <div className='col-md-8'>
           <h3 className='shopping-cart-title'>Shopping Cart</h3>
@@ -66,10 +68,12 @@ const Cart = () => {
             style={{ margin: '2em 1.5em 0' }}
           />
           {/* 
-                Total
+          -------------
+          Total section
+          -------------
           */}
           <div className='container'>
-            <div className='row d-flex flex-row align-items-center'>
+            <div className='row d-flex flex-row'>
               <div className='col-md-9'>
                 <h3 className='shopping-cart-title'>Total</h3>
               </div>
@@ -84,9 +88,36 @@ const Cart = () => {
             </div>
           </div>
         </div>
+        {/* 
+        ----------------
+        Checkout section
+        ----------------
+        */}
+        <div className='col-md-4'>
+          <div className='container'>
+            <div className='row align-items-start'>
+              <div className='col-md-12'>
+                <h3 className='shopping-cart-title'>Checkout</h3>
+                <div
+                  className='black-divider-thin'
+                  style={{ margin: '2em 0' }}
+                />
+              </div>
+              <div className='row justify-content-md-center'>
+                <div className='col'>
+                  <button className='btn btn-success'>Checkout</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
+
+// Cart.propTypes = {
+//   items: PropTypes.array
+// };
 
 export default Cart;
