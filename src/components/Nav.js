@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class extends Component {
   constructor() {
     super();
     this.state = {
-      search: ""
+      search: ''
     };
   }
 
@@ -16,42 +16,42 @@ export default class extends Component {
     const { handleChange } = this;
 
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top justify-content-end">
-        <Link to="/" className="navbar-brand" style={{ marginRight: "2em" }}>
+      <nav className='navbar navbar-expand-lg navbar-light bg-light fixed-top justify-content-end'>
+        {/* Home link */}
+        <Link to='/' className='navbar-brand margin-right-2em'>
           Home
         </Link>
 
-        <ul className="navbar-nav">
-          <Link to="/" className="navbar-brand">
+        {/* Link list */}
+        <ul className='navbar-nav'>
+          <Link to='/' className='navbar-brand'>
             Womens
           </Link>
         </ul>
 
-        <div className="form-inline my-2 ml-auto mr-1">
+        {/* Search input and button */}
+        <div className='form-inline my-2 ml-auto mr-1 search-container'>
           <input
-            className="form-control mr-sm-2"
-            name="search"
-            type="text"
-            placeholder="Search"
+            className='form-control mr-sm-2'
+            name='search'
+            type='text'
+            placeholder='Search'
             onChange={handleChange}
-            style={{ border: "0px solid" }}
           />
-          <button
-            className="btn btn-outline-secondary"
-            type="submit"
-            style={{ border: "0px solid", marginRight: "2em" }}
-          >
-            <i className="fas fa-search fa-lg" />
+          <button className='btn margin-right-2em' type='submit'>
+            <i className='fas fa-search fa-lg' />
           </button>
         </div>
 
-        <button className="btn">
-          <i className="fas fa-user-circle fa-lg" />
+        {/* Profile/Login button */}
+        <button className='btn'>
+          <i className='fas fa-user-circle fa-lg' />
         </button>
 
-        <button className="btn">
-          <i className="fas fa-shopping-cart fa-lg" />
-        </button>
+        {/* Cart button */}
+        <Link to='/cart' className='btn'>
+          <i className='fas fa-shopping-cart fa-lg' />
+        </Link>
       </nav>
     );
   }
