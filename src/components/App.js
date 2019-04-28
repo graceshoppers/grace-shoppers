@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import Home from './Home';
 import Cart from './Cart';
+import SingleProduct from './SingleProduct';
 
 class App extends Component {
   constructor() {
@@ -29,12 +30,15 @@ class App extends Component {
     const {products} = this.state;
     return (
       <Fragment>
-        <Home products={products} />
-        <Route exact path="/cart" component={Cart} />
         <Route
           exact
           path="/"
           render={props => <Home props={props} products={products} />}
+        />
+        <Route exact path="/cart" component={Cart} />
+        <Route
+          path="/products/:id"
+          render={props => <SingleProduct props={props} products={products}/>}
         />
       </Fragment>
     );
