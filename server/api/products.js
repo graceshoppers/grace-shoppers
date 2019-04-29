@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const {
   models: {Product},
+  methods: {searchProducts},
 } = require('../db');
 
 module.exports = router;
@@ -37,6 +38,16 @@ router.put('/:id', async (req, res, next) => {
     await Product.update(req.body, {where: {id: req.params.id * 1}});
     const updatedProduct = Product.findByPk(req.params.id * 1);
     res.status(200).json(updatedProduct);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Route to search products
+router.get('/search/:searchTerm', async (req, res, next) => {
+  try {
+    const searchResults = await searchProducts(req.params.searchTerm);
+    res.status(200).json(searchResults);
   } catch (err) {
     next(err);
   }

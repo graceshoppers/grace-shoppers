@@ -1,5 +1,8 @@
 // Database connection
 const connection = require('./database');
+const {
+  Sequelize: {Op},
+} = connection;
 
 // Sequelize models
 const User = require('./models/users-model');
@@ -148,6 +151,18 @@ const syncAndSeed = () => {
     .catch(err => console.log(err));
 };
 
+const searchProducts = searchTerm => {
+  const fields = ['name', 'material'];
+
+  return Product.findAll({
+    where: {
+      [Op.or]: fields.map(field => {
+        return {[field]: {[Op.iLike]: `%${searchTerm}%`}};
+      }),
+    },
+  });
+};
+
 module.exports = {
   models: {
     User,
@@ -156,5 +171,6 @@ module.exports = {
   },
   methods: {
     syncAndSeed,
+    searchProducts,
   },
 };
