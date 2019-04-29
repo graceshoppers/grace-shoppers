@@ -139,7 +139,8 @@ export const addUser = (user) => {
   };
 };
 
-export const editCategory = (category, id) => {
+export const editCategory = (category) => {
+  const id = category.id;
   return dispatch => {
     return axios.put(`/api/category/${id}`, category)
       .then(res => res.data)
@@ -148,7 +149,8 @@ export const editCategory = (category, id) => {
   };
 };
 
-export const editProduct = (product, id) => {
+export const editProduct = (product) => {
+  const id = product.id;
   return dispatch => {
     return axios.put(`/api/product/${id}`, product)
       .then(res => res.data)
@@ -157,7 +159,8 @@ export const editProduct = (product, id) => {
   };
 };
 
-export const editUser = (user, id) => {
+export const editUser = (user) => {
+  const id = user.id;
   return dispatch => {
     return axios.put(`/api/user/${id}`, user)
       .then(res => res.data)
