@@ -61,7 +61,7 @@ const createUser = (user) => {
   };
 };
 
-const updatedCategory = (category, id) => {
+const updateCategory = (category, id) => {
   return {
     type: UPDATE_CATEGORY,
     category,
@@ -69,7 +69,7 @@ const updatedCategory = (category, id) => {
   };
 };
 
-const updatedProduct = (product, id) => {
+const updateProduct = (product, id) => {
   return {
     type: UPDATE_PRODUCT,
     product,
@@ -77,7 +77,7 @@ const updatedProduct = (product, id) => {
   };
 };
 
-const updatedUser = (user, id) => {
+const updateUser = (user, id) => {
   return {
     type: UPDATE_USER,
     user,
@@ -87,7 +87,7 @@ const updatedUser = (user, id) => {
 
 export const fetchCategories = () => {
   return dispatch => {
-    return axios.get('/category')
+    return axios.get('/api/category')
       .then(res => res.data)
       .then(categories => dispatch(gotCategories(categories)))
       .catch(e => console.log(`Error fetching categories:\n${e}`));
@@ -96,7 +96,7 @@ export const fetchCategories = () => {
 
 export const fetchProducts = () => {
   return dispatch => {
-    return axios.get('/product')
+    return axios.get('/api/product')
       .then(res => res.data)
       .then(products => dispatch(gotProducts(products)))
       .catch(e => console.log(`Error fetching products:\n${e}`));
@@ -105,7 +105,7 @@ export const fetchProducts = () => {
 
 export const fetchUsers = () => {
   return dispatch => {
-    return axios.get('/user')
+    return axios.get('/api/user')
       .then(res => res.data)
       .then(users => dispatch(gotUsers(users)))
       .catch(e => console.log(`Error fetching users:\n${e}`));
@@ -114,7 +114,7 @@ export const fetchUsers = () => {
 
 export const addCategory = (category) => {
   return dispatch => {
-    return axios.post('/category', category)
+    return axios.post('/api/category', category)
       .then(res => res.data)
       .then(category => dispatch(createCategory(category)))
       .catch(e => console.log(`Error creating a category:\n${e}`));
@@ -123,7 +123,7 @@ export const addCategory = (category) => {
 
 export const addProduct = (product) => {
   return dispatch => {
-    return axios.post('/product', product)
+    return axios.post('/api/product', product)
       .then(res => res.data)
       .then(product => dispatch(createProduct(product)))
       .catch(e => console.log(`Error creating a product:\n${e}`));
@@ -132,36 +132,36 @@ export const addProduct = (product) => {
 
 export const addUser = (user) => {
   return dispatch => {
-    return axios.post('/user', user)
+    return axios.post('/api/user', user)
       .then(res => res.data)
       .then(user => dispatch(createUser(user)))
       .catch(e => console.log(`Error creating a user:\n${e}`));
   };
 };
 
-export const updateCategory = (category, id) => {
+export const editCategory = (category, id) => {
   return dispatch => {
-    return axios.put(`/category/${id}`, category)
+    return axios.put(`/api/category/${id}`, category)
       .then(res => res.data)
-      .then(category => dispatch(updatedCategory(category, category.id)))
+      .then(category => dispatch(updateCategory(category, category.id)))
       .catch(e => console.error(`Error updating a category:\n${e}`));
   };
 };
 
-export const updateProduct = (product, id) => {
+export const editProduct = (product, id) => {
   return dispatch => {
-    return axios.put(`/product/${id}`, product)
+    return axios.put(`/api/product/${id}`, product)
       .then(res => res.data)
-      .then(product => dispatch(updatedProduct(product, product.id)))
+      .then(product => dispatch(updateProduct(product, product.id)))
       .catch(e => console.error(`Error updating a product:\n${e}`));
   };
 };
 
-export const updateUser = (user, id) => {
+export const editUser = (user, id) => {
   return dispatch => {
-    return axios.put(`/user/${id}`, user)
+    return axios.put(`/api/user/${id}`, user)
       .then(res => res.data)
-      .then(user => dispatch(updatedUser(user, user.id)))
+      .then(user => dispatch(updateUser(user, user.id)))
       .catch(e => console.error(`Error updating a user:\n${e}`));
   };
 };
