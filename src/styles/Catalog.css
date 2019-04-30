@@ -1,15 +1,14 @@
 .overflow-container {
-  border: solid 5px green;
   overflow: auto;
 }
 
 .column-list {
   display: flex;
   list-style: none;
-  align-content: space-around;
+  align-content: space-evenly;
   flex-wrap: wrap;
-  margin-left: 100px;
-  margin-right: 100px;
+  margin-left: 75px;
+  margin-right: 75px;
 }
 
 li {
@@ -21,8 +20,8 @@ li {
 }
 
 .catalog-img {
-  width: 250px;
-  height: 250px;
+  width: 275px;
+  height: 275px;
   object-fit: contain;
   position: block;
   opacity: 1;

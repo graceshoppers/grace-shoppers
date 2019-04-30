@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 
 const initialState = {
   categories: [],
-  proucts: [],
+  products: [],
   users: [],
 };
 
@@ -87,7 +87,7 @@ const updateUser = (user, id) => {
 
 export const fetchCategories = () => {
   return dispatch => {
-    return axios.get('/api/category')
+    return axios.get('/api/categories')
       .then(res => res.data)
       .then(categories => dispatch(gotCategories(categories)))
       .catch(e => console.log(`Error fetching categories:\n${e}`));
@@ -96,7 +96,7 @@ export const fetchCategories = () => {
 
 export const fetchProducts = () => {
   return dispatch => {
-    return axios.get('/api/product')
+    return axios.get('/api/products')
       .then(res => res.data)
       .then(products => dispatch(gotProducts(products)))
       .catch(e => console.log(`Error fetching products:\n${e}`));
@@ -105,7 +105,7 @@ export const fetchProducts = () => {
 
 export const fetchUsers = () => {
   return dispatch => {
-    return axios.get('/api/user')
+    return axios.get('/api/users')
       .then(res => res.data)
       .then(users => dispatch(gotUsers(users)))
       .catch(e => console.log(`Error fetching users:\n${e}`));
@@ -114,7 +114,7 @@ export const fetchUsers = () => {
 
 export const addCategory = (category) => {
   return dispatch => {
-    return axios.post('/api/category', category)
+    return axios.post('/api/categories', category)
       .then(res => res.data)
       .then(category => dispatch(createCategory(category)))
       .catch(e => console.log(`Error creating a category:\n${e}`));
@@ -123,7 +123,7 @@ export const addCategory = (category) => {
 
 export const addProduct = (product) => {
   return dispatch => {
-    return axios.post('/api/product', product)
+    return axios.post('/api/products', product)
       .then(res => res.data)
       .then(product => dispatch(createProduct(product)))
       .catch(e => console.log(`Error creating a product:\n${e}`));
@@ -132,7 +132,7 @@ export const addProduct = (product) => {
 
 export const addUser = (user) => {
   return dispatch => {
-    return axios.post('/api/user', user)
+    return axios.post('/api/users', user)
       .then(res => res.data)
       .then(user => dispatch(createUser(user)))
       .catch(e => console.log(`Error creating a user:\n${e}`));
@@ -142,7 +142,7 @@ export const addUser = (user) => {
 export const editCategory = (category) => {
   const id = category.id;
   return dispatch => {
-    return axios.put(`/api/category/${id}`, category)
+    return axios.put(`/api/categories/${id}`, category)
       .then(res => res.data)
       .then(category => dispatch(updateCategory(category, category.id)))
       .catch(e => console.error(`Error updating a category:\n${e}`));
@@ -152,7 +152,7 @@ export const editCategory = (category) => {
 export const editProduct = (product) => {
   const id = product.id;
   return dispatch => {
-    return axios.put(`/api/product/${id}`, product)
+    return axios.put(`/api/products/${id}`, product)
       .then(res => res.data)
       .then(product => dispatch(updateProduct(product, product.id)))
       .catch(e => console.error(`Error updating a product:\n${e}`));
@@ -162,7 +162,7 @@ export const editProduct = (product) => {
 export const editUser = (user) => {
   const id = user.id;
   return dispatch => {
-    return axios.put(`/api/user/${id}`, user)
+    return axios.put(`/api/users/${id}`, user)
       .then(res => res.data)
       .then(user => dispatch(updateUser(user, user.id)))
       .catch(e => console.error(`Error updating a user:\n${e}`));

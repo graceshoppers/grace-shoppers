@@ -1,33 +1,20 @@
 import React, {Component, Fragment} from 'react';
 import {Route} from 'react-router-dom';
 import axios from 'axios';
+import {connect} from'react-redux';
+import {fetchProducts, fetchUsers} from '../redux-store/store';
 
 import Home from './Home';
 import Cart from './Cart';
 import SingleProduct from './SingleProduct';
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      products: [],
-      categories: [],
-      users: [],
-    };
-  }
   async componentDidMount() {
-    {
-      /*
-        ------------------
-        Placeholder, replace with redux
-        ------------------
-        */
-    }
-    const products = await axios.get('/api/products').then(res => res.data);
-    this.setState({...this.state, products: products});
+    const {fetchProducts,fetchUsers}=this.props;
+    await Promise.all([fetchProducts(),fetchUsers()])
   }
   render() {
-    const {products} = this.state;
+    const {products}= this.props;
     return (
       <Fragment>
         <Route
@@ -45,4 +32,14 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state =>({
+  products: state.products,
+  users: state.users
+})
+
+const mapDispatchToProps = dispatch =>({
+  fetchProducts: ()=>dispatch(fetchProducts()),
+  fetchUsers: ()=>dispatch(fetchUsers()),
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(App);
