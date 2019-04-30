@@ -5,15 +5,30 @@ import connect from 'react-redux';
 import SingleProduct from './SingleProduct';
 import {NavLink} from 'react-router-dom';
 
+import '../styles/Catalog.css';
+
 const Catalog = props => {
   const {products} = props;
+
   return (
-    <div className="catalog-container">
-      <ul>
+    <div className="overflow-container">
+      <ul className="column-list">
         {products.map(product => {
           return (
             <NavLink to={`/products/${product.id}`} key={product.id}>
-              <li>{product.name}</li>
+              <li>
+                <div className="product-container">
+                  <img
+                    src={product.imageName}
+                    className="catalog-img"
+                    name={product.imageName}
+                  />
+
+                  <div className="middle">
+                    <div className="product-name">{product.name}</div>
+                  </div>
+                </div>
+              </li>
             </NavLink>
           );
         })}
