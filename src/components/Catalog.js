@@ -1,8 +1,4 @@
 import React from 'react';
-import Navbar from './Nav';
-import addToCart from '../redux-store/store';
-import connect from 'react-redux';
-import SingleProduct from './SingleProduct';
 import {NavLink} from 'react-router-dom';
 
 import '../styles/Catalog.css';
@@ -36,13 +32,5 @@ const Catalog = props => {
     </div>
   );
 };
-
-// const mapStateToProps = state => {
-//   return {
-//     products: state.products
-//   };
-// };
-
-// export default connect(mapStateToProps)(Catalog);
 
 export default Catalog;

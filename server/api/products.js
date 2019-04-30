@@ -36,7 +36,7 @@ router.post('/', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
   try {
     await Product.update(req.body, {where: {id: req.params.id * 1}});
-    const updatedProduct = Product.findByPk(req.params.id * 1);
+    const updatedProduct = await Product.findByPk(req.params.id * 1);
     res.status(200).json(updatedProduct);
   } catch (err) {
     next(err);
@@ -45,8 +45,12 @@ router.put('/:id', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
   try {
-    await Product.delete(req.params.id);
-    res.status(200).json({message: 'Deleted product successfully.'});
+    const deletedProduct = await Product.findByPk(req.params.id);
+    await Product.destroy({where: {id: req.params.id}});
+
+    res
+      .status(200)
+      .json({message: 'Deleted product successfully.', deletedProduct});
   } catch (err) {
     next(err);
   }

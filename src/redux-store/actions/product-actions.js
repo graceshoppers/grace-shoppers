@@ -1,5 +1,10 @@
 import axios from 'axios';
-import {GET_PRODUCTS, CREATE_PRODUCT, UPDATE_PRODUCT} from './action-types';
+import {
+  GET_PRODUCTS,
+  CREATE_PRODUCT,
+  UPDATE_PRODUCT,
+  DELETE_PRODUCT,
+} from './action-types';
 
 // ===============================
 // Get all products from database
@@ -49,4 +54,20 @@ const updateProduct = (updatedProduct, id) => ({
   type: UPDATE_PRODUCT,
   updatedProduct,
   id,
+});
+
+// ===============================
+// Delete a product from database
+export const deleteProduct = productId => {
+  return dispatch => {
+    return axios
+      .delete(`/api/products/${productId}`)
+      .then(res => dispatch(removeProduct(productId)))
+      .catch(e => console.error(`Error updating a product:\n${e}`));
+  };
+};
+
+const removeProduct = productId => ({
+  type: DELETE_PRODUCT,
+  productId,
 });
