@@ -110,7 +110,7 @@ const syncAndSeed = () => {
         'Yellow Gold, Black Lacquer, Citrine, Tsavorite Garnets, Diamonds',
       description:
         "The panther, the symbolic animal of Cartier, made its first appearance in the Maison's collections in 1914. Louis Cartier was the first to tame the mythic animal, and his colleague Jeanne Toussaint turned it into a legend. The panther can be fierce, playful, or lovable, displaying all the facets of its liberated personality from one collection to the next.",
-      imageName: 'panthere-de-carrtier-necklace.jpg',
+      imageName: 'panthere-de-cartier-necklace.jpg',
       unitCost: 28200,
     },
     {
