@@ -1,7 +1,7 @@
 const connection = require('../database')
 const { Sequelize: { INTEGER } } = connection
 
-const OrderItem = connection.define('orderitem', {
+const Orderitem = connection.define('orderitem', {
     quantity: {
         type: INTEGER,
         allowNull: false,
@@ -13,4 +13,4 @@ const OrderItem = connection.define('orderitem', {
     }
 })
 
-module.exports = OrderItem
+module.exports = Orderitem
