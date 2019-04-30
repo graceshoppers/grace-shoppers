@@ -5,11 +5,48 @@ import connect from 'react-redux';
 import SingleProduct from './SingleProduct';
 import {NavLink} from 'react-router-dom';
 
+import '../styles/Catalog.css'
+
 const Catalog = props => {
   const {products} = props;
   return (
-    <div className="catalog-container">
+    <div className="overflow-container">
       <ul>
+        {products.map(product => {
+          return (
+            <NavLink to={`/products/${product.id}`} key={product.id}>
+              <li>{product.name}</li>
+            </NavLink>
+          );
+        })}
+        {products.map(product => {
+          return (
+            <NavLink to={`/products/${product.id}`} key={product.id}>
+              <li>{product.name}</li>
+            </NavLink>
+          );
+        })}
+        {products.map(product => {
+          return (
+            <NavLink to={`/products/${product.id}`} key={product.id}>
+              <li>{product.name}</li>
+            </NavLink>
+          );
+        })}
+        {products.map(product => {
+          return (
+            <NavLink to={`/products/${product.id}`} key={product.id}>
+              <li>{product.name}</li>
+            </NavLink>
+          );
+        })}
+        {products.map(product => {
+          return (
+            <NavLink to={`/products/${product.id}`} key={product.id}>
+              <li>{product.name}</li>
+            </NavLink>
+          );
+        })}
         {products.map(product => {
           return (
             <NavLink to={`/products/${product.id}`} key={product.id}>

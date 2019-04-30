@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
+import '../styles/Nav.css'
+
 export default class extends Component {
   constructor() {
     super();
@@ -15,7 +17,7 @@ export default class extends Component {
     const {handleChange} = this;
 
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light justify-content-end">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light justify-content-end fixed-container">
         {/* Home link */}
         <Link to="/" className="navbar-brand margin-right-2em">
           Home
