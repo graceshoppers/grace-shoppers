@@ -9,6 +9,8 @@ const User = require('./models/users-model');
 const Category = require('./models/categories-model');
 const Product = require('./models/products-model');
 const Review = require('./models/reviews-model');
+const Order = require('./models/orders-model')
+const Orderitem = require('./models/orderitems-model')
 
 Category.hasMany(Product);
 Product.belongsTo(Category);
