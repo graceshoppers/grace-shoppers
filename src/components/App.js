@@ -1,8 +1,8 @@
 import React, {Component, Fragment} from 'react';
 import {Route} from 'react-router-dom';
-import axios from 'axios';
 import {connect} from 'react-redux';
-import {fetchProducts, fetchUsers} from '../redux-store/store';
+import {fetchProducts} from '../redux-store/actions/product-actions';
+import {fetchUsers} from '../redux-store/actions/user-actions';
 
 import Home from './Home';
 import Cart from './Cart';
@@ -16,6 +16,7 @@ class App extends Component {
   }
   render() {
     const {products} = this.props;
+
     return (
       <Fragment>
         {/* Home route */}
@@ -30,10 +31,10 @@ class App extends Component {
           render={props => <SingleProduct props={props} products={products} />}
         />
         {/* Product search route */}
-        <Route
+        {/* <Route
           to="/search/:searchTerm"
           render={({match}) => <Catalog products={[]} />}
-        />
+        /> */}
 
         {/* Checkout/cart route */}
         <Route exact path="/cart" component={Cart} />

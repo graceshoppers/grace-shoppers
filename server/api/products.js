@@ -43,6 +43,15 @@ router.put('/:id', async (req, res, next) => {
   }
 });
 
+router.delete('/:id', async (req, res, next) => {
+  try {
+    await Product.delete(req.params.id);
+    res.status(200).json({message: 'Deleted product successfully.'});
+  } catch (err) {
+    next(err);
+  }
+});
+
 // Route to search products
 router.get('/search/:searchTerm', async (req, res, next) => {
   try {
