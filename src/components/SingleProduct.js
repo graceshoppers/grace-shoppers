@@ -13,7 +13,6 @@ const SingleProduct = props => {
   if (!product) return null;
   return (
     <div>
-      <Navbar />
       <img src={product.imageName} />
       <h1>{product.name}</h1>
       <h3>{product.material}</h3>
