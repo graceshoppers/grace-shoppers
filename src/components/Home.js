@@ -7,12 +7,7 @@ import '../styles/Home.css';
 
 const Home = props => {
   const {products} = props;
-  return (
-    <div className="column-container">
-      <Navbar />
-      <Catalog products={products} />
-    </div>
-  );
+  return <Catalog products={products} />;
 };
 
 export default Home;

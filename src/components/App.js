@@ -6,8 +6,11 @@ import {fetchUsers} from '../redux-store/actions/user-actions';
 
 import Home from './Home';
 import Cart from './Cart';
+import Navbar from './Nav';
 import Catalog from './Catalog';
 import SingleProduct from './SingleProduct';
+
+import '../styles/App.css';
 
 class App extends Component {
   async componentDidMount() {
@@ -18,7 +21,8 @@ class App extends Component {
     const {products} = this.props;
 
     return (
-      <Fragment>
+      <div className="column-container">
+        <Navbar />
         {/* Home route */}
         <Route
           exact
@@ -38,7 +42,7 @@ class App extends Component {
 
         {/* Checkout/cart route */}
         <Route exact path="/cart" component={Cart} />
-      </Fragment>
+      </div>
     );
   }
 }
