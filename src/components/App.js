@@ -1,15 +1,22 @@
 import React, {Component, Fragment} from 'react';
 import {Route, Redirect} from 'react-router-dom';
 
+import {connect} from 'react-redux';
+import {fetchProducts} from '../redux-store/actions/product-actions';
+
 import Navbar from './Nav';
 import Catalog from './Catalog';
 import Cart from './Cart';
 import SingleProduct from './SingleProduct';
 
-export default class App extends Component {
+class App extends Component {
+  componentDidMount() {
+    this.props.fetchProducts();
+  }
+
   render() {
     return (
-      <Fragment>
+      <div className="column-container">
         <Route component={Navbar} />
 
         {/* Landing page route */}
@@ -29,7 +36,16 @@ export default class App extends Component {
 
         {/* Checkout/cart route */}
         <Route exact path="/cart" component={Cart} />
-      </Fragment>
+      </div>
     );
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  fetchProducts: () => dispatch(fetchProducts()),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(App);

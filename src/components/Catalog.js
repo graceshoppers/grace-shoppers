@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {NavLink} from 'react-router-dom';
 import '../styles/Catalog.css';
+import CatalogCard from './CatalogCard';
 
 import {connect} from 'react-redux';
 import {fetchCategories} from '../redux-store/actions/category-actions';
@@ -11,14 +11,6 @@ import {
 } from '../redux-store/actions/product-actions';
 
 class Catalog extends Component {
-  constructor() {
-    super();
-    this.state = {
-      categories: [],
-      products: [],
-    };
-  }
-
   setLocalProps = () => {
     const {location, match} = this.props;
     const urlArray = location.pathname.split('/');
@@ -69,30 +61,7 @@ class Catalog extends Component {
   }
 }
 
-const CatalogCard = ({attributes}) => {
-  const {id, name, imageName} = attributes;
-
-  return (
-    <NavLink to={`/products/${id}`}>
-      <li>
-        <div className="product-container">
-          <img src={imageName} className="catalog-img" name={imageName} />
-
-          <div className="middle">
-            <div className="product-name">{name}</div>
-          </div>
-        </div>
-      </li>
-    </NavLink>
-  );
-};
-
-const mapStateToProps = state => {
-  return {
-    categories: state.categories,
-    products: state.products,
-  };
-};
+const mapStateToProps = ({products}) => ({products});
 
 const mapDispatchToProps = dispatch => ({
   fetchProducts: () => dispatch(fetchProducts()),
