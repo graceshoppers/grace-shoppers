@@ -7,6 +7,7 @@ import {fetchProducts, fetchUsers} from '../redux-store/store';
 import Home from './Home';
 import Cart from './Cart';
 import SingleProduct from './SingleProduct';
+import Login from './Login';
 
 class App extends Component {
   async componentDidMount() {
@@ -27,6 +28,7 @@ class App extends Component {
           path="/products/:id"
           render={props => <SingleProduct props={props} products={products}/>}
         />
+        <Route path="/login" render={() => <Login />}/>
       </Fragment>
     );
   }
