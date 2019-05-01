@@ -25,10 +25,7 @@ export default class App extends Component {
         <Route exact path="/catalog/search/:searchTerm" component={Catalog} />
 
         {/* Product details route */}
-        <Route
-          path="/products/:id"
-          render={props => <SingleProduct props={props} />}
-        />
+        <Route path="/products/:id" component={SingleProduct} />
 
         {/* Checkout/cart route */}
         <Route exact path="/cart" component={Cart} />

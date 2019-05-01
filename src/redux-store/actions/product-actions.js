@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {
   GET_PRODUCTS,
+  GET_PRODUCTS_BY_CATEGORY,
   CREATE_PRODUCT,
   UPDATE_PRODUCT,
   DELETE_PRODUCT,
@@ -78,14 +79,14 @@ const removeProduct = productId => ({
 export const fetchProductsByCategory = category => {
   return dispatch => {
     return axios
-      .get(`/api/products/${category}`)
+      .get(`/api/products/by-category/${category}`)
       .then(res => dispatch(getProductsByCategory(res.data)))
       .catch(e => console.error(`Error searching for products:\n${e}`));
   };
 };
 
 const getProductsByCategory = productsByCategory => ({
-  type: SEARCH_PRODUCTS,
+  type: GET_PRODUCTS_BY_CATEGORY,
   productsByCategory,
 });
 

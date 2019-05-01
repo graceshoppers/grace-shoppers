@@ -1,8 +1,6 @@
 import React from 'react';
-import Navbar from './Nav';
-import addToCart from '../redux-store/store';
-import {connect} from 'react-redux';
 
+import {connect} from 'react-redux';
 import {deleteProduct} from '../redux-store/actions/product-actions';
 
 const SingleProduct = props => {

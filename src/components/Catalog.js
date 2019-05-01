@@ -18,6 +18,7 @@ class Catalog extends Component {
       products: [],
     };
   }
+
   setLocalProps = () => {
     const {location, match} = this.props;
     const urlArray = location.pathname.split('/');
@@ -33,10 +34,7 @@ class Catalog extends Component {
     }
     //
     else if (filterKeyword) {
-      const category = this.props.categories.find(
-        ({name}) => name.toLowerCase() === filterKeyword
-      );
-      this.props.fetchProducts();
+      this.props.fetchProductsByCategory(filterKeyword);
     }
   };
 

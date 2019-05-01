@@ -9,8 +9,8 @@ const User = require('./models/users-model');
 const Category = require('./models/categories-model');
 const Product = require('./models/products-model');
 const Review = require('./models/reviews-model');
-const Order = require('./models/orders-model')
-const Orderitem = require('./models/orderitems-model')
+const Order = require('./models/orders-model');
+const Orderitem = require('./models/orderitems-model');
 
 Category.hasMany(Product);
 Product.belongsTo(Category);
@@ -165,6 +165,15 @@ const searchProducts = searchTerm => {
   });
 };
 
+const getProductsByCategory = category => {
+  return Category.findOne({
+    where: {
+      name: {[Op.iLike]: category},
+    },
+    include: [Product],
+  });
+};
+
 module.exports = {
   models: {
     User,
@@ -174,5 +183,6 @@ module.exports = {
   methods: {
     syncAndSeed,
     searchProducts,
+    getProductsByCategory,
   },
 };
