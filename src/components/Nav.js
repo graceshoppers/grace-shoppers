@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
-import '../styles/Nav.css'
+import '../styles/Nav.css';
 
 export default class extends Component {
   constructor() {
@@ -13,8 +13,12 @@ export default class extends Component {
 
   handleChange = ({target: {name, value}}) => this.setState({[name]: value});
 
+  handleSubmit = event => {
+    event.handleSubmit();
+  };
+
   render() {
-    const {handleChange} = this;
+    const {handleChange, handleSubmit} = this;
 
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light justify-content-end fixed-container">
