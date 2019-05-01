@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {
   GET_PRODUCTS,
+  GET_PRODUCT_BY_ID,
   GET_PRODUCTS_BY_CATEGORY,
   CREATE_PRODUCT,
   UPDATE_PRODUCT,
@@ -88,6 +89,22 @@ export const fetchProductsByCategory = category => {
 const getProductsByCategory = productsByCategory => ({
   type: GET_PRODUCTS_BY_CATEGORY,
   productsByCategory,
+});
+
+// ===============================
+// Get product by id in database
+export const fetchProductById = productId => {
+  return dispatch => {
+    return axios
+      .get(`/api/products/${productId}`)
+      .then(res => dispatch(getProductById(res.data)))
+      .catch(e => console.error(`Error getting product:\n${e}`));
+  };
+};
+
+const getProductById = product => ({
+  type: GET_PRODUCT_BY_ID,
+  product,
 });
 
 // ===============================

@@ -1,5 +1,6 @@
 import {
   GET_PRODUCTS,
+  GET_PRODUCT_BY_ID,
   GET_PRODUCTS_BY_CATEGORY,
   CREATE_PRODUCT,
   UPDATE_PRODUCT,
@@ -11,6 +12,9 @@ export default (state = [], action) => {
   switch (action.type) {
     case GET_PRODUCTS:
       return [...action.products];
+
+    case GET_PRODUCT_BY_ID:
+      return [action.product];
 
     case GET_PRODUCTS_BY_CATEGORY:
       return [...action.productsByCategory];

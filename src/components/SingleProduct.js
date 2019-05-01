@@ -1,45 +1,53 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 import {connect} from 'react-redux';
 import {
-  fetchProducts,
+  fetchProductById,
   deleteProduct,
 } from '../redux-store/actions/product-actions';
 
-const SingleProduct = props => {
-  const {products, deleteProduct} = props;
-  const product = products.find(
-    product => product.id === +props.match.params.id
-  );
-  if (!product) return null;
+class SingleProduct extends Component {
+  componentDidMount() {
+    this.props.fetchProductById(+this.props.match.params.id);
+  }
+  render() {
+    const {products, deleteProduct} = this.props;
+    // const product = products.find(
+    //   product => product.id === +this.props.match.params.id
+    // );
+    // if (!product) return null;
 
-  return (
-    <div>
-      <img src={product.imageName} />
-      <h1>{product.name}</h1>
-      <h3>{product.material}</h3>
-      <p>{product.description}</p>
+    const product = products[0];
+    if (!product) return null;
 
-      {/* Delete product button */}
-      <button
-        style={{color: 'red', marginRight: '1em'}}
-        onClick={() => deleteProduct(product.id)}
-      >
-        Delete Product
-      </button>
+    return (
+      <div>
+        <img src={product.imageName} />
+        <h1>{product.name}</h1>
+        <h3>{product.material}</h3>
+        <p>{product.description}</p>
 
-      {/* Add to cart button */}
-      <button>Add to Cart</button>
-    </div>
-  );
-};
+        {/* Delete product button */}
+        <button
+          style={{color: 'red', marginRight: '1em'}}
+          onClick={() => deleteProduct(product.id)}
+        >
+          Delete Product
+        </button>
+
+        {/* Add to cart button */}
+        <button>Add to Cart</button>
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = state => ({
   products: state.products,
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchProducts: () => dispatch(fetchProducts()),
+  fetchProductById: productId => dispatch(fetchProductById(productId)),
 
   deleteProduct: productId => dispatch(deleteProduct(productId)),
 });
