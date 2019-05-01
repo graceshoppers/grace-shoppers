@@ -1,38 +1,50 @@
 import React from 'react';
 
 import {connect} from 'react-redux';
-import {deleteProduct} from '../redux-store/actions/product-actions';
+import {
+  fetchProducts,
+  deleteProduct,
+} from '../redux-store/actions/product-actions';
 
 const SingleProduct = props => {
   const {products, deleteProduct} = props;
   const product = products.find(
-    item => item.id === props.props.match.params.id * 1
+    product => product.id === +props.match.params.id
   );
   if (!product) return null;
+
   return (
     <div>
-      <Navbar />
       <img src={product.imageName} />
       <h1>{product.name}</h1>
       <h3>{product.material}</h3>
       <p>{product.description}</p>
-      {/* <button onClick={props.addToCart}>ADD TO CART</button>; */}
+
+      {/* Delete product button */}
       <button
         style={{color: 'red', marginRight: '1em'}}
         onClick={() => deleteProduct(product.id)}
       >
         Delete Product
       </button>
-      <button>ADD TO CART</button>
+
+      {/* Add to cart button */}
+      <button>Add to Cart</button>
     </div>
   );
 };
 
+const mapStateToProps = state => ({
+  products: state.products,
+});
+
 const mapDispatchToProps = dispatch => ({
+  fetchProducts: () => dispatch(fetchProducts()),
+
   deleteProduct: productId => dispatch(deleteProduct(productId)),
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(SingleProduct);
