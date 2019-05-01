@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 
 import '../styles/Nav.css';
 
-export default class extends Component {
+export default class Navbar extends Component {
   constructor() {
     super();
     this.state = {
