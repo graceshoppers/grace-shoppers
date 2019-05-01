@@ -74,6 +74,22 @@ const removeProduct = productId => ({
 });
 
 // ===============================
+// Get products by category in database
+export const fetchProductsByCategory = category => {
+  return dispatch => {
+    return axios
+      .get(`/api/products/${category}`)
+      .then(res => dispatch(getProductsByCategory(res.data)))
+      .catch(e => console.error(`Error searching for products:\n${e}`));
+  };
+};
+
+const getProductsByCategory = productsByCategory => ({
+  type: SEARCH_PRODUCTS,
+  productsByCategory,
+});
+
+// ===============================
 // Search for products in database
 export const searchForProductsInDatabase = searchTerm => {
   return dispatch => {

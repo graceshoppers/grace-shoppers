@@ -24,6 +24,15 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
+// router.get('/:category', async (req, res, next) => {
+//   try {
+//     const
+//     res.status(200).json(productsByCategory);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
 router.post('/', async (req, res, next) => {
   try {
     const createdProduct = await Product.create(req.body);

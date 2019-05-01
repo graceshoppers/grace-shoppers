@@ -34,16 +34,16 @@ export default class extends Component {
 
         {/* Link list */}
         <ul className="navbar-nav">
-          <Link to="/rings" className="navbar-brand">
+          <Link to="/catalog/rings" className="navbar-brand">
             Rings
           </Link>
-          <Link to="/earrings" className="navbar-brand">
+          <Link to="/catalog/earrings" className="navbar-brand">
             Earrings
           </Link>
-          <Link to="/bracelets" className="navbar-brand">
+          <Link to="/catalog/bracelets" className="navbar-brand">
             Bracelets
           </Link>
-          <Link to="/necklaces" className="navbar-brand">
+          <Link to="/catalog/necklaces" className="navbar-brand">
             Necklaces
           </Link>
         </ul>
