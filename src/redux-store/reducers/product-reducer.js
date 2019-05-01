@@ -2,6 +2,8 @@ import {
   GET_PRODUCTS,
   CREATE_PRODUCT,
   UPDATE_PRODUCT,
+  DELETE_PRODUCT,
+  SEARCH_PRODUCTS,
 } from '../actions/action-types';
 
 export default (state = [], action) => {
@@ -17,6 +19,13 @@ export default (state = [], action) => {
         ...state.filter(product => product.id !== action.updatedProduct.id),
         action.updatedProduct,
       ];
+
+    case DELETE_PRODUCT:
+      return state.filter(product => product.id !== action.productId);
+
+    case SEARCH_PRODUCTS:
+      return [...action.searchedProducts];
+
     default:
       return state;
   }

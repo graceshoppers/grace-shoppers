@@ -1,40 +1,34 @@
 import React, {Component, Fragment} from 'react';
-import {Route} from 'react-router-dom';
-import {connect} from 'react-redux';
-import {fetchProducts} from '../redux-store/actions/product-actions';
-import {fetchUsers} from '../redux-store/actions/user-actions';
+import {Route, Redirect} from 'react-router-dom';
 
-import Home from './Home';
-import Cart from './Cart';
+import Navbar from './Nav';
 import Catalog from './Catalog';
+import Cart from './Cart';
 import SingleProduct from './SingleProduct';
 
-class App extends Component {
-  async componentDidMount() {
-    const {fetchProducts, fetchUsers} = this.props;
-    await Promise.all([fetchProducts(), fetchUsers()]);
-  }
+export default class App extends Component {
   render() {
-    const {products} = this.props;
-
     return (
       <Fragment>
-        {/* Home route */}
-        <Route
-          exact
-          path="/"
-          render={props => <Home props={props} products={products} />}
-        />
+        <Route component={Navbar} />
+
+        {/* Landing page route */}
+        <Route exact path="/" render={() => <Redirect to="/catalog" />} />
+
+        {/* Catalog route */}
+        <Route exact path="/catalog" component={Catalog} />
+
+        {/* Catelog by category route */}
+        <Route exact path="/catalog/:category" component={Catalog} />
+
+        {/* Catelog with search results route */}
+        <Route exact path="/catalog/search/:searchTerm" component={Catalog} />
+
         {/* Product details route */}
         <Route
           path="/products/:id"
           render={props => <SingleProduct props={props} products={products} />}
         />
-        {/* Product search route */}
-        {/* <Route
-          to="/search/:searchTerm"
-          render={({match}) => <Catalog products={[]} />}
-        /> */}
 
         {/* Checkout/cart route */}
         <Route exact path="/cart" component={Cart} />
@@ -42,18 +36,3 @@ class App extends Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  products: state.products,
-  users: state.users,
-});
-
-const mapDispatchToProps = dispatch => ({
-  fetchProducts: () => dispatch(fetchProducts()),
-  fetchUsers: () => dispatch(fetchUsers()),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);

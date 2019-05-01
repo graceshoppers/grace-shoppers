@@ -13,12 +13,17 @@ export default class extends Component {
 
   handleChange = ({target: {name, value}}) => this.setState({[name]: value});
 
-  handleSubmit = event => {
-    event.handleSubmit();
+  handleClick = () => this.searchForTerm();
+
+  handleKeyDown = event => {
+    if (event.key === 'Enter') this.searchForTerm();
   };
 
+  searchForTerm = () =>
+    this.props.history.push(`/catalog/search/${this.state.search}`);
+
   render() {
-    const {handleChange, handleSubmit} = this;
+    const {handleChange, handleClick, handleKeyDown} = this;
 
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light justify-content-end fixed-container">
@@ -51,8 +56,9 @@ export default class extends Component {
             type="text"
             placeholder="Search"
             onChange={handleChange}
+            onKeyDown={handleKeyDown}
           />
-          <button className="btn margin-right-2em" type="submit">
+          <button className="btn margin-right-2em" onClick={handleClick}>
             <i className="fas fa-search fa-lg" />
           </button>
         </div>

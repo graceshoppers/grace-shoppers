@@ -4,13 +4,14 @@ import {
   CREATE_PRODUCT,
   UPDATE_PRODUCT,
   DELETE_PRODUCT,
+  SEARCH_PRODUCTS,
 } from './action-types';
 
 // ===============================
 // Get all products from database
 export const fetchProducts = () => {
   return dispatch => {
-    return axios
+    axios
       .get('/api/products')
       .then(res => dispatch(getProducts(res.data)))
       .catch(e => console.log(`Error fetching products:\n${e}`));
@@ -70,4 +71,20 @@ export const deleteProduct = productId => {
 const removeProduct = productId => ({
   type: DELETE_PRODUCT,
   productId,
+});
+
+// ===============================
+// Search for products in database
+export const searchForProductsInDatabase = searchTerm => {
+  return dispatch => {
+    return axios
+      .get(`/api/products/search/${searchTerm}`)
+      .then(res => dispatch(searchProducts(res.data)))
+      .catch(e => console.error(`Error searching for products:\n${e}`));
+  };
+};
+
+const searchProducts = searchedProducts => ({
+  type: SEARCH_PRODUCTS,
+  searchedProducts,
 });
