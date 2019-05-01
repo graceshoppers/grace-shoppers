@@ -20,7 +20,7 @@ export default class extends Component {
       <nav className="navbar navbar-expand-lg navbar-light bg-light justify-content-end fixed-container">
         {/* Home link */}
         <Link to="/" className="navbar-brand margin-right-2em">
-          Home
+        <div className='horizontal-flip'>K</div>BMK
         </Link>
 
         {/* Link list */}
