@@ -1,12 +1,9 @@
 import axios from 'axios';
 import {
   GET_PRODUCTS,
-  GET_PRODUCT_BY_ID,
-  GET_PRODUCTS_BY_CATEGORY,
   CREATE_PRODUCT,
   UPDATE_PRODUCT,
   DELETE_PRODUCT,
-  SEARCH_PRODUCTS,
 } from './action-types';
 
 // ===============================
@@ -73,52 +70,4 @@ export const deleteProduct = productId => {
 const removeProduct = productId => ({
   type: DELETE_PRODUCT,
   productId,
-});
-
-// ===============================
-// Get products by category in database
-export const fetchProductsByCategory = category => {
-  return dispatch => {
-    return axios
-      .get(`/api/products/by-category/${category}`)
-      .then(res => dispatch(getProductsByCategory(res.data)))
-      .catch(e => console.error(`Error searching for products:\n${e}`));
-  };
-};
-
-const getProductsByCategory = productsByCategory => ({
-  type: GET_PRODUCTS_BY_CATEGORY,
-  productsByCategory,
-});
-
-// ===============================
-// Get product by id in database
-export const fetchProductById = productId => {
-  return dispatch => {
-    return axios
-      .get(`/api/products/${productId}`)
-      .then(res => dispatch(getProductById(res.data)))
-      .catch(e => console.error(`Error getting product:\n${e}`));
-  };
-};
-
-const getProductById = product => ({
-  type: GET_PRODUCT_BY_ID,
-  product,
-});
-
-// ===============================
-// Search for products in database
-export const searchForProductsInDatabase = searchTerm => {
-  return dispatch => {
-    return axios
-      .get(`/api/products/search/${searchTerm}`)
-      .then(res => dispatch(searchProducts(res.data)))
-      .catch(e => console.error(`Error searching for products:\n${e}`));
-  };
-};
-
-const searchProducts = searchedProducts => ({
-  type: SEARCH_PRODUCTS,
-  searchedProducts,
 });
