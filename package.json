@@ -38,5 +38,8 @@
     "heroku-postbuild": "webpack -p"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "faker": "^4.1.0"
+  }
 }
