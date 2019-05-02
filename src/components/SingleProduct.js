@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {deleteProduct} from '../redux-store/actions/product-actions';
+import Reviews from './Reviews'
 
 const SingleProduct = props => {
   const {products, match, deleteProduct} = props;
