@@ -1,29 +1,25 @@
 const router = require('express').Router();
 const {
-  models: {Product},
-  methods: {searchProducts},
+  models: {Product, Category},
 } = require('../db');
 
 module.exports = router;
 
+// GET, gets all products
 router.get('/', async (req, res, next) => {
   try {
-    const products = await Product.findAll({order: [['id', 'ASC']]});
+    const products = await Product.findAll({
+      order: [['id', 'ASC']],
+      include: [Category],
+    });
+
     res.status(200).json(products);
   } catch (err) {
     next(err);
   }
 });
 
-router.get('/:id', async (req, res, next) => {
-  try {
-    const product = await Product.findByPk(req.params.id * 1);
-    res.status(200).json(product);
-  } catch (err) {
-    next(err);
-  }
-});
-
+// POST, creates a new product
 router.post('/', async (req, res, next) => {
   try {
     const createdProduct = await Product.create(req.body);
@@ -33,6 +29,7 @@ router.post('/', async (req, res, next) => {
   }
 });
 
+// PUT, updates a product
 router.put('/:id', async (req, res, next) => {
   try {
     await Product.update(req.body, {where: {id: req.params.id * 1}});
@@ -43,6 +40,7 @@ router.put('/:id', async (req, res, next) => {
   }
 });
 
+// DELETE, deletes a product
 router.delete('/:id', async (req, res, next) => {
   try {
     const deletedProduct = await Product.findByPk(req.params.id);
@@ -51,16 +49,6 @@ router.delete('/:id', async (req, res, next) => {
     res
       .status(200)
       .json({message: 'Deleted product successfully.', deletedProduct});
-  } catch (err) {
-    next(err);
-  }
-});
-
-// Route to search products
-router.get('/search/:searchTerm', async (req, res, next) => {
-  try {
-    const searchResults = await searchProducts(req.params.searchTerm);
-    res.status(200).json(searchResults);
   } catch (err) {
     next(err);
   }
