@@ -153,27 +153,6 @@ const syncAndSeed = () => {
     .catch(err => console.log(err));
 };
 
-const searchProducts = searchTerm => {
-  const fields = ['name', 'material'];
-
-  return Product.findAll({
-    where: {
-      [Op.or]: fields.map(field => {
-        return {[field]: {[Op.iLike]: `%${searchTerm}%`}};
-      }),
-    },
-  });
-};
-
-const getProductsByCategory = category => {
-  return Category.findOne({
-    where: {
-      name: {[Op.iLike]: category},
-    },
-    include: [Product],
-  });
-};
-
 module.exports = {
   models: {
     User,
@@ -182,7 +161,5 @@ module.exports = {
   },
   methods: {
     syncAndSeed,
-    searchProducts,
-    getProductsByCategory,
   },
 };

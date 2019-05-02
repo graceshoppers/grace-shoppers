@@ -26,10 +26,35 @@ const Catalog = props => {
 };
 
 const filterProducts = (productsArray, match) => {
+  if (!productsArray.length) return productsArray;
+
   if (match.params.searchTerm)
-    return productsArray.filter(product => product.name === 'Trinity Ring');
+    return searchProducts(productsArray, match.params.searchTerm);
+  //
   else if (!match.params.category) return productsArray;
-  else return productsArray.filter(product => product.categoryId === 1);
+  //
+  else
+    return productsArray.filter(
+      product =>
+        product.category.name.toLowerCase() ===
+        match.params.category.toLowerCase()
+    );
+};
+
+const searchProducts = (productsArray, searchTerm) => {
+  const fields = ['name', 'material'];
+  let f;
+
+  const array = productsArray.filter(product => {
+    for (let i = 0; i < fields.length; i++) {
+      f = fields[i];
+      if (product[f].toLowerCase().includes(searchTerm.toLowerCase()))
+        return true;
+    }
+    return false;
+  });
+
+  return array;
 };
 
 const mapStateToProps = ({products}) => ({products});
