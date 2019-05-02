@@ -1,42 +1,63 @@
-import React from 'react';
-import Navbar from './Nav';
-import connect from 'react-redux';
-import getOrderItemsForOneUser from '../redux-store/store'
+import React from "react";
+import connect from "react-redux";
+
+const props = {
+  user: {
+    id:1,
+    firstName: "bob",
+    lastName: "bobbert",
+    email: "bob@gmail.com"
+  },
+  orders: {
+    id=55,
+    userId = 1
+  },
+  orderitems: [{
+    orderId:55,
+    productId:5,
+    quantity:3
+  },
+  {
+    orderId:55,
+    productId:2,
+    quantity:1
+  }],
+  products:[{
+    name:,
+    unitCost,
+  }]
+
+
+};
+
+
 
 const AccountSettings = props => {
-  const { user } = props
-  const { orders } = props
+  const { user } = props;
+  const { orders } = props;
 
   return (
     <div>
-      <h1>Hello</h1>
-      <h1>{user.firstName}</h1>
-      <h1>{user.lastName}</h1>
+      <h1>Welcome</h1>
+      <h2>{user.firstName}</h2>
+      <h3>{user.lastName}</h3>
       <h3>{user.email}</h3>
-      <br/>
-      <br/>
+      <br />
+      <br />
 
       <h1>Orders</h1>
-      
-      <div>
-      {orders.map(order =>{
 
-      })}
-      </div>
-      
-
+      <div>{orders.filter(order => order.userId === user.id).map(order => {
+        
+      })}</div>
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    orders:state.ordersForOne
-  }
-}
+    orders: state.orders
+  };
+};
 
-
-
-export default connect(mapStateToProps, {getOrderItemsForOneUser(user)})(AccountSettings);
-
-
+export default AccountSettings; //connect(mapStateToProps)(AccountSettings);
