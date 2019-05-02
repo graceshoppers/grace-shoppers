@@ -7,7 +7,7 @@ module.exports = router;
 
 router.get('/', async (req, res, next) => {
   try {
-    const categories = await Category.findAll();
+    const categories = await Category.findAll({order: [['id', 'ASC']]});
     res.status(200).json(categories);
   } catch (err) {
     next(err);
