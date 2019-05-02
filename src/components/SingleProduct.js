@@ -25,6 +25,7 @@ const SingleProduct = props => {
         Delete Product
       </button>
       <button>ADD TO CART</button>
+      <Reviews product={product} />
     </div>
   );
 };
