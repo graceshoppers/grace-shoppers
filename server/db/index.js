@@ -31,7 +31,7 @@ Orderitem.belongsTo(Order);
 Order.hasMany(Orderitem);
 
 Orderitem.belongsTo(Product);
-Product.hasOne(Orderitem);
+Product.hasMany(Orderitem);
 
 Product.hasMany(Review);
 Review.belongsTo(Product);

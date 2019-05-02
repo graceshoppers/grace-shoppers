@@ -5,11 +5,14 @@ import thunk from 'redux-thunk';
 import categoryReducer from './reducers/category-reducer';
 import productReducer from './reducers/product-reducer';
 import userReducer from './reducers/user-reducer';
+import reviewReducer from './reducers/review-reducer';
+
 
 const rootReducer = combineReducers({
   categories: categoryReducer,
   products: productReducer,
   users: userReducer,
+  reviews: reviewReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
