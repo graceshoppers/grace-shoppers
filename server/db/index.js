@@ -1,8 +1,5 @@
 // Database connection
 const connection = require('./database');
-const {
-  Sequelize: {Op},
-} = connection;
 
 // Sequelize models
 const User = require('./models/users-model');
@@ -14,6 +11,21 @@ const Orderitem = require('./models/orderitems-model');
 
 Category.hasMany(Product);
 Product.belongsTo(Category);
+
+Order.belongsTo(User);
+User.hasMany(Order);
+
+Orderitem.belongsTo(Order);
+Order.hasMany(Orderitem);
+
+Orderitem.hasOne(Product);
+Product.belongsTo(Orderitem);
+
+Product.hasMany(Review);
+Review.belongsTo(Product);
+
+Review.belongsTo(User);
+User.hasMany(Review);
 
 // Clears database tables and repopulates it with seed data
 const syncAndSeed = () => {
