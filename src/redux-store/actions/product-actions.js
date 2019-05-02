@@ -10,7 +10,7 @@ import {
 // Get all products from database
 export const fetchProducts = () => {
   return dispatch => {
-    return axios
+    axios
       .get('/api/products')
       .then(res => dispatch(getProducts(res.data)))
       .catch(e => console.log(`Error fetching products:\n${e}`));

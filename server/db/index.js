@@ -1,8 +1,5 @@
 // Database connection
-const connection = require("./database");
-const {
-  Sequelize: { Op }
-} = connection;
+const connection = require('./database');
 
 //Seed db
 const {
@@ -45,7 +42,7 @@ User.hasMany(Review);
 // Clears database tables and repopulates it with seed data
 const syncAndSeed = () => {
   connection
-    .sync({ force: true })
+    .sync({force: true})
     .then(async () => {
       // Hardcoded products from before are preserved
       const resolvedCategories = await Promise.all(
@@ -121,30 +118,17 @@ const syncAndSeed = () => {
         resolvedOrderitem.setProduct(Math.ceil(Math.random() * resolvedProducts.length))
       })
     })
-    .then(() => console.log("db seeded"))
+    .then(() => console.log('db seeded'))
     .catch(err => console.log(err));
-};
-
-const searchProducts = searchTerm => {
-  const fields = ["name", "material"];
-
-  return Product.findAll({
-    where: {
-      [Op.or]: fields.map(field => {
-        return { [field]: { [Op.iLike]: `%${searchTerm}%` } };
-      })
-    }
-  });
 };
 
 module.exports = {
   models: {
     User,
     Category,
-    Product
+    Product,
   },
   methods: {
     syncAndSeed,
-    searchProducts
-  }
+  },
 };

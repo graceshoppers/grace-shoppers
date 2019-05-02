@@ -13,62 +13,66 @@ export default class Navbar extends Component {
 
   handleChange = ({target: {name, value}}) => this.setState({[name]: value});
 
-  handleSubmit = event => {
-    event.handleSubmit();
+  handleClick = () => this.searchForTerm();
+
+  handleKeyDown = event => {
+    if (event.key === 'Enter') this.searchForTerm();
   };
 
+  searchForTerm = () =>
+    this.props.history.push(`/catalog/search/${this.state.search}`);
+
   render() {
-    const {handleChange, handleSubmit} = this;
+    const {handleChange, handleClick, handleKeyDown} = this;
 
     return (
-      <div className="fixed-container">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light justify-content-end">
-          {/* Home link */}
-          <Link to="/" className="navbar-brand margin-right-2em">
-            <div className="horizontal-flip">K</div>BMK
+      <nav className="navbar navbar-expand-lg navbar-light bg-light justify-content-end fixed-container">
+        {/* Home link */}
+        <Link to="/" className="navbar-brand margin-right-2em">
+          Home
+        </Link>
+
+        {/* Link list */}
+        <ul className="navbar-nav">
+          <Link to="/catalog/rings" className="navbar-brand">
+            Rings
           </Link>
+          <Link to="/catalog/earrings" className="navbar-brand">
+            Earrings
+          </Link>
+          <Link to="/catalog/bracelets" className="navbar-brand">
+            Bracelets
+          </Link>
+          <Link to="/catalog/necklaces" className="navbar-brand">
+            Necklaces
+          </Link>
+        </ul>
 
-          {/* Link list */}
-          <ul className="navbar-nav">
-            <Link to="/rings" className="navbar-brand">
-              Rings
-            </Link>
-            <Link to="/earrings" className="navbar-brand">
-              Earrings
-            </Link>
-            <Link to="/bracelets" className="navbar-brand">
-              Bracelets
-            </Link>
-            <Link to="/necklaces" className="navbar-brand">
-              Necklaces
-            </Link>
-          </ul>
-
-          {/* Search input and button */}
-          <div className="form-inline my-2 ml-auto mr-1 search-container">
-            <input
-              className="form-control mr-sm-2"
-              name="search"
-              type="text"
-              placeholder="Search"
-              onChange={handleChange}
-            />
-            <button className="btn margin-right-2em" type="submit">
-              <i className="fas fa-search fa-lg" />
-            </button>
-          </div>
-
-          {/* Profile/Login button */}
-          <button className="btn">
-            <i className="fas fa-user-circle fa-lg" />
+        {/* Search input and button */}
+        <div className="form-inline my-2 ml-auto mr-1 search-container">
+          <input
+            className="form-control mr-sm-2"
+            name="search"
+            type="text"
+            placeholder="Search"
+            onChange={handleChange}
+            onKeyDown={handleKeyDown}
+          />
+          <button className="btn margin-right-2em" onClick={handleClick}>
+            <i className="fas fa-search fa-lg" />
           </button>
+        </div>
 
-          {/* Cart button */}
-          <Link to="/cart" className="btn">
-            <i className="fas fa-shopping-cart fa-lg" />
-          </Link>
-        </nav>
-      </div>
+        {/* Profile/Login button */}
+        <button className="btn">
+          <i className="fas fa-user-circle fa-lg" />
+        </button>
+
+        {/* Cart button */}
+        <Link to="/cart" className="btn">
+          <i className="fas fa-shopping-cart fa-lg" />
+        </Link>
+      </nav>
     );
   }
 }
