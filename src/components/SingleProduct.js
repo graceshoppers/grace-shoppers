@@ -1,8 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {deleteProduct} from '../redux-store/actions/product-actions';
 
 const SingleProduct = props => {
-  const product = findProduct(props.products, +props.match.params.id);
+  const {products, match, deleteProduct} = props;
+  const product = findProduct(products, +match.params.id);
   if (!product) return null;
 
   return (
@@ -31,4 +33,11 @@ const findProduct = (productsArray, productId) =>
 
 const mapStateToProps = ({products}) => ({products});
 
-export default connect(mapStateToProps)(SingleProduct);
+const mapDispatchToProps = dispatch => ({
+  deleteProduct: productId => dispatch(deleteProduct(productId)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SingleProduct);
