@@ -5,10 +5,12 @@ import {connect} from 'react-redux';
 import {fetchProducts} from '../redux-store/actions/product-actions';
 
 import Navbar from './Nav';
+import Home from './Home';
 import Catalog from './Catalog';
 import Cart from './Cart';
 import SingleProduct from './SingleProduct';
 
+import '../styles/App.css'
 class App extends Component {
   componentDidMount() {
     this.props.fetchProducts();
@@ -20,7 +22,7 @@ class App extends Component {
         <Route component={Navbar} />
 
         {/* Landing page route */}
-        <Route exact path="/" render={() => <Redirect to="/catalog" />} />
+        <Route exact path="/" component={Home}/>
 
         {/* Catalog route */}
         <Route exact path="/catalog" component={Catalog} />
