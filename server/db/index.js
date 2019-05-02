@@ -1,16 +1,28 @@
 // Database connection
 const connection = require('./database');
 
-// Sequelize models
-const User = require('./models/users-model');
-const Category = require('./models/categories-model');
-const Product = require('./models/products-model');
-const Review = require('./models/reviews-model');
-const Order = require('./models/orders-model');
-const Orderitem = require('./models/orderitems-model');
+//Seed db
+const {
+  users,
+  categories,
+  orders,
+  products,
+  orderitems,
+  reviews
+} = require("./seeds");
 
-Category.hasMany(Product);
+// Sequelize models
+const {
+  User,
+  Category,
+  Product,
+  Review,
+  Order,
+  Orderitem
+} = require("./models");
+
 Product.belongsTo(Category);
+Category.hasMany(Product);
 
 Order.belongsTo(User);
 User.hasMany(Order);
@@ -18,8 +30,8 @@ User.hasMany(Order);
 Orderitem.belongsTo(Order);
 Order.hasMany(Orderitem);
 
-Orderitem.hasOne(Product);
-Product.belongsTo(Orderitem);
+Orderitem.belongsTo(Product);
+Product.hasOne(Orderitem);
 
 Product.hasMany(Review);
 Review.belongsTo(Product);
@@ -29,120 +41,18 @@ User.hasMany(Review);
 
 // Clears database tables and repopulates it with seed data
 const syncAndSeed = () => {
-  const users = [
-    {
-      firstName: 'Kyle',
-      lastName: 'Jiang',
-      email: 'kylejiang@email.com',
-      isAdmin: true,
-    },
-    {
-      firstName: 'Kevin',
-      lastName: 'Han',
-      email: 'kevinhan@email.com',
-      isAdmin: true,
-    },
-    {
-      firstName: 'Mariano',
-      lastName: 'Fuentes',
-      email: 'marianofuentes@email.com',
-      isAdmin: true,
-    },
-    {
-      firstName: 'Bao',
-      lastName: 'Nguyen',
-      email: 'baonguyen@email.com',
-      isAdmin: true,
-    },
-    {
-      firstName: 'Adam',
-      lastName: 'Smith',
-      email: 'adamsmith@email.com',
-      isAdmin: false,
-    },
-  ];
-
-  const categories = [
-    {name: 'Rings'},
-    {name: 'Bracelets'},
-    {name: 'Earrings'},
-    {name: 'Necklaces'},
-  ];
-
-  const products = [
-    {
-      name: 'Trinity Ring',
-      material: 'White Gold, Yellow Gold, Pink Gold',
-      description:
-        "Designed by Louis Cartier in 1924, the Trinity ring is a signature design of the Cartier Maison. The three interlaced bands in pink, yellow and white gold symbolize love, fidelity and friendship. The ring has inspired the full Trinity collection, a timeless testament to life's most memorable loves.",
-      imageName: 'trinity_ring.jpg',
-      unitCost: 1140,
-    },
-    {
-      name: 'Butterfly Ring',
-      material: 'Sterling Silver, Rose Gold, Blue Topaz',
-      description:
-        'Drawing inspiration from an urban garden, the Return to Tiffany® Love Bugs collection transforms an icon into something unexpected and modern. A radiant blue topaz adds a pop of color of this striking butterfly ring.',
-      imageName: 'butterfly_ring.jpg',
-      unitCost: 1400,
-    },
-    {
-      name: 'JUSTE UN CLOU Bracelet',
-      material: 'Pink Gold, Diamonds',
-      description:
-        'A nail becomes jewelry. Designed in 1970s New York, the first Juste un Clou bracelet reflected a wild, freewheeling era. Bold, modern, and innovative, Juste un Clou is a creative twist on a familiar object. This jewelry collection transcends the everyday, making the ordinary exquisite, for him and for her.',
-      imageName: 'juste-un-clou-bracelet.jpg',
-      unitCost: 43600,
-    },
-    {
-      name: 'Daisy Chain Bracelet',
-      material: 'Sterling Silver, Yellow Gold',
-      description:
-        'Drawing inspiration from an urban garden, the Return to Tiffany® Love Bugs collection transforms an icon into something unexpected and modern. Designed in 18k gold and sterling silver, this daisy chain bracelet is playful and contemporary.',
-      imageName: 'daisy-bracelet.jpg',
-      unitCost: 1050,
-    },
-    {
-      name: "Caresse d'Orchidées Par Cartier Earrings",
-      material: 'White Gold, Diamonds',
-      description:
-        "A popular flower at Cartier, the orchid demonstrates a delicate, feminine appeal. The fragility of this queen of flowers is meticulously rendered by Cartier's skillful craftsmanship, its delicate petals sculpted from the finest precious materials. First used by the jeweler in 1925, the orchid is now a classic motif in Cartier jewelry.",
-      imageName: 'caresse-dorchidees-earrings.jpg',
-      unitCost: 11100,
-    },
-    {
-      name: 'Lynn Earrings',
-      material: 'Yellow Gold, Rubies',
-      description:
-        "Jean Schlumberger’s visionary creations have captivated the world's most fashionable women. Rich rubies make a strong statement in these iconic earrings.",
-      imageName: 'lynn-earrings.jpg',
-      unitCost: 2650,
-    },
-    {
-      name: 'Panthère de Cartier Necklace',
-      material:
-        'Yellow Gold, Black Lacquer, Citrine, Tsavorite Garnets, Diamonds',
-      description:
-        "The panther, the symbolic animal of Cartier, made its first appearance in the Maison's collections in 1914. Louis Cartier was the first to tame the mythic animal, and his colleague Jeanne Toussaint turned it into a legend. The panther can be fierce, playful, or lovable, displaying all the facets of its liberated personality from one collection to the next.",
-      imageName: 'panthere-de-cartier-necklace.jpg',
-      unitCost: 28200,
-    },
-    {
-      name: 'Wrap Necklace',
-      material: 'Rose Gold',
-      description:
-        'Tiffany HardWear is elegantly subversive and captures the spirit of the women of New York City. This necklace is both refined and rebellious.',
-      imageName: 'wrap-necklace.jpg',
-      unitCost: 14700,
-    },
-  ];
-
   connection
     .sync({force: true})
     .then(async () => {
-      const [rings, bracelets, earrings, necklaces] = await Promise.all(
+      // Hardcoded products from before are preserved
+      const resolvedCategories = await Promise.all(
         categories.map(category => Category.create(category))
       );
+
+      const [rings, bracelets, earrings, necklaces] = resolvedCategories;
+
+      const resolvedProducts = await Promise.all(products.map(product => Product.create(product)));
+
       const [
         ring1,
         ring2,
@@ -152,14 +62,61 @@ const syncAndSeed = () => {
         earrings2,
         necklace1,
         necklace2,
-      ] = await Promise.all(products.map(product => Product.create(product)));
+        ...nonHardcodedProducts] = resolvedProducts
+
+      console.log(Array.isArray(resolvedProducts));
 
       rings.setProducts([ring1, ring2]);
       bracelets.setProducts([bracelet1, bracelet2]);
       earrings.setProducts([earrings1, earrings2]);
       necklaces.setProducts([necklace1, necklace2]);
 
-      await Promise.all(users.map(user => User.create(user)));
+      //Assign categoryIds randomly to products
+      nonHardcodedProducts.forEach(async nonHardcodedProduct => {
+        nonHardcodedProduct.setCategory(
+          Math.ceil(Math.random() * categories.length)
+        );
+      });
+
+      //Assign orderIds randomly to orderitems
+      const resolvedOrders = await Promise.all(
+        orders.map(order => Order.create(order))
+      );
+      const resolvedOrderitems = await Promise.all(
+        orderitems.map(orderitem => Orderitem.create(orderitem))
+      );
+      resolvedOrderitems.forEach(async resolvedOrderitem => {
+        await resolvedOrderitem.setOrder(
+          Math.ceil(Math.random() * resolvedOrders.length)
+        );
+      });
+
+      //Assign userIds randomly to reviews
+      //Assign productIds randomly to reviews
+      const resolvedReviews = await Promise.all(
+        reviews.map(review => Review.create(review))
+      );
+      const resolvedUsers = await Promise.all(
+        users.map(user => User.create(user))
+      );
+      resolvedReviews.forEach(async resolvedReview => {
+        await resolvedReview.setUser(
+          Math.ceil(Math.random() * resolvedUsers.length)
+        );
+      });
+      resolvedReviews.forEach(async resolvedReview => {
+        await resolvedReview.setProduct(Math.ceil(Math.random() * resolvedProducts.length)); 
+      });
+
+      //Assign userIds randomly to orders
+      resolvedOrders.forEach(async resolvedOrder => {
+        resolvedOrder.setUser(Math.ceil(Math.random() *resolvedUsers.length))
+      })
+
+      //Assign productIds randomly to orderitems
+      resolvedOrderitems.forEach(async resolvedOrderitem => {
+        resolvedOrderitem.setProduct(Math.ceil(Math.random() * resolvedProducts.length))
+      })
     })
     .then(() => console.log('db seeded'))
     .catch(err => console.log(err));
