@@ -3,6 +3,7 @@ import {Route, Redirect} from 'react-router-dom';
 
 import {connect} from 'react-redux';
 import {fetchProducts} from '../redux-store/actions/product-actions';
+import {fetchReviews} from '../redux-store/actions/review-actions';
 
 import Navbar from './Nav';
 import Catalog from './Catalog';
@@ -12,6 +13,7 @@ import SingleProduct from './SingleProduct';
 class App extends Component {
   componentDidMount() {
     this.props.fetchProducts();
+    this.props.fetchReviews();
   }
 
   render() {
@@ -43,6 +45,7 @@ class App extends Component {
 
 const mapDispatchToProps = dispatch => ({
   fetchProducts: () => dispatch(fetchProducts()),
+  fetchReviews: () => dispatch(fetchReviews())
 });
 
 export default connect(
