@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
 
+import {connect} from 'react-redux';
+
 import '../styles/Nav.css';
 
-export default class Navbar extends Component {
+class Navbar extends Component {
   constructor() {
     super();
     this.state = {
@@ -23,7 +25,8 @@ export default class Navbar extends Component {
     this.props.history.push(`/catalog/search/${this.state.search}`);
 
   render() {
-    const {handleChange, handleClick, handleKeyDown} = this;
+    const {props, handleChange, handleClick, handleKeyDown} = this;
+    const {userDetails} = props;
 
     return (
       <nav className="row navbar navbar-expand-lg navbar-light fixed-container">
@@ -68,9 +71,15 @@ export default class Navbar extends Component {
         {/* Search input and button */}
         <div className="col d-flex justify-content-end align-items-center">
           {/* Profile/Login button */}
-          <NavLink to="/login" className="btn">
-            <i className="fas fa-user-circle fa-lg" />
-          </NavLink>
+          {userDetails.info ? (
+            <NavLink to="/account" className="btn">
+              <i className="fas fa-user-circle fa-lg" />
+            </NavLink>
+          ) : (
+            <NavLink to="/login" className="btn">
+              <i className="far fa-meh fa-lg" />
+            </NavLink>
+          )}
 
           {/* Cart button */}
           <NavLink to="/cart" className="btn">
@@ -81,3 +90,7 @@ export default class Navbar extends Component {
     );
   }
 }
+
+const mapStateToProps = ({userDetails}) => ({userDetails});
+
+export default connect(mapStateToProps)(Navbar);
