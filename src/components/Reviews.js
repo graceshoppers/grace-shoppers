@@ -8,13 +8,13 @@ const Reviews = props => {
 
   return (
     <div>
-    <h2>{product.name}</h2>
+    <h2>REVIEWS BEGIN HERE</h2>
     <span>CUSTOMER NAME PLACEHOLDER</span>
      {thisProductReviews.map(thisProductReview => {
         return (
             <div>
-            {thisProductReview.rating}
-        <p>{thisProductReview.textbody}</p>
+            {thisProductReview.stars}
+        <p>{thisProductReview.textBody}</p>
         </div>
         )
     })}
