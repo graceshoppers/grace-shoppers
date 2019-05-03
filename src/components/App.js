@@ -8,6 +8,8 @@ import Navbar from './Nav';
 import Catalog from './Catalog';
 import Cart from './Cart';
 import SingleProduct from './SingleProduct';
+import Login from './Login';
+import SignUp from './SignUp';
 
 class App extends Component {
   componentDidMount() {
@@ -36,6 +38,12 @@ class App extends Component {
 
         {/* Checkout/cart route */}
         <Route exact path="/cart" component={Cart} />
+
+        {/* Login Route */}
+        <Route path="/login" render={() => <Login />}/>
+
+        {/* SignUp Route */}
+        <Route path="/signup" render={() => <SignUp />}/>
       </div>
     );
   }
