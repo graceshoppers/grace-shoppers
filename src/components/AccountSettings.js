@@ -1,39 +1,15 @@
 import React from "react";
-import connect from "react-redux";
-
-const props = {
-  user: {
-    id:1,
-    firstName: "bob",
-    lastName: "bobbert",
-    email: "bob@gmail.com"
-  },
-  orders: {
-    id=55,
-    userId = 1
-  },
-  orderitems: [{
-    orderId:55,
-    productId:5,
-    quantity:3
-  },
-  {
-    orderId:55,
-    productId:2,
-    quantity:1
-  }],
-  products:[{
-    name:,
-    unitCost,
-  }]
-
-
-};
-
+import { connect } from "react-redux";
 
 
 const AccountSettings = props => {
-  const { user } = props;
+  const users  = props.users;
+  const userId = props.match.params.userId * 1
+  
+  console.log(users)
+  console.log(userId)
+  const user = users.find(user => {return user.id === userId})
+  console.log(user)
   const { orders } = props;
 
   return (
@@ -47,17 +23,17 @@ const AccountSettings = props => {
 
       <h1>Orders</h1>
 
-      <div>{orders.filter(order => order.userId === user.id).map(order => {
+      {/* <div>{orders.filter(order => order.userId === user.id).map(order => {
         
-      })}</div>
+      })}</div> */}
     </div>
   );
 };
 
 const mapStateToProps = state => {
   return {
-    orders: state.orders
+    users: state.users
   };
 };
 
-export default AccountSettings; //connect(mapStateToProps)(AccountSettings);
+export default connect(mapStateToProps)(AccountSettings);
