@@ -15,13 +15,12 @@
   display: inline-block;
 }
 
-.left-bar {
-  align-content: flex-start;
-  border: solid 5px red;
-}
-
 .home-logo {
   font-size: 40px;
   font-weight: bold;
   font-family: 'Courier New', Courier, monospace;
+}
+
+.navbar{
+  background-color: white;
 }

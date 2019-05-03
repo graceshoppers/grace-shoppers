@@ -26,9 +26,9 @@ export default class Navbar extends Component {
     const {handleChange, handleClick, handleKeyDown} = this;
 
     return (
-      <nav className="row navbar navbar-expand-lg navbar-light bg-light justify-content-end fixed-container">
+      <nav className="row navbar navbar-expand-lg navbar-light fixed-container">
         {/* Link list */}
-        <div className="form-inline my-2 ml-auto mr-1 search-container col">
+        <div className="form-inline my-2 ml-auto mr-1 search-container d-flex justify-content-start align-items-center col">
           <input
             className="form-control mr-sm-2"
             name="search"
@@ -45,7 +45,7 @@ export default class Navbar extends Component {
         {/* Home link */}
         <div className="col-6 d-flex flex-column justify-content-center align-items-center">
           <NavLink to="/" className="navbar-brand margin-right-2em">
-            <div className='home-logo'>
+            <div className="home-logo">
               <div className="horizontal-flip">K</div>BMK
             </div>
           </NavLink>
@@ -66,7 +66,7 @@ export default class Navbar extends Component {
         </div>
 
         {/* Search input and button */}
-        <div className="col">
+        <div className="col d-flex justify-content-end align-items-center">
           {/* Profile/Login button */}
           <button className="btn">
             <i className="fas fa-user-circle fa-lg" />
