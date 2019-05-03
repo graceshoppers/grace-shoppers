@@ -1,5 +1,11 @@
 import axios from 'axios';
-import {GET_USERS, CREATE_USER, UPDATE_USER, LOGIN_USER} from './action-types';
+import {
+  GET_USERS,
+  CREATE_USER,
+  UPDATE_USER,
+  LOGIN_USER,
+  CHECK_IF_A_USER_IS_LOGGED_IN,
+} from './action-types';
 
 // ===============================
 // Get all users from database
@@ -64,4 +70,20 @@ export const authenticateUser = loginCredentials => {
 const loginUser = status => ({
   type: LOGIN_USER,
   status,
+});
+
+// Checks Express session if there is a user logged in
+// If true, expect to receive user's id
+export const checkIfUserIsLoggedIn = () => {
+  return dispatch => {
+    return axios
+      .get('/auth')
+      .then(res => dispatch(getUserInformationFromExpressSession(res.data)))
+      .catch(e => console.error(`Error:\n${e}`));
+  };
+};
+
+const getUserInformationFromExpressSession = userInfo => ({
+  type: CHECK_IF_A_USER_IS_LOGGED_IN,
+  userInfo,
 });
