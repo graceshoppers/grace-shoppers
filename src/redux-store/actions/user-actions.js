@@ -83,7 +83,7 @@ export const checkIfUserIsLoggedIn = () => {
   };
 };
 
-const getUserInformationFromExpressSession = userInfo => ({
+const getUserInformationFromExpressSession = userDetails => ({
   type: CHECK_IF_A_USER_IS_LOGGED_IN,
-  userInfo,
+  userDetails,
 });

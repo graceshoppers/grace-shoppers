@@ -1,3 +1,4 @@
+// React imports
 import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
 
@@ -5,6 +6,7 @@ import {Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {fetchProducts} from '../redux-store/actions/product-actions';
 import {fetchReviews} from '../redux-store/actions/review-actions';
+import {checkIfUserIsLoggedIn} from '../redux-store/actions/user-actions';
 
 // Component imports
 import Navbar from './Nav';
@@ -23,9 +25,14 @@ class App extends Component {
   componentDidMount() {
     this.props.fetchProducts();
     this.props.fetchReviews();
+    this.props.checkIfUserIsLoggedIn();
   }
 
   render() {
+    console.groupCollapsed('App Component: Logging userId from Redux state');
+    console.info('userDetails:', this.props.users.userDetails);
+    console.groupEnd();
+
     return (
       <div className="container-fluid">
         <Route component={Navbar} />
@@ -61,12 +68,15 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = ({users}) => ({users});
+
 const mapDispatchToProps = dispatch => ({
   fetchProducts: () => dispatch(fetchProducts()),
   fetchReviews: () => dispatch(fetchReviews()),
+  checkIfUserIsLoggedIn: () => dispatch(checkIfUserIsLoggedIn()),
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(App);

@@ -8,7 +8,7 @@ import {
 
 const initialState = {
   users: [],
-  loggedInUserInfo: {},
+  userId: undefined,
 };
 
 export default (state = initialState, action) => {
@@ -16,26 +16,30 @@ export default (state = initialState, action) => {
     // Start of:
     // CRUD functionality
     case GET_USERS:
-      return [...action.users];
+      return {...state, users: [...action.users]};
 
     case CREATE_USER:
-      return [...state, action.newUser];
+      return {...state, users: [...state.users, action.newUser]};
 
     case UPDATE_USER:
-      return [
-        ...state.filter(user => user.id !== action.updatedUser.id),
-        action.user,
-      ];
+      return {
+        ...state,
+        users: [
+          ...state.users.filter(user => user.id !== action.updatedUser.id),
+          action.user,
+        ],
+      };
     // End of:
     // CRUD functionality
 
     // Start of:
     // Authentication functionality
     case LOGIN_USER:
-      console.log(action.status);
+      return {...state, userDetails: action.userDetails || undefined};
 
     case CHECK_IF_A_USER_IS_LOGGED_IN:
-      console.log(action.userInfo);
+      return {...state, userDetails: action.userDetails || undefined};
+
     // End of:
     // Authentication functionality
     default:
