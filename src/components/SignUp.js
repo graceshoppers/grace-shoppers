@@ -4,7 +4,8 @@ import {addUser} from '../redux-store/actions/user-actions';
 
 class SignUp extends Component {
   render() {
-    const {handleSubmit, addUser} = this.props;
+    const {handleSubmit} = this.props;
+
     return (
       <div className="card container" style={{marginTop: '2em'}}>
         <h2>Sign Up</h2>
@@ -61,19 +62,22 @@ class SignUp extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  addUser: user => dispatch(addUser(user)),
-
   handleSubmit: event => {
     event.preventDefault();
-    const {
-      firstName,
-      lastName,
-      email,
-      password,
-      confirmPassword,
-    } = event.target;
 
-    console.log(firstName);
+    const fields = [
+      'firstName',
+      'lastName',
+      'email',
+      'password',
+      'confirmPassword',
+    ];
+    const signupCredentials = fields.reduce((acc, field) => {
+      if (event.target[field]) acc[field] = event.target[field].value;
+      return acc;
+    }, {});
+
+    dispatch(addUser(signupCredentials));
   },
 });
 
