@@ -1,4 +1,4 @@
-const faker = require("faker");
+const faker = require('faker');
 
 const makeFakeUser = () => {
   return {
@@ -6,50 +6,50 @@ const makeFakeUser = () => {
     lastName: faker.name.lastName(),
     email: faker.internet.email(),
     isAdmin: faker.random.boolean(),
-    password: "password"
+    password: 'password',
   };
 };
 
 const users = [
   {
-    firstName: "Kyle",
-    lastName: "Jiang",
-    email: "kylejiang@email.com",
+    firstName: 'Kyle',
+    lastName: 'Jiang',
+    email: 'kylejiang@email.com',
     isAdmin: true,
-    password: "password"
+    password: 'password',
   },
   {
-    firstName: "Kevin",
-    lastName: "Han",
-    email: "kevinhan@email.com",
+    firstName: 'Kevin',
+    lastName: 'Han',
+    email: 'kevinhan@email.com',
     isAdmin: true,
-    password: "password"
+    password: 'password',
   },
   {
-    firstName: "Mariano",
-    lastName: "Fuentes",
-    email: "marianofuentes@email.com",
+    firstName: 'Mariano',
+    lastName: 'Fuentes',
+    email: 'marianofuentes@email.com',
     isAdmin: true,
-    password: "password"
+    password: 'password',
   },
   {
-    firstName: "Bao",
-    lastName: "Nguyen",
-    email: "baonguyen@email.com",
+    firstName: 'Bao',
+    lastName: 'Nguyen',
+    email: 'baonguyen@email.com',
     isAdmin: true,
-    password: "password"
+    password: 'password',
   },
   {
-    firstName: "Adam",
-    lastName: "Smith",
-    email: "adamsmith@email.com",
+    firstName: 'Adam',
+    lastName: 'Smith',
+    email: 'adamsmith@email.com',
     isAdmin: false,
-    password: "password"
-  }
+    password: 'password',
+  },
 ];
 
-for (let i = users.length; i < 100; i++) {
-  users.push(makeFakeUser());
-}
+// for (let i = users.length; i < 100; i++) {
+//   users.push(makeFakeUser());
+// }
 
 module.exports = users;

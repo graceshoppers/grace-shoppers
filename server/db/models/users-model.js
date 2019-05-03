@@ -19,7 +19,10 @@ const User = connection.define('user', {
     allowNull: false,
     notEmpty: true,
     isEmail: true,
-    isUnique: true,
+    unique: {
+      args: true,
+      msg: 'There is already an account this email.',
+    },
   },
   isAdmin: {
     type: BOOLEAN,
