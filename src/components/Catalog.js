@@ -8,7 +8,7 @@ const Catalog = props => {
   const products = filterProducts(props.products, props.match);
 
   return (
-    <div className="overflow-container">
+    <div className="overflow-container row">
       <ul className="column-list">
         {products.length ? (
           products.map(product => {

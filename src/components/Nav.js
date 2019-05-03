@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 import '../styles/Nav.css';
 
@@ -26,30 +26,9 @@ export default class Navbar extends Component {
     const {handleChange, handleClick, handleKeyDown} = this;
 
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light justify-content-end fixed-container">
-        {/* Home link */}
-        <Link to="/" className="navbar-brand margin-right-2em">
-          Home
-        </Link>
-
+      <nav className="row navbar navbar-expand-lg navbar-light fixed-container">
         {/* Link list */}
-        <ul className="navbar-nav">
-          <Link to="/catalog/rings" className="navbar-brand">
-            Rings
-          </Link>
-          <Link to="/catalog/earrings" className="navbar-brand">
-            Earrings
-          </Link>
-          <Link to="/catalog/bracelets" className="navbar-brand">
-            Bracelets
-          </Link>
-          <Link to="/catalog/necklaces" className="navbar-brand">
-            Necklaces
-          </Link>
-        </ul>
-
-        {/* Search input and button */}
-        <div className="form-inline my-2 ml-auto mr-1 search-container">
+        <div className="form-inline my-2 ml-auto mr-1 search-container d-flex justify-content-start align-items-center col">
           <input
             className="form-control mr-sm-2"
             name="search"
@@ -63,15 +42,41 @@ export default class Navbar extends Component {
           </button>
         </div>
 
-        {/* Profile/Login button */}
-        <button className="btn">
-          <i className="fas fa-user-circle fa-lg" />
-        </button>
+        {/* Home link */}
+        <div className="col-6 d-flex flex-column justify-content-center align-items-center">
+          <NavLink to="/" className="navbar-brand margin-right-2em">
+            <div className="home-logo">
+              <div className="horizontal-flip">K</div>BMK
+            </div>
+          </NavLink>
+          <ul className="navbar-nav">
+            <NavLink to="/catalog/rings" className="navbar-brand">
+              Rings
+            </NavLink>
+            <NavLink to="/catalog/earrings" className="navbar-brand">
+              Earrings
+            </NavLink>
+            <NavLink to="/catalog/bracelets" className="navbar-brand">
+              Bracelets
+            </NavLink>
+            <NavLink to="/catalog/necklaces" className="navbar-brand">
+              Necklaces
+            </NavLink>
+          </ul>
+        </div>
 
-        {/* Cart button */}
-        <Link to="/cart" className="btn">
-          <i className="fas fa-shopping-cart fa-lg" />
-        </Link>
+        {/* Search input and button */}
+        <div className="col d-flex justify-content-end align-items-center">
+          {/* Profile/Login button */}
+          <button className="btn">
+            <i className="fas fa-user-circle fa-lg" />
+          </button>
+
+          {/* Cart button */}
+          <NavLink to="/cart" className="btn">
+            <i className="fas fa-shopping-cart fa-lg" />
+          </NavLink>
+        </div>
       </nav>
     );
   }

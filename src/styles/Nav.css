@@ -1,8 +1,9 @@
 .fixed-container {
+  flex: 1;
   top: 0px;
   position: sticky;
-  margin-bottom: 15px;
   z-index: 9999;
+  display: flex;
 }
 
 .horizontal-flip {
@@ -12,4 +13,14 @@
   -ms-transform: scale(-1, 1);
   transform: scale(-1, 1);
   display: inline-block;
+}
+
+.home-logo {
+  font-size: 40px;
+  font-weight: bold;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.navbar{
+  background-color: white;
 }
