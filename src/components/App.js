@@ -11,6 +11,17 @@ import Cart from './Cart';
 import SingleProduct from './SingleProduct';
 import Login from './Login';
 import SignUp from './SignUp';
+import Callback from './Callback';
+import Auth from '../auth';
+
+
+const auth = new Auth();
+
+const handleAuthentication = ({location}) => {
+  if (/access_token|id_token|error/.test(location.hash)) {
+    auth.handleAuthentication();
+  }
+}
 
 class App extends Component {
   componentDidMount() {
@@ -46,6 +57,11 @@ class App extends Component {
 
         {/* SignUp Route */}
         <Route path="/signup" render={() => <SignUp />}/>
+
+        <Route path="/callback" render={(props) => {
+            handleAuthentication(props);
+            return <Callback {...props}/>
+          }}/>
       </div>
     );
   }
