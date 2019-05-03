@@ -9,20 +9,20 @@ class Login extends Component {
       password: '',
     };
   }
-  onChange({target}){
+  onChange = ({target}) => {
     //Some stuff to happen here
     this.setState({
       [target.name]: target.value
     });
   };
-  onSubmit(){
+  onSubmit = () => {
     //Some stuff to happen here
   };
   render(){
     return (
       <div style={{height: '100vh', backgroundColor: 'blue'}}>
-        <div className="card container" style={{marginTop: '25vh'}}>
-          <div className="mt-3">
+        <div className="card container">
+          <div>
             <form>
               <div className="form-group">
                 <label>Email</label>
