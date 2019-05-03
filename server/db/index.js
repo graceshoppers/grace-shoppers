@@ -127,6 +127,7 @@ module.exports = {
     User,
     Category,
     Product,
+    Review
   },
   methods: {
     syncAndSeed,
