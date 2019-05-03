@@ -30,7 +30,7 @@ class App extends Component {
 
   render() {
     console.groupCollapsed('App Component: Logging userId from Redux state');
-    console.info('userDetails:', this.props.users.userDetails);
+    console.info('userDetails:', this.props.userDetails);
     console.groupEnd();
 
     return (
@@ -68,7 +68,7 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({users}) => ({users});
+const mapStateToProps = ({userDetails}) => ({userDetails});
 
 const mapDispatchToProps = dispatch => ({
   fetchProducts: () => dispatch(fetchProducts()),

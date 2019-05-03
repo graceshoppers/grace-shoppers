@@ -67,9 +67,9 @@ export const authenticateUser = loginCredentials => {
   };
 };
 
-const loginUser = status => ({
+const loginUser = userDetails => ({
   type: LOGIN_USER,
-  status,
+  userDetails,
 });
 
 // Checks Express session if there is a user logged in
