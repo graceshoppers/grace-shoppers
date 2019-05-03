@@ -6,7 +6,7 @@ const makeFakeProduct = () => {
     unitCost: faker.commerce.price(),
     description: faker.lorem.paragraph(),
     material: faker.commerce.productMaterial(),
-    imageName: faker.image.image()
+    imageName: faker.image.imageUrl(400,400,"fashion",true)
   };
 };
 
