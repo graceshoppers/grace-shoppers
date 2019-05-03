@@ -20,3 +20,11 @@ export const GET_REVIEWS = 'GET_REVIEWS'
 export const CREATE_REVIEW = 'CREATE_REVIEW';
 export const UPDATE_REVIEW = 'UPDATE_REVIEW';
 export const DELETE_REVIEW = 'DELETE_REVIEW';
+
+
+//Order actions
+export const GET_ORDERS = 'GET_ORDERS'
+export const CREATE_ORDER = 'CREATE_ORDER';
+export const UPDATE_ORDER = 'UPDATE_ORDER';
+export const DELETE_ORDER = 'DELETE_ORDER';
+

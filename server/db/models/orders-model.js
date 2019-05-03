@@ -3,8 +3,8 @@ const { Sequelize: { ENUM } } = connection
 
 const Order = connection.define('order', {
     status: {
-        type: ENUM(['Delivered', 'Processing', 'Shipped']),
-        defaultValue:'Processing',
+        type: ENUM(['Delivered', 'Processing', 'Shipped', 'Cart']),
+        defaultValue:'Cart',
         allowNull: false,
         validate:{
             notEmpty: true
@@ -12,4 +12,4 @@ const Order = connection.define('order', {
     }
 })
 
-module.exports = Order
+module.exports = Order;

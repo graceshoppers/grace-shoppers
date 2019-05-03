@@ -1,17 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
 
-
 const AccountSettings = props => {
-  const users  = props.users;
-  const userId = props.match.params.userId * 1
-  
-  console.log(users)
-  console.log(userId)
-  const user = users.find(user => {return user.id === userId})
-  console.log(user)
-  const { orders } = props;
+  const { users } = props;
+  const userId = props.match.params.userId * 1;
+  const user = users.find(user => {
+    return user.id === userId;
+  });
 
+  const { orders } = props;
+  console.log(orders)
+  const ownOrders = orders.filter(order => order.userId === userId)
+
+  console.log(ownOrders)
   return (
     <div>
       <h1>Welcome</h1>
@@ -22,17 +23,25 @@ const AccountSettings = props => {
       <br />
 
       <h1>Orders</h1>
+      {ownOrders.map(ownOrder => {
+        return (
+        <ul key={ownOrder.id}>
+          <h2>{ownOrder.createdAt}</h2>
+          <h3>{ownOrder.status}</h3>
+          PUT ORDERITEMS HERE
 
-      {/* <div>{orders.filter(order => order.userId === user.id).map(order => {
+        </ul>)
         
-      })}</div> */}
+      })}
+
     </div>
   );
 };
 
 const mapStateToProps = state => {
   return {
-    users: state.users
+    users: state.users,
+    orders: state.orders
   };
 };
 

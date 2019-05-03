@@ -5,6 +5,8 @@ const Review = require("./reviews-model");
 const Order = require("./orders-model");
 const Orderitem = require("./orderitems-model");
 
+console.log(Order)
+
 module.exports = {
   User,
   Category,
