@@ -1,64 +1,83 @@
 import React, {Component} from 'react';
-import {addUser} from '../redux-store/actions/user-actions';
 import {connect} from 'react-redux';
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addUser: (user) => dispatch(addUser(user)),
-  }
-};
+import {addUser} from '../redux-store/actions/user-actions';
 
 class SignUp extends Component {
-  constructor(){
-    super();
-    this.state = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-    };
-  };
-  onChange = ({target}) => {
-    //Some stuff to happen here
-    this.setState({
-      [target.name]: target.value
-    });
-    console.log(this.state);
-  };
-  onSubmit = (ev) => {
-    //Some stuff to happen here
-    ev.preventDefault();
-    this.props.addUser(this.state);
-  };
-  render(){
-    return(
-      <div style={{height: '100vh', backgroundColor: 'blue'}}>
-        <div className="card container" style={{marginTop: '30px'}}>
-          <div>
-            <form onSubmit={this.onSubmit}>
-            <div className="form-group">
-                <label>First Name</label>
-                <input className="form-control" value={this.state.firstName} name="firstName" placeholder="John" onChange={this.onChange}/>
-              </div>
-              <div className="form-group">
-                <label>Last Name</label>
-                <input className="form-control" value={this.state.lastName} name="lastName" placeholder="Doe" onChange={this.onChange}/>
-              </div>
-              <div className="form-group">
-                <label>Email</label>
-                <input className="form-control" value={this.state.email} name="email" placeholder="email@gmail.com" onChange={this.onChange}/>
-              </div>
-              <div className="form-group">
-                <label>Password</label>
-                <input className="form-control mb-3" value={this.state.password} name="password" placeholder="maryh4dAL1ttl3L4M.B" onChange={this.onChange} type="password"/>
-                <button type="submit" className="btn btn-warning">Login</button>
-              </div>
-            </form>
+  render() {
+    const {handleSubmit, addUser} = this.props;
+    return (
+      <div className="card container" style={{marginTop: '2em'}}>
+        <h2>Sign Up</h2>
+        <hr />
+        <form onSubmit={handleSubmit}>
+          {/* Input for first name*/}
+          <div className="form-group">
+            <label htmlFor="firstName">First Name</label>
+            <input type="text" name="firstName" className="form-control" />
           </div>
-        </div>
+
+          {/* Input for last name */}
+          <div className="form-group">
+            <label htmlFor="lastName">Last Name</label>
+            <input type="text" name="lastName" className="form-control" />
+          </div>
+
+          {/* Input for email */}
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input type="email" name="email" className="form-control" />
+          </div>
+
+          {/* Input for password */}
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              name="password"
+              className="form-control mb-3"
+            />
+          </div>
+
+          {/* Input for confirm password */}
+          <div className="form-group">
+            <label htmlFor="confirmPassword">Confirm Password</label>
+            <input
+              type="password"
+              name="confirmPassword"
+              className="form-control mb-3"
+            />
+          </div>
+
+          {/* Submit button */}
+          <div className="form-group">
+            <button type="submit" className="btn btn-primary">
+              Sign Up
+            </button>
+          </div>
+        </form>
       </div>
     );
   }
-};
+}
 
-export default connect(null, mapDispatchToProps)(SignUp);
+const mapDispatchToProps = dispatch => ({
+  addUser: user => dispatch(addUser(user)),
+
+  handleSubmit: event => {
+    event.preventDefault();
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      confirmPassword,
+    } = event.target;
+
+    console.log(firstName);
+  },
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(SignUp);

@@ -1,4 +1,9 @@
-import {GET_USERS, CREATE_USER, UPDATE_USER} from '../actions/action-types';
+import {
+  GET_USERS,
+  CREATE_USER,
+  UPDATE_USER,
+  LOGIN_USER,
+} from '../actions/action-types';
 
 export default (state = [], action) => {
   switch (action.type) {
@@ -13,6 +18,9 @@ export default (state = [], action) => {
         ...state.filter(user => user.id !== action.updatedUser.id),
         action.user,
       ];
+
+    case LOGIN_USER:
+      console.log(action.status);
 
     default:
       return state;

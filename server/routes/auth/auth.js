@@ -4,11 +4,16 @@ const {
 const router = require('express').Router();
 module.exports = router;
 
-router.post('/login', (req, res, next) => {
+router.post('/login', async (req, res, next) => {
   try {
     const {email, password} = req.body;
+    const user = await User.findOne({where: {email}});
+    let error = null;
 
-    res.send({email, password});
+    if (!user) error = 'No user found with given email.';
+    else if (user.password !== password) error = 'Incorrect password.';
+
+    res.send({user: user || {}, error});
   } catch (err) {
     return next(err);
   }
