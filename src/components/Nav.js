@@ -68,9 +68,9 @@ export default class Navbar extends Component {
         {/* Search input and button */}
         <div className="col d-flex justify-content-end align-items-center">
           {/* Profile/Login button */}
-          <button className="btn">
+          <NavLink to="/login" className="btn">
             <i className="fas fa-user-circle fa-lg" />
-          </button>
+          </NavLink>
 
           {/* Cart button */}
           <NavLink to="/cart" className="btn">

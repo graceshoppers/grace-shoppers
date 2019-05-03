@@ -1,44 +1,66 @@
 import React, {Component} from 'react';
-
+import {connect} from 'react-redux';
+import {authenticateUser} from '../redux-store/actions/user-actions';
 
 class Login extends Component {
-  constructor(){
-    super();
-    this.state = {
-      email: '',
-      password: '',
-    };
-  }
-  onChange = ({target}) => {
-    //Some stuff to happen here
-    this.setState({
-      [target.name]: target.value
-    });
+  handleSubmit = event => {
+    event.preventDefault();
+    const {email, password} = event.target;
+    this.props.authenticateUser({email: email.value, password: password.value});
   };
-  onSubmit = () => {
-    //Some stuff to happen here
-  };
-  render(){
+
+  //   componentDidMount() {
+  //     this.props.history.push('/account');
+  //   }
+
+  render() {
+    const {handleSubmit} = this;
+
     return (
       <div style={{height: '100vh', backgroundColor: 'blue'}}>
         <div className="card container">
           <div>
-            <form>
+            <form onSubmit={handleSubmit}>
+              {/* Email input */}
               <div className="form-group">
                 <label>Email</label>
-                <input className="form-control" value={this.state.email} name="email" placeholder="email@gmail.com"/>
+                <input
+                  name="email"
+                  type="email"
+                  className="form-control"
+                  placeholder="email@gmail.com"
+                />
               </div>
+
+              {/* Password input */}
               <div className="form-group">
                 <label>Password</label>
-                <input className="form-control mb-3" value={this.state.password} name="password" placeholder="maryh4dAL1ttl3L4M.B"/>
-                <button type="submit" className="btn btn-warning">Login</button>
+                <input
+                  name="password"
+                  type="password"
+                  className="form-control mb-3"
+                  placeholder="maryh4dAL1ttl3L4M.B"
+                />
+
+                {/* Submit button */}
+                <button type="submit" className="btn btn-warning">
+                  Login
+                </button>
               </div>
             </form>
           </div>
         </div>
       </div>
-    )
+    );
   }
-};
+}
 
-export default Login;
+const mapDispatchToProps = dispatch => ({
+  authenticateUser: loginCredentials =>
+    dispatch(authenticateUser(loginCredentials)),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Login);

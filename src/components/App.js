@@ -1,10 +1,12 @@
-import React, {Component, Fragment} from 'react';
-import {Route, Redirect} from 'react-router-dom';
+import React, {Component} from 'react';
+import {Route} from 'react-router-dom';
 
+// Redux imports
 import {connect} from 'react-redux';
 import {fetchProducts} from '../redux-store/actions/product-actions';
 import {fetchReviews} from '../redux-store/actions/review-actions';
 
+// Component imports
 import Navbar from './Nav';
 import Home from './Home';
 import Catalog from './Catalog';
@@ -12,8 +14,11 @@ import Cart from './Cart';
 import SingleProduct from './SingleProduct';
 import Login from './Login';
 import SignUp from './SignUp';
+import AccountSettings from './AccountSettings';
 
-import '../styles/App.css'
+// CSS imports
+import '../styles/App.css';
+
 class App extends Component {
   componentDidMount() {
     this.props.fetchProducts();
@@ -26,7 +31,7 @@ class App extends Component {
         <Route component={Navbar} />
 
         {/* Landing page route */}
-        <Route exact path="/" component={Home}/>
+        <Route exact path="/" component={Home} />
 
         {/* Catalog route */}
         <Route exact path="/catalog" component={Catalog} />
@@ -44,10 +49,13 @@ class App extends Component {
         <Route exact path="/cart" component={Cart} />
 
         {/* Login Route */}
-        <Route path="/login" render={() => <Login />}/>
+        <Route path="/login" component={Login} />
 
         {/* SignUp Route */}
-        <Route path="/signup" render={() => <SignUp />}/>
+        <Route path="/signup" component={SignUp} />
+
+        {/* Account Profile Route */}
+        <Route path="/account" component={AccountSettings} />
       </div>
     );
   }
@@ -55,7 +63,7 @@ class App extends Component {
 
 const mapDispatchToProps = dispatch => ({
   fetchProducts: () => dispatch(fetchProducts()),
-  fetchReviews: () => dispatch(fetchReviews())
+  fetchReviews: () => dispatch(fetchReviews()),
 });
 
 export default connect(
