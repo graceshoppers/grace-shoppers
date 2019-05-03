@@ -7,8 +7,6 @@
   list-style: none;
   align-content: space-evenly;
   flex-wrap: wrap;
-  margin-left: 75px;
-  margin-right: 75px;
 }
 
 li {
@@ -20,8 +18,8 @@ li {
 }
 
 .catalog-img {
-  width: 275px;
-  height: 275px;
+  width: 250px;
+  height: 250px;
   object-fit: contain;
   position: block;
   opacity: 1;
