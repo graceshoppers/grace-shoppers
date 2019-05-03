@@ -2,9 +2,8 @@
   flex: 1;
   top: 0px;
   position: sticky;
-  margin-bottom: 15px;
   z-index: 9999;
-  display:flex;
+  display: flex;
 }
 
 .horizontal-flip {
@@ -16,7 +15,13 @@
   display: inline-block;
 }
 
-.left-bar{
+.left-bar {
   align-content: flex-start;
   border: solid 5px red;
+}
+
+.home-logo {
+  font-size: 40px;
+  font-weight: bold;
+  font-family: 'Courier New', Courier, monospace;
 }

@@ -18,7 +18,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="column-container">
+      <div className="container-fluid">
         <Route component={Navbar} />
 
         {/* Landing page route */}
