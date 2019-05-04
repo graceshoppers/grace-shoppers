@@ -12,6 +12,7 @@ import Cart from './Cart';
 import SingleProduct from './SingleProduct';
 import Login from './Login';
 import SignUp from './SignUp';
+import Checkout from './Checkout';
 
 import '../styles/App.css'
 class App extends Component {
@@ -48,6 +49,9 @@ class App extends Component {
 
         {/* SignUp Route */}
         <Route path="/signup" render={() => <SignUp />}/>
+
+        {/* Checkout Route */}
+        <Route path="/checkout" render={() => <Checkout/>}/>
       </div>
     );
   }

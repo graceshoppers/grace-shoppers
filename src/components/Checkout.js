@@ -1,9 +1,8 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
-import CartItem, {parseCost} from './CartItem';
-import {NavLink} from 'react-router-dom';
 
-const Cart = () => {
+import CartItem, {parseCost} from './CartItem';
+
+const Checkout = () => {
   const items = [
     {
       id: 1,
@@ -44,65 +43,61 @@ const Cart = () => {
   ];
   const totalCost = items.reduce((acc, next) => acc + next.unitCost, 0);
   return (
-    <div className="cart-container">
-      <div className="row d-flex flex-row">
-        {/*
-        ------------------
-        Shopping cart list
-        ------------------
-        */}
-        <div className="col-md-8">
-          <h3 className="shopping-cart-title">Shopping Cart</h3>
-          <div className="black-divider-thin" style={{margin: '2em 1.5em 0'}} />
-          {items.map((item, index) => (
-            <CartItem
-              key={item.id}
-              item={item}
-              displayTopBorder={index === 0 ? false : true}
-            />
-          ))}
-          <div
-            className="black-divider-thick"
-            style={{margin: '2em 1.5em 0'}}
+    <div className="container">
+      <div className="panel panel-info">
+        <h3 className="panel-heading">Shipping Address</h3>
+        <div className="panel-body">
+          <p>
+            user.name
+            <br />
+            user.address
+            <br />
+            <button className="btn">Change</button>
+          </p>
+        </div>
+      </div>
+
+      <div className="panel panel-info">
+        <h3 className="panel-heading">Payment Method</h3>
+        <div className="panel-body">
+          <p>
+            user.name
+            <br />
+            user.address
+            <br />
+            <button className="btn">Change</button>
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <h3 className='panel-heading'>Shopping Cart</h3>
+        <div className="black-divider-thin" style={{margin: '2em 0 0'}} />
+        {items.map((item, index) => (
+          <CartItem
+            key={item.id}
+            item={item}
+            displayTopBorder={index === 0 ? false : true}
           />
-          {/*
+        ))}
+        <div className="black-divider-thick" style={{margin: '2em 1.5em 0'}} />
+        {/*
           -------------
           Total section
           -------------
           */}
-          <div className="container">
-            <div className="row d-flex flex-row">
-              <div className="col-md-9">
-                <h3 className="shopping-cart-title">Total</h3>
-              </div>
-              <div
-                className="col-md-2 d-flex flex-row-reverse"
-                style={{marginLeft: '19px'}}
-              >
-                <h5 className="shopping-cart-title">{`${parseCost(
-                  totalCost
-                )}`}</h5>
-              </div>
+        <div className="container">
+          <div className="row d-flex flex-row">
+            <div className="col-md-9">
+              <h3 className="shopping-cart-title">Total</h3>
             </div>
-          </div>
-        </div>
-        {/*
-        ----------------
-        Checkout section
-        ----------------
-        */}
-        <div className="col-md-4">
-          <div className="container">
-            <div className="row align-items-start">
-              <div className="col-md-12">
-                <h3 className="shopping-cart-title">Checkout</h3>
-                <div className="black-divider-thin" style={{margin: '2em 0'}} />
-              </div>
-              <div className="row justify-content-md-center">
-                <div className="col">
-                  <button className="btn btn-success"><NavLink to ='/checkout'>Checkout</NavLink></button>
-                </div>
-              </div>
+            <div
+              className="col-md-2 d-flex flex-row-reverse"
+              style={{marginLeft: '19px'}}
+            >
+              <h5 className="shopping-cart-title">{`${parseCost(
+                totalCost
+              )}`}</h5>
             </div>
           </div>
         </div>
@@ -111,8 +106,4 @@ const Cart = () => {
   );
 };
 
-// Cart.propTypes = {
-//   items: PropTypes.array
-// };
-
-export default Cart;
+export default Checkout;
