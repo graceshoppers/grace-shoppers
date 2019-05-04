@@ -55,7 +55,7 @@ router.post('/login', async (req, res, next) => {
 
     if (!user) error = 'No user found with given email.';
     else if (user.password !== password) error = 'Incorrect password.';
-    else req.session.user = {info: user, cartItems: []};
+    else req.session.user = {...req.session.user, info: user};
 
     res.send(req.session.user);
   } catch (err) {
