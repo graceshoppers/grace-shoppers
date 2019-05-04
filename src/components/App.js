@@ -6,6 +6,7 @@ import {fetchProducts} from '../redux-store/actions/product-actions';
 import {fetchReviews} from '../redux-store/actions/review-actions';
 import {fetchUsers} from '../redux-store/actions/user-actions';
 import {fetchOrders} from '../redux-store/actions/order-actions';
+import {fetchOrderitems} from '../redux-store/actions/orderitem-actions';
 
 import Navbar from './Nav';
 import Home from './Home';
@@ -23,6 +24,7 @@ class App extends Component {
     this.props.fetchReviews();
     this.props.fetchUsers();
     this.props.fetchOrders();
+    this.props.fetchOrderitems();
   }
 
   render() {
