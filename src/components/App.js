@@ -67,7 +67,8 @@ const mapDispatchToProps = dispatch => ({
   fetchProducts: () => dispatch(fetchProducts()),
   fetchReviews: () => dispatch(fetchReviews()),
   fetchUsers: () => dispatch(fetchUsers()),
-  fetchOrders: () => dispatch(fetchOrders())
+  fetchOrders: () => dispatch(fetchOrders()),
+  fetchOrderitems: () => dispatch(fetchOrderitems())
 });
 
 export default connect(
