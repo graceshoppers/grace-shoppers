@@ -4,6 +4,8 @@ import {Route, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {fetchProducts} from '../redux-store/actions/product-actions';
 import {fetchReviews} from '../redux-store/actions/review-actions';
+import {fetchUsers} from '../redux-store/actions/user-actions';
+import {fetchOrders} from '../redux-store/actions/order-actions';
 
 import Navbar from './Nav';
 import Home from './Home';
@@ -12,13 +14,19 @@ import Cart from './Cart';
 import SingleProduct from './SingleProduct';
 import Login from './Login';
 import SignUp from './SignUp';
+<<<<<<< HEAD
 import Checkout from './Checkout';
+=======
+import AccountSettings from './AccountSettings';
+>>>>>>> 5aa73728fede827a8f5884bb1d5aad697c5753a4
 
 import '../styles/App.css'
 class App extends Component {
   componentDidMount() {
     this.props.fetchProducts();
     this.props.fetchReviews();
+    this.props.fetchUsers();
+    this.props.fetchOrders();
   }
 
   render() {
@@ -52,6 +60,9 @@ class App extends Component {
 
         {/* Checkout Route */}
         <Route path="/checkout" render={() => <Checkout/>}/>
+
+        {/* /users/accountsettings */}
+        <Route exact path="/users/:userId/accountsettings/" component={AccountSettings}/>
       </div>
     );
   }
@@ -59,7 +70,9 @@ class App extends Component {
 
 const mapDispatchToProps = dispatch => ({
   fetchProducts: () => dispatch(fetchProducts()),
-  fetchReviews: () => dispatch(fetchReviews())
+  fetchReviews: () => dispatch(fetchReviews()),
+  fetchUsers: () => dispatch(fetchUsers()),
+  fetchOrders: () => dispatch(fetchOrders())
 });
 
 export default connect(

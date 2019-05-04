@@ -127,7 +127,8 @@ module.exports = {
     User,
     Category,
     Product,
-    Review
+    Review,
+    Order
   },
   methods: {
     syncAndSeed,
