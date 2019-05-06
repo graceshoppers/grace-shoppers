@@ -1,10 +1,12 @@
 const router = require('express').Router();
+const {validationResult} = require('express-validator/check');
 const {
   models: {User},
 } = require('../../db');
 
 module.exports = router;
 
+// GET, gets all users
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({order: [['id', 'ASC']]});
@@ -14,6 +16,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+// GET, gets one user using user's id
 router.get('/:id', async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id * 1);
@@ -23,14 +26,25 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.post('/', async (req, res, next) => {
-  try {
-    const createdUser = await User.create(req.body);
-    res.status(201).json(createdUser);
-  } catch (err) {
-    next(err);
+//POST, creates a new user
+router.post(
+  '/',
+
+  // Callback functions using Express Validator
+  [...require('./validations/signup-validations')],
+
+  async (req, res, next) => {
+    const errors = validationResult(req);
+
+    if (errors.isEmpty()) {
+      const createdUser = await User.create(req.body);
+      res.status(201).json(createdUser);
+    } else {
+      res.status(422).json({errors: errors.array()});
+      next(errors.throw());
+    }
   }
-});
+);
 
 router.put('/:id', async (req, res, next) => {
   try {

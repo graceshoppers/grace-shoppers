@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const session = require('express-session');
+
 const app = express();
 
 module.exports = app;
@@ -12,6 +13,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', express.json());
 app.use(express.urlencoded({extended: true}));
 
+// Express session middleware
 app.use(
   session({
     saveUninitialized: false,

@@ -3,14 +3,30 @@ import {connect} from 'react-redux';
 import {addUser} from '../redux-store/actions/user-actions';
 
 class SignUp extends Component {
-  render() {
-    const {handleSubmit} = this.props;
+  handleSubmit = event => {
+    event.preventDefault();
 
+    const fields = [
+      'firstName',
+      'lastName',
+      'email',
+      'password',
+      'confirmPassword',
+    ];
+    const signupCredentials = fields.reduce((acc, field) => {
+      if (event.target[field]) acc[field] = event.target[field].value;
+      return acc;
+    }, {});
+
+    this.props.addUser(signupCredentials);
+  };
+
+  render() {
     return (
       <div className="card container" style={{marginTop: '2em'}}>
         <h2>Sign Up</h2>
         <hr />
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={this.handleSubmit}>
           {/* Input for first name*/}
           <div className="form-group">
             <label htmlFor="firstName">First Name</label>
@@ -62,23 +78,7 @@ class SignUp extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  handleSubmit: event => {
-    event.preventDefault();
-
-    const fields = [
-      'firstName',
-      'lastName',
-      'email',
-      'password',
-      'confirmPassword',
-    ];
-    const signupCredentials = fields.reduce((acc, field) => {
-      if (event.target[field]) acc[field] = event.target[field].value;
-      return acc;
-    }, {});
-
-    dispatch(addUser(signupCredentials));
-  },
+  addUser: signupCredentials => dispatch(addUser(signupCredentials)),
 });
 
 export default connect(
