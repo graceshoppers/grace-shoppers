@@ -4,7 +4,7 @@ import {NavLink} from 'react-router-dom';
 import './Nav.css';
 import NavMenu from './NavMenu';
 import SearchBar from './SearchBar';
-import CartButton from './CartButton';
+import CartButton from '../Cart/CartButton';
 
 class NavBar extends Component {
   goTo(route) {

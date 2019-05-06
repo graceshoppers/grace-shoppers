@@ -38,12 +38,10 @@ const AccountSettings = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    users: state.users,
-    orders: state.orders,
-    orderitems: state.orderitems,
-  };
-};
+const mapStateToProps = ({users, orders, orderitems}) => ({
+  users,
+  orders,
+  orderitems,
+});
 
 export default connect(mapStateToProps)(AccountSettings);

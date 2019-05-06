@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/Catalog.css';
+import './Catalog.css';
 import CatalogCard from './CatalogCard';
 
 import {connect} from 'react-redux';
