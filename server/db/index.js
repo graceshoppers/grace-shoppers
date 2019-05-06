@@ -8,7 +8,8 @@ const {
   orders,
   products,
   orderitems,
-  reviews
+  reviews,
+  address,
 } = require("./seeds");
 
 // Sequelize models
@@ -18,7 +19,8 @@ const {
   Product,
   Review,
   Order,
-  Orderitem
+  Orderitem,
+  Address
 } = require("./models");
 
 Product.belongsTo(Category);
@@ -38,6 +40,9 @@ Review.belongsTo(Product);
 
 Review.belongsTo(User);
 User.hasMany(Review);
+
+Address.belongsTo(User);
+User.hasMany(Address);
 
 // Clears database tables and repopulates it with seed data
 const syncAndSeed = () => {
@@ -105,7 +110,7 @@ const syncAndSeed = () => {
         );
       });
       resolvedReviews.forEach(async resolvedReview => {
-        await resolvedReview.setProduct(Math.ceil(Math.random() * resolvedProducts.length)); 
+        await resolvedReview.setProduct(Math.ceil(Math.random() * resolvedProducts.length));
       });
 
       //Assign userIds randomly to orders

@@ -18,7 +18,10 @@ const User = connection.define("user", {
     type: STRING,
     allowNull: false,
     notEmpty: true,
-    isEmail: true
+    isEmail: true,
+    validate:{
+      isEmail:true,
+    }
   },
   isAdmin: {
     type: BOOLEAN,
