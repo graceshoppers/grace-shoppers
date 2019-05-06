@@ -3,13 +3,17 @@ import {connect} from 'react-redux';
 import {loginUser} from '../redux-store/actions/user-actions';
 
 class Login extends Component {
-  handleSubmit = event => {
-    event.preventDefault();
-    const {email, password} = event.target;
+  constructor() {
+    super();
+    this.state = {
+      email: '',
+      password: '',
+    };
+  }
 
-    this.props.loginUser({
-      email: email.value,
-      password: password.value,
+  onChange = ({target}) => {
+    this.setState({
+      [target.name]: target.value,
     });
   };
 

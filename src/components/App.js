@@ -1,6 +1,6 @@
-// React imports
-import React, {Component} from 'react';
-import {Route} from 'react-router-dom';
+/* eslint-disable react/button-has-type */
+import React, {Component, Fragment} from 'react';
+import {Route, Redirect} from 'react-router-dom';
 
 // Redux imports
 import {connect} from 'react-redux';
@@ -19,8 +19,26 @@ import SingleProduct from './SingleProduct';
 import Login from './Login';
 import SignUp from './SignUp/SignUp';
 import AccountSettings from './AccountSettings';
+import '../styles/App.css';
+import Callback from '../Callback/Callback';
+import Auth from '../Auth/Auth';
+import history from '../history';
+
+const auth = new Auth();
 
 class App extends Component {
+  goTo(route) {
+    this.props.history.replace(`/${route}`);
+  }
+
+  login() {
+    auth.login();
+  }
+
+  logout() {
+    auth.logout();
+  }
+
   componentDidMount() {
     this.props.fetchProducts();
     this.props.fetchReviews();
@@ -28,12 +46,15 @@ class App extends Component {
     this.props.fetchOrders();
     this.props.fetchOrderitems();
   }
-
   render() {
-    console.log(this.props.userDetails);
+    const {isAuthenticated} = auth;
     return (
       <div className="container-fluid">
-        <Route component={Navbar} />
+        <Route
+          render={() => (
+            <Navbar isAuthenticated={isAuthenticated()} auth={auth} />
+          )}
+        />
 
         {/* Landing page route */}
         <Route exact path="/" component={Home} />
@@ -59,8 +80,14 @@ class App extends Component {
         {/* SignUp Route */}
         <Route path="/signup" component={SignUp} />
 
-        {/* Account Profile Route */}
-        <Route path="/account" component={AccountSettings} />
+        {/* /users/accountsettings */}
+        <Route
+          exact
+          path="/users/:userId/accountsettings/"
+          component={AccountSettings}
+        />
+
+        <Route path="/callback" render={props => <Callback {...props} />} />
       </div>
     );
   }

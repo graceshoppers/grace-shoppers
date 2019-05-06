@@ -12,6 +12,17 @@ class Navbar extends Component {
       search: '',
     };
   }
+  goTo(route) {
+    this.props.history.replace(`/${route}`);
+  }
+
+  login() {
+    this.props.auth.login();
+  }
+
+  logout() {
+    this.props.auth.logout();
+  }
 
   handleChange = ({target: {name, value}}) => this.setState({[name]: value});
 
@@ -25,9 +36,8 @@ class Navbar extends Component {
     this.props.history.push(`/catalog/search/${this.state.search}`);
 
   render() {
-    const {props, handleChange, handleClick, handleKeyDown} = this;
-    const {userDetails} = props;
-
+    const {handleChange, handleClick, handleKeyDown} = this;
+    const {isAuthenticated} = this.props;
     return (
       <nav className="row navbar navbar-expand-lg navbar-light fixed-container">
         {/* Link list */}
@@ -71,15 +81,25 @@ class Navbar extends Component {
         {/* Search input and button */}
         <div className="col d-flex justify-content-end align-items-center">
           {/* Profile/Login button */}
-          {userDetails.info ? (
-            <NavLink to="/account" className="btn">
-              <i className="fas fa-user-circle fa-lg" />
-            </NavLink>
-          ) : (
-            <NavLink to="/login" className="btn">
-              <i className="far fa-meh fa-lg" />
-            </NavLink>
+          {!isAuthenticated && (
+            <button
+              className="btn-margin btn-primary"
+              onClick={this.login.bind(this)}
+            >
+              Log In
+            </button>
           )}
+          {isAuthenticated && (
+            <button
+              className="btn-margin btn-primary"
+              onClick={this.logout.bind(this)}
+            >
+              Log Out
+            </button>
+          )}
+          <button className="btn">
+            <i className="fas fa-user-circle fa-lg" />
+          </button>
 
           {/* Cart button */}
           <NavLink to="/cart" className="btn">
