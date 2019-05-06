@@ -31,7 +31,7 @@ router.post(
   '/',
 
   // Callback functions using Express Validator
-  [...require('./validations/signup-validations')],
+  require('./validations/signup-validations'),
 
   async (req, res, next) => {
     const errors = validationResult(req);
@@ -40,8 +40,13 @@ router.post(
       const createdUser = await User.create(req.body);
       res.status(201).json(createdUser);
     } else {
-      res.status(422).json({errors: errors.array()});
-      next(errors.throw());
+      const errorFormatter = errorArray =>
+        errorArray.reduce((acc, {param, msg}) => {
+          if (acc[param]) acc[param].push(msg);
+          else acc[param] = [msg];
+          return acc;
+        }, {});
+      res.status(422).json({errors: errorFormatter(errors.array())});
     }
   }
 );

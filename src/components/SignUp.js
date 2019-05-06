@@ -1,8 +1,16 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {addUser} from '../redux-store/actions/user-actions';
+import axios from 'axios';
 
 class SignUp extends Component {
+  constructor() {
+    super();
+    this.state = {
+      errors: [],
+    };
+  }
+
   handleSubmit = event => {
     event.preventDefault();
 
@@ -18,10 +26,15 @@ class SignUp extends Component {
       return acc;
     }, {});
 
-    this.props.addUser(signupCredentials);
+    this.props.addUser(signupCredentials).catch(err =>
+      this.setState({
+        errors: err.response.data.errors,
+      })
+    );
   };
 
   render() {
+    console.log(this.state);
     return (
       <div className="card container" style={{marginTop: '2em'}}>
         <h2>Sign Up</h2>

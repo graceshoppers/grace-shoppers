@@ -32,6 +32,7 @@ module.exports = [
   }),
 
   // Checks if passwords are equal
-  check('password', 'Passwords must match.').equals('confirmPassword'),
-  check('confirmPassword', 'Passwords must match.').equals('password'),
+  check('password', 'Passwords must match.').custom(
+    (value, {req}) => value === req.body.confirmPassword
+  ),
 ];
