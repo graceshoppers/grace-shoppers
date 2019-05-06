@@ -15,7 +15,7 @@ import Catalog from './Catalog';
 import Cart from './Cart';
 import SingleProduct from './SingleProduct';
 import Login from './Login';
-import SignUp from './SignUp';
+import SignUp from './SignUp/SignUp';
 import AccountSettings from './AccountSettings';
 
 // CSS imports
