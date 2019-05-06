@@ -8,7 +8,8 @@ import {fetchProducts} from '../redux-store/actions/product-actions';
 import {fetchReviews} from '../redux-store/actions/review-actions';
 
 // Component imports
-import Navbar from './Nav';
+import '../styles/App.css';
+import Navbar from './NavBar/Navbar';
 import Home from './Home';
 import Catalog from './Catalog';
 import Cart from './Cart';
@@ -16,7 +17,6 @@ import SingleProduct from './SingleProduct';
 import Login from './Login';
 import SignUp from './SignUp/SignUp';
 import AccountSettings from './AccountSettings';
-import '../styles/App.css';
 import Callback from '../Callback/Callback';
 import Auth from '../Auth/Auth';
 import history from '../history';
@@ -28,25 +28,23 @@ class App extends Component {
     this.props.history.replace(`/${route}`);
   }
 
-  login() {
-    auth.login();
-  }
-
-  logout() {
-    auth.logout();
-  }
-
   componentDidMount() {
     this.props.fetchProducts();
     this.props.fetchReviews();
   }
+
   render() {
     const {isAuthenticated} = auth;
+
     return (
       <div className="container-fluid">
         <Route
-          render={() => (
-            <Navbar isAuthenticated={isAuthenticated()} auth={auth} />
+          render={({history}) => (
+            <Navbar
+              isAuthenticated={isAuthenticated()}
+              auth={auth}
+              history={history}
+            />
           )}
         />
 

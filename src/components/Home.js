@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Navbar from './Nav';
+import Navbar from './NavBar/Navbar';
 import Catalog from './Catalog';
 
 import '../styles/Home.css';
