@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import {addUser} from '../redux-store/actions/user-actions';
 import {connect} from 'react-redux';
+import { isAuthenticated } from '../auth';
+import Login from './LoginButton';
+import Logout from './LogoutButton';
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -17,15 +20,17 @@ class SignUp extends Component {
       email: '',
       password: '',
     };
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   };
-  onChange = ({target}) => {
+  onChange({target}) {
     //Some stuff to happen here
     this.setState({
       [target.name]: target.value
     });
     console.log(this.state);
   };
-  onSubmit = (ev) => {
+  onSubmit(ev) {
     //Some stuff to happen here
     ev.preventDefault();
     this.props.addUser(this.state);
@@ -51,7 +56,7 @@ class SignUp extends Component {
               <div className="form-group">
                 <label>Password</label>
                 <input className="form-control mb-3" value={this.state.password} name="password" placeholder="maryh4dAL1ttl3L4M.B" onChange={this.onChange} type="password"/>
-                <button type="submit" className="btn btn-warning">Login</button>
+                <button type="submit" className="btn btn-warning">Register</button>
               </div>
             </form>
           </div>

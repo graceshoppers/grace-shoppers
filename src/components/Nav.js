@@ -10,6 +10,17 @@ export default class Navbar extends Component {
       search: '',
     };
   }
+  goTo(route) {
+    this.props.history.replace(`/${route}`)
+  }
+
+  login() {
+    this.props.auth.login();
+  }
+
+  logout() {
+    this.props.auth.logout();
+  }
 
   handleChange = ({target: {name, value}}) => this.setState({[name]: value});
 
@@ -24,7 +35,7 @@ export default class Navbar extends Component {
 
   render() {
     const {handleChange, handleClick, handleKeyDown} = this;
-
+    const { isAuthenticated } = this.props;
     return (
       <nav className="row navbar navbar-expand-lg navbar-light fixed-container">
         {/* Link list */}
@@ -68,6 +79,26 @@ export default class Navbar extends Component {
         {/* Search input and button */}
         <div className="col d-flex justify-content-end align-items-center">
           {/* Profile/Login button */}
+          {
+                !isAuthenticated && (
+                    <button
+                      className="btn-margin btn-primary"
+                      onClick={this.login.bind(this)}
+                    >
+                      Log In
+                    </button>
+                  )
+              }
+              {
+                isAuthenticated && (
+                    <button
+                      className="btn-margin btn-primary"
+                      onClick={this.logout.bind(this)}
+                    >
+                      Log Out
+                    </button>
+                  )
+              }
           <button className="btn">
             <i className="fas fa-user-circle fa-lg" />
           </button>

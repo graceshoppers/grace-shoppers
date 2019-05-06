@@ -8,6 +8,8 @@ class Login extends Component {
       email: '',
       password: '',
     };
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
   onChange = ({target}) => {
     //Some stuff to happen here
