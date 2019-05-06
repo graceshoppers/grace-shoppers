@@ -6,9 +6,6 @@ import {Route, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {fetchProducts} from '../redux-store/actions/product-actions';
 import {fetchReviews} from '../redux-store/actions/review-actions';
-import {fetchUsers} from '../redux-store/actions/user-actions';
-import {fetchOrders} from '../redux-store/actions/order-actions';
-import {fetchOrderitems} from '../redux-store/actions/orderitem-actions';
 
 // Component imports
 import Navbar from './Nav';
@@ -42,9 +39,6 @@ class App extends Component {
   componentDidMount() {
     this.props.fetchProducts();
     this.props.fetchReviews();
-    this.props.fetchUsers();
-    this.props.fetchOrders();
-    this.props.fetchOrderitems();
   }
   render() {
     const {isAuthenticated} = auth;
@@ -93,15 +87,12 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({userDetails}) => ({userDetails});
-
 const mapDispatchToProps = dispatch => ({
   fetchProducts: () => dispatch(fetchProducts()),
   fetchReviews: () => dispatch(fetchReviews()),
-  getUserDetailsFromSession: () => dispatch(getUserDetailsFromSession()),
 });
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(App);

@@ -6,10 +6,10 @@ const app = express();
 
 module.exports = app;
 
-//static middleware
+//Static middleware
 app.use(express.static(path.join(__dirname, 'public')));
 
-//data logging middleware
+//Parsing middleware
 app.use('/', express.json());
 app.use(express.urlencoded({extended: true}));
 
@@ -22,11 +22,11 @@ app.use(
   })
 );
 
-//api middleware
+//API middleware
 app.use('/api', require('./routes/api'));
 app.use('/auth', require('./routes/auth/auth'));
 
-//routes
+//Routes
 app.get('/', (req, res, next) => res.sendFile('index.html'));
 app.get('/app.js', (req, res, next) =>
   res.sendFile(path.join(__dirname, '..', 'dist', 'main.js'))
