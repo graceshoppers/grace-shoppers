@@ -1,41 +1,18 @@
 import React from "react";
-import connect from "react-redux";
-
-const props = {
-  user: {
-    id:1,
-    firstName: "bob",
-    lastName: "bobbert",
-    email: "bob@gmail.com"
-  },
-  orders: {
-    id=55,
-    userId = 1
-  },
-  orderitems: [{
-    orderId:55,
-    productId:5,
-    quantity:3
-  },
-  {
-    orderId:55,
-    productId:2,
-    quantity:1
-  }],
-  products:[{
-    name:,
-    unitCost,
-  }]
-
-
-};
-
-
+import { connect } from "react-redux";
 
 const AccountSettings = props => {
-  const { user } = props;
-  const { orders } = props;
+  const { users } = props;
+  const userId = props.match.params.userId * 1;
+  const user = users.find(user => {
+    return user.id === userId;
+  });
 
+  const { orders } = props;
+  console.log(orders)
+  const ownOrders = orders.filter(order => order.userId === userId)
+
+  console.log(ownOrders)
   return (
     <div>
       <h1>Welcome</h1>
@@ -46,18 +23,26 @@ const AccountSettings = props => {
       <br />
 
       <h1>Orders</h1>
+      {ownOrders.map(ownOrder => {
+        return (
+        <ul key={ownOrder.id}>
+          <h2>{ownOrder.createdAt}</h2>
+          <h3>{ownOrder.status}</h3>
+          PUT ORDERITEMS HERE
 
-      <div>{orders.filter(order => order.userId === user.id).map(order => {
+        </ul>)
         
-      })}</div>
+      })}
+
     </div>
   );
 };
 
 const mapStateToProps = state => {
   return {
+    users: state.users,
     orders: state.orders
   };
 };
 
-export default AccountSettings; //connect(mapStateToProps)(AccountSettings);
+export default connect(mapStateToProps)(AccountSettings);

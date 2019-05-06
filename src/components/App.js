@@ -4,6 +4,8 @@ import {Route, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {fetchProducts} from '../redux-store/actions/product-actions';
 import {fetchReviews} from '../redux-store/actions/review-actions';
+import {fetchUsers} from '../redux-store/actions/user-actions';
+import {fetchOrders} from '../redux-store/actions/order-actions';
 
 import Navbar from './Nav';
 import Home from './Home';
@@ -12,23 +14,15 @@ import Cart from './Cart';
 import SingleProduct from './SingleProduct';
 import Login from './Login';
 import SignUp from './SignUp';
-import Callback from './Callback';
-import Auth from '../auth';
+import AccountSettings from './AccountSettings';
 
-
-const auth = new Auth();
-
-const handleAuthentication = ({location}) => {
-  if (/access_token|id_token|error/.test(location.hash)) {
-    auth.handleAuthentication();
-  }
-}
-
-import '../styles/App.css'
+import '../styles/App.css';
 class App extends Component {
   componentDidMount() {
     this.props.fetchProducts();
     this.props.fetchReviews();
+    this.props.fetchUsers();
+    this.props.fetchOrders();
   }
 
   render() {
@@ -60,10 +54,8 @@ class App extends Component {
         {/* SignUp Route */}
         <Route path="/signup" render={() => <SignUp />}/>
 
-        <Route path="/callback" render={(props) => {
-            handleAuthentication(props);
-            return <Callback {...props}/>
-          }}/>
+        {/* /users/accountsettings */}
+        <Route exact path="/users/:userId/accountsettings/" component={AccountSettings}/>
       </div>
     );
   }
@@ -71,7 +63,9 @@ class App extends Component {
 
 const mapDispatchToProps = dispatch => ({
   fetchProducts: () => dispatch(fetchProducts()),
-  fetchReviews: () => dispatch(fetchReviews())
+  fetchReviews: () => dispatch(fetchReviews()),
+  fetchUsers: () => dispatch(fetchUsers()),
+  fetchOrders: () => dispatch(fetchOrders())
 });
 
 export default connect(
