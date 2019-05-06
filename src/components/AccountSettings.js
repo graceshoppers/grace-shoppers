@@ -3,11 +3,6 @@ import {connect} from 'react-redux';
 
 const AccountSettings = props => {
   const {userDetails} = props;
-
-  // If user information is not on Redux state from thunk request,
-  // redirect to /login
-  if (!userDetails.info) props.history.push('/login');
-
   return (
     <div>
       <hr />

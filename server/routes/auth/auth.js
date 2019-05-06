@@ -43,7 +43,7 @@ module.exports = router;
 
 // Checks if there is a user currently logged in
 router.get('/', (req, res, next) => {
-  res.json(req.session.user);
+  res.json(req.session.userDetails);
 });
 
 // Checks if login credentials match values in database
@@ -55,9 +55,9 @@ router.post('/login', async (req, res, next) => {
 
     if (!user) error = 'No user found with given email.';
     else if (user.password !== password) error = 'Incorrect password.';
-    else req.session.user = {...req.session.user, info: user};
+    else req.session.userDetails = {...req.session.userDetails, info: user};
 
-    res.send(req.session.user);
+    res.send(req.session.userDetails);
   } catch (err) {
     return next(err);
   }

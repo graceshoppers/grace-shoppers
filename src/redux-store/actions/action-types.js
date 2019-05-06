@@ -13,8 +13,10 @@ export const DELETE_PRODUCT = 'DELETE_PRODUCT';
 export const GET_USERS = 'GET_USERS';
 export const CREATE_USER = 'CREATE_USER';
 export const UPDATE_USER = 'UPDATE_USER';
+
+// User authentication actions
+export const GET_USER_DETAILS_FROM_SESSION = 'GET_USER_DETAILS_FROM_SESSION';
 export const LOGIN_USER = 'LOGIN_USER';
-export const CHECK_IF_A_USER_IS_LOGGED_IN = 'CHECK_IF_A_USER_IS_LOGGED_IN';
 
 //Review actions
 export const GET_REVIEWS = 'GET_REVIEWS';

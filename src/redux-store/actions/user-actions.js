@@ -3,8 +3,8 @@ import {
   GET_USERS,
   CREATE_USER,
   UPDATE_USER,
+  GET_USER_DETAILS_FROM_SESSION,
   LOGIN_USER,
-  CHECK_IF_A_USER_IS_LOGGED_IN,
 } from './action-types';
 
 // ===============================
@@ -56,34 +56,32 @@ const updateUser = updatedUser => ({
   updatedUser,
 });
 
-// Sends login credentials to auth route
-// Auth route returns status
-export const authenticateUser = loginCredentials => {
-  return dispatch => {
-    return axios
-      .post('/auth/login', loginCredentials)
-      .then(res => dispatch(loginUser(res.data)))
-      .catch(e => console.error(`Error:\n${e}`));
-  };
-};
-
-const loginUser = userDetails => ({
-  type: LOGIN_USER,
-  userDetails,
-});
-
-// Checks Express session if there is a user logged in
-// If true, expect to receive user's id
-export const checkIfUserIsLoggedIn = () => {
+// ===============================
+// Gets session information from Express app
+export const getUserDetailsFromSession = () => {
   return dispatch => {
     return axios
       .get('/auth')
-      .then(res => dispatch(getUserInformationFromExpressSession(res.data)))
+      .then(res =>
+        dispatch({
+          type: GET_USER_DETAILS_FROM_SESSION,
+          userDetails: res.data,
+        })
+      )
       .catch(e => console.error(`Error:\n${e}`));
   };
 };
 
-const getUserInformationFromExpressSession = userDetails => ({
-  type: CHECK_IF_A_USER_IS_LOGGED_IN,
-  userDetails,
-});
+export const loginUser = loginCredentials => {
+  return dispatch => {
+    return axios
+      .post('/auth/login', loginCredentials)
+      .then(res =>
+        dispatch({
+          type: LOGIN_USER,
+          userDetails: res.data,
+        })
+      )
+      .catch(e => console.error(`Error:\n${e}`));
+  };
+};
