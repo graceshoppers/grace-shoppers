@@ -20,15 +20,17 @@ class SignUp extends Component {
       email: '',
       password: '',
     };
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   };
-  onChange = ({target}) => {
+  onChange({target}) {
     //Some stuff to happen here
     this.setState({
       [target.name]: target.value
     });
     console.log(this.state);
   };
-  onSubmit = (ev) => {
+  onSubmit(ev) {
     //Some stuff to happen here
     ev.preventDefault();
     this.props.addUser(this.state);

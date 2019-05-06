@@ -1,23 +1,26 @@
-import React, { Component } from 'react';
-import { Logout } from '../auth';
+// import React, { Component } from 'react';
+// import Auth from '../auth';
 
-class LogoutButton extends Component {
-  constructor(props) {
-    super(props);
-    this.logout = this.logout.bind(this);
-  }
+// const auth = new Auth();
+// console.log(auth.login);
 
-  logout() {
-    Logout();
-  }
+// class LogoutButton extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.logout = this.logout.bind(this);
+//   }
 
-  render() {
-    return (
-        <button onClick={this.logout}>
-        	Log Out
-        </button>
-    );
-  }
-}
+//   logout() {
+//     Logout();
+//   }
 
-export default LogoutButton;
+//   render() {
+//     return (
+//         <button onClick={this.logout}>
+//         	Log Out
+//         </button>
+//     );
+//   }
+// }
+
+// export default LogoutButton;

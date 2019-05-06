@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 import React, {Component, Fragment} from 'react';
 import {Route, Redirect} from 'react-router-dom';
 
@@ -15,20 +16,37 @@ import SingleProduct from './SingleProduct';
 import Login from './Login';
 import SignUp from './SignUp';
 import AccountSettings from './AccountSettings';
-
 import '../styles/App.css';
+import Callback from '../Callback/Callback';
+import Auth from '../Auth/Auth';
+import history from '../history';
+
+const auth = new Auth();
+
 class App extends Component {
+  goTo(route) {
+    this.props.history.replace(`/${route}`)
+  }
+
+  login() {
+    auth.login();
+  }
+
+  logout() {
+    auth.logout();
+  }
+
   componentDidMount() {
     this.props.fetchProducts();
     this.props.fetchReviews();
     this.props.fetchUsers();
     this.props.fetchOrders();
   }
-
   render() {
+    const { isAuthenticated } = auth;
     return (
       <div className="container-fluid">
-        <Route component={Navbar} />
+        <Route render={() => <Navbar isAuthenticated={isAuthenticated()} auth={auth}/>} />
 
         {/* Landing page route */}
         <Route exact path="/" component={Home}/>
@@ -56,6 +74,8 @@ class App extends Component {
 
         {/* /users/accountsettings */}
         <Route exact path="/users/:userId/accountsettings/" component={AccountSettings}/>
+
+        <Route path="/callback" render={(props) => <Callback {...props} />} />
       </div>
     );
   }

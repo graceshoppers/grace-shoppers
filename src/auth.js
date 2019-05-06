@@ -3,7 +3,7 @@ import auth0 from 'auth0-js';
 
 const isBrowser = typeof window !== 'undefined';
 
-export default class Auth {
+class Auth {
   auth0 = new auth0.WebAuth({
     domain: "graceshopper.auth0.com",
     clientID: "JVMUt6QCM6mWW0R0hRantgCwixzcdXzy",
@@ -89,3 +89,5 @@ export default class Auth {
     return accessToken;
   }
 }
+
+export default Auth;
