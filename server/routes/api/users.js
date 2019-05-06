@@ -46,6 +46,7 @@ router.post(
           else acc[param] = [msg];
           return acc;
         }, {});
+
       res.status(422).json({errors: errorFormatter(errors.array())});
     }
   }

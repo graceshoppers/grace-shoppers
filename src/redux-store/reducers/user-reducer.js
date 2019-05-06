@@ -6,11 +6,11 @@ export default (state = [], action) => {
       return [...action.users];
 
     case CREATE_USER:
-      return [...state.users, action.newUser];
+      return [...state, action.newUser];
 
     case UPDATE_USER:
       return [
-        ...state.users.filter(user => user.id !== action.updatedUser.id),
+        ...state.filter(user => user.id !== action.updatedUser.id),
         action.user,
       ];
 

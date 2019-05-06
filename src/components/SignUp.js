@@ -26,15 +26,20 @@ class SignUp extends Component {
       return acc;
     }, {});
 
-    this.props.addUser(signupCredentials).catch(err =>
-      this.setState({
-        errors: err.response.data.errors,
-      })
-    );
+    this.props
+      .addUser(signupCredentials)
+      .then(() => this.props.history.push('/'))
+      .catch(err => {
+        console.log(err);
+        this.setState({
+          errors: err.response.data.errors,
+        });
+      });
   };
 
   render() {
-    console.log(this.state);
+    const {errors} = this.state;
+
     return (
       <div className="card container" style={{marginTop: '2em'}}>
         <h2>Sign Up</h2>
@@ -42,40 +47,82 @@ class SignUp extends Component {
         <form onSubmit={this.handleSubmit}>
           {/* Input for first name*/}
           <div className="form-group">
-            <label htmlFor="firstName">First Name</label>
-            <input type="text" name="firstName" className="form-control" />
+            <label
+              htmlFor="firstName"
+              className={`${errors.firstName ? 'text-danger' : ''}`}
+            >
+              First Name
+            </label>
+            <input
+              type="text"
+              name="firstName"
+              className={`form-control${errors.firstName ? ' is-invalid' : ''}`}
+            />
+            {errors.firstName && renderErrors(errors.firstName)}
           </div>
 
           {/* Input for last name */}
           <div className="form-group">
-            <label htmlFor="lastName">Last Name</label>
-            <input type="text" name="lastName" className="form-control" />
+            <label
+              htmlFor="lastName"
+              className={`${errors.firstName ? 'text-danger' : ''}`}
+            >
+              Last Name
+            </label>
+            <input
+              type="text"
+              name="lastName"
+              className={`form-control${errors.firstName ? ' is-invalid' : ''}`}
+            />
+            {errors.lastName && renderErrors(errors.lastName)}
           </div>
 
           {/* Input for email */}
           <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input type="email" name="email" className="form-control" />
+            <label
+              htmlFor="email"
+              className={`${errors.firstName ? 'text-danger' : ''}`}
+            >
+              Email
+            </label>
+            <input
+              type="email"
+              name="email"
+              className={`form-control${errors.firstName ? ' is-invalid' : ''}`}
+            />
+            {errors.email && renderErrors(errors.email)}
           </div>
 
           {/* Input for password */}
           <div className="form-group">
-            <label htmlFor="password">Password</label>
+            <label
+              htmlFor="password"
+              className={`${errors.firstName ? 'text-danger' : ''}`}
+            >
+              Password
+            </label>
             <input
               type="password"
               name="password"
-              className="form-control mb-3"
+              className={`form-control${errors.firstName ? ' is-invalid' : ''}`}
             />
+            {errors.password && renderErrors(errors.password)}
           </div>
 
           {/* Input for confirm password */}
           <div className="form-group">
-            <label htmlFor="confirmPassword">Confirm Password</label>
+            <label
+              htmlFor="confirmPassword"
+              className={`${errors.firstName ? 'text-danger' : ''}`}
+            >
+              Confirm Password
+            </label>
             <input
               type="password"
               name="confirmPassword"
-              className="form-control mb-3"
+              className={`form-control${errors.firstName ? ' is-invalid' : ''}`}
             />
+            {errors.confirmPassword && renderErrors(errors.confirmPassword)}
           </div>
 
           {/* Submit button */}
@@ -89,6 +136,13 @@ class SignUp extends Component {
     );
   }
 }
+
+const renderErrors = errorArray =>
+  errorArray.map((err, i) => (
+    <div key={i} className="help-block text-danger">
+      ∙ {err}
+    </div>
+  ));
 
 const mapDispatchToProps = dispatch => ({
   addUser: signupCredentials => dispatch(addUser(signupCredentials)),

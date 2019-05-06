@@ -1,13 +1,7 @@
 const {check} = require('express-validator/check');
 
 // Input fields that are required in the SignUp component
-const requiredFields = [
-  'firstName',
-  'lastName',
-  'email',
-  'password',
-  'confirmPassword',
-];
+const requiredFields = ['firstName', 'lastName', 'password', 'confirmPassword'];
 
 const checkRequiredFields = requiredFields.map(field =>
   check(field, 'This field is required.')
@@ -34,5 +28,9 @@ module.exports = [
   // Checks if passwords are equal
   check('password', 'Passwords must match.').custom(
     (value, {req}) => value === req.body.confirmPassword
+  ),
+
+  check('confirmPassword', 'Passwords must match.').custom(
+    (value, {req}) => value === req.body.password
   ),
 ];
