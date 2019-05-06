@@ -128,7 +128,8 @@ module.exports = {
     Category,
     Product,
     Review,
-    Order
+    Order,
+    Orderitem
   },
   methods: {
     syncAndSeed,

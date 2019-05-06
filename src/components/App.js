@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 import React, {Component, Fragment} from 'react';
 import {Route, Redirect} from 'react-router-dom';
 
@@ -6,6 +7,7 @@ import {fetchProducts} from '../redux-store/actions/product-actions';
 import {fetchReviews} from '../redux-store/actions/review-actions';
 import {fetchUsers} from '../redux-store/actions/user-actions';
 import {fetchOrders} from '../redux-store/actions/order-actions';
+import {fetchOrderitems} from '../redux-store/actions/orderitem-actions';
 
 import Navbar from './Nav';
 import Home from './Home';
@@ -16,20 +18,38 @@ import Login from './Login';
 import SignUp from './SignUp';
 import Checkout from './Checkout';
 import AccountSettings from './AccountSettings';
+import '../styles/App.css';
+import Callback from '../Callback/Callback';
+import Auth from '../Auth/Auth';
+import history from '../history';
 
-import '../styles/App.css'
+const auth = new Auth();
+
 class App extends Component {
+  goTo(route) {
+    this.props.history.replace(`/${route}`)
+  }
+
+  login() {
+    auth.login();
+  }
+
+  logout() {
+    auth.logout();
+  }
+
   componentDidMount() {
     this.props.fetchProducts();
     this.props.fetchReviews();
     this.props.fetchUsers();
     this.props.fetchOrders();
+    this.props.fetchOrderitems();
   }
-
   render() {
+    const { isAuthenticated } = auth;
     return (
       <div className="container-fluid">
-        <Route component={Navbar} />
+        <Route render={() => <Navbar isAuthenticated={isAuthenticated()} auth={auth}/>} />
 
         {/* Landing page route */}
         <Route exact path="/" component={Home}/>
@@ -60,6 +80,8 @@ class App extends Component {
 
         {/* /users/accountsettings */}
         <Route exact path="/users/:userId/accountsettings/" component={AccountSettings}/>
+
+        <Route path="/callback" render={(props) => <Callback {...props} />} />
       </div>
     );
   }
@@ -69,7 +91,8 @@ const mapDispatchToProps = dispatch => ({
   fetchProducts: () => dispatch(fetchProducts()),
   fetchReviews: () => dispatch(fetchReviews()),
   fetchUsers: () => dispatch(fetchUsers()),
-  fetchOrders: () => dispatch(fetchOrders())
+  fetchOrders: () => dispatch(fetchOrders()),
+  fetchOrderitems: () => dispatch(fetchOrderitems())
 });
 
 export default connect(

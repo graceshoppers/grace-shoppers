@@ -12,7 +12,9 @@ const AccountSettings = props => {
   console.log(orders)
   const ownOrders = orders.filter(order => order.userId === userId)
 
-  console.log(ownOrders)
+
+  const {orderitems} = props
+  console.log(orderitems)
   return (
     <div>
       <h1>Welcome</h1>
@@ -41,7 +43,8 @@ const AccountSettings = props => {
 const mapStateToProps = state => {
   return {
     users: state.users,
-    orders: state.orders
+    orders: state.orders,
+    orderitems: state.orderitems
   };
 };
 
