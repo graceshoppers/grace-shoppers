@@ -1,6 +1,6 @@
 const connection = require("../database");
 const {
-  Sequelize: { TEXT, INTEGER }
+  Sequelize: { TEXT, INTEGER, STRING, BOOLEAN }
 } = connection;
 
 const Review = connection.define("review", {
@@ -20,6 +20,18 @@ const Review = connection.define("review", {
       max: 5,
       notEmpty: true
     }
+  },
+  title: {
+    type: STRING,
+    allowNull: false,
+    validate:{
+      notEmpty:true
+    }
+  },
+  recommended: {
+    type:BOOLEAN,
+    allowNull: false,
+    defaultValue: true
   }
 });
 

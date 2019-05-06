@@ -6,7 +6,9 @@ import {Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {fetchProducts} from '../redux-store/actions/product-actions';
 import {fetchReviews} from '../redux-store/actions/review-actions';
-import {getUserDetailsFromSession} from '../redux-store/actions/user-actions';
+import {fetchUsers} from '../redux-store/actions/user-actions';
+import {fetchOrders} from '../redux-store/actions/order-actions';
+import {fetchOrderitems} from '../redux-store/actions/orderitem-actions';
 
 // Component imports
 import Navbar from './Nav';
@@ -18,14 +20,13 @@ import Login from './Login';
 import SignUp from './SignUp/SignUp';
 import AccountSettings from './AccountSettings';
 
-// CSS imports
-import '../styles/App.css';
-
 class App extends Component {
   componentDidMount() {
     this.props.fetchProducts();
     this.props.fetchReviews();
-    this.props.getUserDetailsFromSession();
+    this.props.fetchUsers();
+    this.props.fetchOrders();
+    this.props.fetchOrderitems();
   }
 
   render() {

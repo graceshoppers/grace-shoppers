@@ -1,7 +1,7 @@
 import {
     GET_ORDERITEMS,
     CREATE_ORDERITEM,
-    UPDATE_ORDERITEM,
+    UPDATE_ORDERITEM
   } from '../actions/action-types';
   
   export default (state = [], action) => {
