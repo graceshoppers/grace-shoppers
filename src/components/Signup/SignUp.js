@@ -89,13 +89,6 @@ class SignUp extends Component {
   }
 }
 
-const renderErrors = errorArray =>
-  errorArray.map((err, i) => (
-    <div key={i} className="help-block text-danger">
-      ∙ {err}
-    </div>
-  ));
-
 const mapDispatchToProps = dispatch => ({
   addUser: signupCredentials => dispatch(addUser(signupCredentials)),
 });
