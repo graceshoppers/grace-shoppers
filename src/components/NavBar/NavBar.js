@@ -7,17 +7,13 @@ import SearchBar from './SearchBar';
 import CartButton from '../Cart/CartButton';
 
 class NavBar extends Component {
-  goTo(route) {
-    this.props.history.replace(`/${route}`);
-  }
-
   render() {
     const {handleChange, handleClick, handleKeyDown} = this;
-    const {auth, isAuthenticated} = this.props;
+    const {history, auth, isAuthenticated} = this.props;
 
     return (
       <nav className="row navbar navbar-expand-lg navbar-light fixed-container">
-        <SearchBar history={this.props.history} />
+        <SearchBar history={history} />
 
         {/* Home link */}
         <div className="col-6 d-flex flex-column justify-content-center align-items-center">
@@ -34,7 +30,7 @@ class NavBar extends Component {
           {/* Profile/Login button */}
 
           {isAuthenticated ? (
-            <button className="btn" onClick={auth.logout.bind(this)}>
+            <button className="btn" onClick={() => history.push('/profile')}>
               <i className="fas fa-user-check fa-lg" />
             </button>
           ) : (
