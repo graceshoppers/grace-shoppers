@@ -1,6 +1,12 @@
 const router = require('express').Router();
 module.exports = router;
 
+// GET, returns the cart item array stored in req.session.cart.
+// If there is no req.session.cart, returns empty array.
+router.get('/', (req, res, next) => {
+  res.json(req.session.cart || []);
+});
+
 // POST, a user will hit this route when adding a product to the cart.
 // The route adds product object to req.session.cart.
 router.post('/', (req, res, next) => {
