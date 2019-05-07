@@ -31,7 +31,7 @@ router.post('/', (req, res, next) => {
     const productIndex = req.session.cart.map(e => e.id).indexOf(req.body.id);
     req.session.cart[productIndex].quantity++;
   }
-  console.log([...req.session.cart]);
+
   res.json([...req.session.cart]);
 
   // Will need some error handling in this route.
