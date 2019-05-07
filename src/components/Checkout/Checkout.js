@@ -1,7 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import CartItem, {parseCost} from '../Cart/CartItem';
+import CartItem from '../Cart/CartItem';
+import parseCost from '../../shared/parse-cost';
 
 const items = [
   {
@@ -79,7 +80,7 @@ const Checkout = props => {
         {items.map((item, index) => (
           <CartItem
             key={item.id}
-            item={item}
+            attributes={item}
             displayTopBorder={index === 0 ? false : true}
           />
         ))}
@@ -114,4 +115,4 @@ const mapStateToProps = state => ({
   users: state,
 });
 
-export default connect(mapStateToProps)(Checkout);
+export default connect(null)(Checkout);
