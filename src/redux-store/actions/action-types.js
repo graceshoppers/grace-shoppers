@@ -9,6 +9,9 @@ export const CREATE_PRODUCT = 'CREATE_PRODUCT';
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 export const DELETE_PRODUCT = 'DELETE_PRODUCT';
 
+// Cart actions
+export const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART';
+
 // User actions
 export const GET_USERS = 'GET_USERS';
 export const CREATE_USER = 'CREATE_USER';
@@ -24,15 +27,14 @@ export const CREATE_REVIEW = 'CREATE_REVIEW';
 export const UPDATE_REVIEW = 'UPDATE_REVIEW';
 export const DELETE_REVIEW = 'DELETE_REVIEW';
 
-
 //Order actions
-export const GET_ORDERS = 'GET_ORDERS'
+export const GET_ORDERS = 'GET_ORDERS';
 export const CREATE_ORDER = 'CREATE_ORDER';
 export const UPDATE_ORDER = 'UPDATE_ORDER';
 export const DELETE_ORDER = 'DELETE_ORDER';
 
 //Orderitem actions
-export const GET_ORDERITEMS = 'GET_ORDERITEMS'
+export const GET_ORDERITEMS = 'GET_ORDERITEMS';
 export const CREATE_ORDERITEM = 'CREATE_ORDERITEM';
 export const UPDATE_ORDERITEM = 'UPDATE_ORDERITEM';
 export const DELETE_ORDERITEM = 'DELETE_ORDERITEM';
