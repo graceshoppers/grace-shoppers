@@ -132,9 +132,10 @@ const syncAndSeed = () => {
       const resolvedAddresses = await Promise.all(
         addresses.map(address => Address.create(address))
       );
-      resolvedAddresses.forEach(
-        async address =>
-          await address.setUser(Math.ceil(Math.random() * resolvedUsers.length))
+      await Promise.all(
+        resolvedAddresses.map(address =>
+          address.setUser(Math.ceil(Math.random() * resolvedUsers.length))
+        )
       );
     })
     .then(() => console.log('db seeded'))
@@ -149,7 +150,7 @@ module.exports = {
     Review,
     Order,
     Orderitem,
-    Address
+    Address,
   },
   methods: {
     syncAndSeed,

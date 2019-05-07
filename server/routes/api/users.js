@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const {validationResult} = require('express-validator/check');
 const {
-  models: {User},
+  models: {User, Address},
 } = require('../../db');
 
 module.exports = router;
@@ -9,7 +9,14 @@ module.exports = router;
 // GET, gets all users
 router.get('/', async (req, res, next) => {
   try {
-    const users = await User.findAll({order: [['id', 'ASC']]});
+    const users = await User.findAll({
+      order: [['id', 'ASC']],
+      include: [
+        {
+          model: Address,
+        },
+      ],
+    });
     res.status(200).json(users);
   } catch (err) {
     next(err);
