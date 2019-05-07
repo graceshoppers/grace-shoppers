@@ -2,7 +2,7 @@ const faker = require('faker');
 
 const makeFakeAddress = () => {
   return {
-    addressName: `${faker.name.firstName()} ${faker.name.lastName()}`,
+    fullName: `${faker.name.firstName()} ${faker.name.lastName()}`,
     addressLine1: faker.address.streetAddress(),
     addressLine2: faker.address.secondaryAddress(),
     city: faker.address.city(),
@@ -16,7 +16,7 @@ const makeFakeAddress = () => {
 
 const addresses = [];
 
-for (let i = 0; i <= 20; i++) {
+for (let i = 0; i < 140; i++) {
   const address = makeFakeAddress();
   addresses.push(address);
 }

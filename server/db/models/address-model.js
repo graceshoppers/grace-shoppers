@@ -4,7 +4,7 @@ const {
 } = connection;
 
 const Address = connection.define('address', {
-  addressName: {
+  fullName: {
     type: STRING,
     allowNull: false,
     notEmpty: true,
