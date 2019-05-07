@@ -27,12 +27,12 @@ const Address = connection.define('address', {
     allowNull: false,
     notEmpty: true,
   },
-  ZIP: {
+  zip: {
     type: STRING,
     allowNull: false,
     notEmpty: true,
   },
-  Country: {
+  country: {
     type: STRING,
     allowNull: false,
     notEmpty: true,
@@ -42,13 +42,9 @@ const Address = connection.define('address', {
     allowNull: false,
     notEmpty: true,
   },
-  additionalInstructions: {
+  additionalInstruction: {
     type: TEXT,
     defaultValue: '',
-  },
-  defaultAddress: {
-    type: BOOLEAN,
-    defaultValue: false,
   },
 });
 
