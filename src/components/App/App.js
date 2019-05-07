@@ -10,7 +10,7 @@ import {fetchReviews} from '../../redux-store/actions/review-actions';
 import './App.css';
 
 // Component imports
-import Navbar from '../NavBar/Navbar';
+import Navbar from '../NavBar/NavBar';
 import Home from '../Home/Home';
 import Catalog from '../Catalog/Catalog';
 import SingleProduct from '../SingleProduct/SingleProduct';
