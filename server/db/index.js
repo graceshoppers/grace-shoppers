@@ -9,10 +9,19 @@ const {
   products,
   orderitems,
   reviews,
+  addresses,
 } = require('./seeds');
 
 // Sequelize models
-const {User, Category, Product, Review, Order, Orderitem} = require('./models');
+const {
+  User,
+  Category,
+  Product,
+  Review,
+  Order,
+  Orderitem,
+  Address,
+} = require('./models');
 
 Product.belongsTo(Category);
 Category.hasMany(Product);
@@ -31,6 +40,9 @@ Review.belongsTo(Product);
 
 Review.belongsTo(User);
 User.hasMany(Review);
+
+Address.belongsTo(User);
+User.hasMany(Address);
 
 // Clears database tables and repopulates it with seed data
 const syncAndSeed = () => {
@@ -115,6 +127,16 @@ const syncAndSeed = () => {
           Math.ceil(Math.random() * resolvedProducts.length)
         );
       });
+
+      //Assign addressIds randomly to users
+      const resolvedAddresses = await Promise.all(
+        addresses.map(address => Address.create(address))
+      );
+      await Promise.all(
+        resolvedAddresses.map(address =>
+          address.setUser(Math.ceil(Math.random() * resolvedUsers.length))
+        )
+      );
     })
     .then(() => console.log('db seeded'))
     .catch(err => console.log(err));
@@ -126,6 +148,9 @@ module.exports = {
     Category,
     Product,
     Review,
+    Order,
+    Orderitem,
+    Address,
   },
   methods: {
     syncAndSeed,

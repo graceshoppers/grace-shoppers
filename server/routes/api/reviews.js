@@ -42,8 +42,8 @@ router.put('/:id', async (req, res, next) => {
 // DELETE, deletes a review
 router.delete('/:id', async (req, res, next) => {
   try {
-    const deletedReview = await Review.findByPk(req.params.id);
-    await Review.destroy({where: {id: req.params.id}});
+    const deletedReview = await Review.findByPk(req.params.id * 1);
+    await Review.destroy({where: {id: req.params.id * 1}});
 
     res
       .status(200)

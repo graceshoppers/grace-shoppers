@@ -3,7 +3,6 @@ const {
   models: {Order, User},
 } = require('../../db');
 
-
 module.exports = router;
 
 // GET, gets all orders
@@ -43,8 +42,8 @@ router.put('/:id', async (req, res, next) => {
 // DELETE, deletes a order
 router.delete('/:id', async (req, res, next) => {
   try {
-    const deletedOrder = await Order.findByPk(req.params.id);
-    await Order.destroy({where: {id: req.params.id}});
+    const deletedOrder = await Order.findByPk(req.params.id * 1);
+    await Order.destroy({where: {id: req.params.id * 1}});
 
     res
       .status(200)

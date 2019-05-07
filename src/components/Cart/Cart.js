@@ -1,5 +1,6 @@
 import React from 'react';
 import CartItem, {parseCost} from './CartItem';
+import {NavLink} from 'react-router-dom';
 
 const Cart = () => {
   const items = [
@@ -98,7 +99,7 @@ const Cart = () => {
               </div>
               <div className="row justify-content-md-center">
                 <div className="col">
-                  <button className="btn btn-success">Checkout</button>
+                  <button className="btn btn-success"><NavLink to ='/checkout'>Checkout</NavLink></button>
                 </div>
               </div>
             </div>
