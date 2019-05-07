@@ -8,18 +8,11 @@ const {
   orders,
   products,
   orderitems,
-  reviews
-} = require("./seeds");
+  reviews,
+} = require('./seeds');
 
 // Sequelize models
-const {
-  User,
-  Category,
-  Product,
-  Review,
-  Order,
-  Orderitem
-} = require("./models");
+const {User, Category, Product, Review, Order, Orderitem} = require('./models');
 
 Product.belongsTo(Category);
 Category.hasMany(Product);
@@ -51,7 +44,9 @@ const syncAndSeed = () => {
 
       const [rings, bracelets, earrings, necklaces] = resolvedCategories;
 
-      const resolvedProducts = await Promise.all(products.map(product => Product.create(product)));
+      const resolvedProducts = await Promise.all(
+        products.map(product => Product.create(product))
+      );
 
       const [
         ring1,
@@ -62,9 +57,8 @@ const syncAndSeed = () => {
         earrings2,
         necklace1,
         necklace2,
-        ...nonHardcodedProducts] = resolvedProducts
-
-      console.log(Array.isArray(resolvedProducts));
+        ...nonHardcodedProducts
+      ] = resolvedProducts;
 
       rings.setProducts([ring1, ring2]);
       bracelets.setProducts([bracelet1, bracelet2]);
@@ -105,18 +99,22 @@ const syncAndSeed = () => {
         );
       });
       resolvedReviews.forEach(async resolvedReview => {
-        await resolvedReview.setProduct(Math.ceil(Math.random() * resolvedProducts.length)); 
+        await resolvedReview.setProduct(
+          Math.ceil(Math.random() * resolvedProducts.length)
+        );
       });
 
       //Assign userIds randomly to orders
       resolvedOrders.forEach(async resolvedOrder => {
-        resolvedOrder.setUser(Math.ceil(Math.random() *resolvedUsers.length))
-      })
+        resolvedOrder.setUser(Math.ceil(Math.random() * resolvedUsers.length));
+      });
 
       //Assign productIds randomly to orderitems
       resolvedOrderitems.forEach(async resolvedOrderitem => {
-        resolvedOrderitem.setProduct(Math.ceil(Math.random() * resolvedProducts.length))
-      })
+        resolvedOrderitem.setProduct(
+          Math.ceil(Math.random() * resolvedProducts.length)
+        );
+      });
     })
     .then(() => console.log('db seeded'))
     .catch(err => console.log(err));
@@ -128,8 +126,6 @@ module.exports = {
     Category,
     Product,
     Review,
-    Order,
-    Orderitem
   },
   methods: {
     syncAndSeed,

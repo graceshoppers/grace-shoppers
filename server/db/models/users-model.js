@@ -1,37 +1,41 @@
-const connection = require("../database");
+const connection = require('../database');
 const {
-  Sequelize: { STRING, BOOLEAN }
+  Sequelize: {STRING, BOOLEAN},
 } = connection;
 
-const User = connection.define("user", {
+const User = connection.define('user', {
   firstName: {
     type: STRING,
     allowNull: false,
-    notEmpty: true
+    notEmpty: true,
   },
   lastName: {
     type: STRING,
     allowNull: false,
-    notEmpty: true
+    notEmpty: true,
   },
   email: {
     type: STRING,
     allowNull: false,
     notEmpty: true,
-    isEmail: true
+    isEmail: true,
+    unique: {
+      args: true,
+      msg: 'There is already an account this email.',
+    },
   },
   isAdmin: {
     type: BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
   },
   password: {
     type: STRING,
     allowNull: false,
     validate: {
       notEmpty: true,
-      len: [5, 20]
-    }
-  }
+      len: [5, 20],
+    },
+  },
 });
 
 module.exports = User;

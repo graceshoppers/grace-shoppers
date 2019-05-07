@@ -1,18 +1,19 @@
+import path from 'path';
 import Auth0Lock from 'auth0-lock';
-import { AUTH_CONFIG } from './auth0-variables';
+import {AUTH_CONFIG} from './auth0-variables';
 import history from '../history';
 
 export default class Auth {
-
   lock = new Auth0Lock(AUTH_CONFIG.clientId, AUTH_CONFIG.domain, {
     autoclose: true,
     auth: {
       redirectUrl: AUTH_CONFIG.callbackUrl,
       responseType: 'token id_token',
       params: {
-        scope: 'openid'
-      }
-    }
+        scope: 'openid',
+      },
+    },
+    signUpLink: 'http://localhost:3000/#/signup',
   });
 
   constructor() {
@@ -32,7 +33,7 @@ export default class Auth {
     // Add a callback for Lock's `authenticated` event
     this.lock.on('authenticated', this.setSession.bind(this));
     // Add a callback for Lock's `authorization_error` event
-    this.lock.on('authorization_error', (err) => {
+    this.lock.on('authorization_error', err => {
       console.log(err);
       alert(`Error: ${err.error}. Check the console for further details.`);
       history.replace('/');
@@ -42,7 +43,9 @@ export default class Auth {
   setSession(authResult) {
     if (authResult && authResult.accessToken && authResult.idToken) {
       // Set the time that the access token will expire at
-      let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
+      let expiresAt = JSON.stringify(
+        authResult.expiresIn * 1000 + new Date().getTime()
+      );
       localStorage.setItem('access_token', authResult.accessToken);
       localStorage.setItem('id_token', authResult.idToken);
       localStorage.setItem('expires_at', expiresAt);
