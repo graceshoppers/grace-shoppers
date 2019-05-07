@@ -31,13 +31,7 @@ _Each sprint will have several main goals, followed by tasks which we need to ac
         * search bar should be able to filter out only the searched item on catalog page
       * Have a Create Product/ Edit Product form
       * Have a cart/order page that houses all the add-to-cart products before check out
-  * Issues:
-    * Back-End:
-      * Write Database Models: Kyle
-    * Front-End:
-      * Redux Store
-      * Home/Landing Page component
-      * Nav component
+
 
 * **Sprint 2:** Users Authentication (Unknown, Customer, Admin), additional functionalities, styles
   * _Period: 5/3 - 5/9_
@@ -55,7 +49,6 @@ _Each sprint will have several main goals, followed by tasks which we need to ac
       * can do everything customer can
       * can manipulate database
       * can see all pending orders and manipulate orders
-  * Issues:
 
 * **Sprint 3:** Finalize styling, additional functionality
   * _Period: 5/10 - 5/14_
