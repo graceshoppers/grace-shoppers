@@ -24,7 +24,8 @@
     "sequelize": "^5.3.5",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3"
+    "webpack-cli": "^3.2.3",
+    "faker": "^4.1.0"
   },
   "babel": {
     "presets": [
@@ -43,6 +44,5 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "faker": "^4.1.0"
   }
 }
