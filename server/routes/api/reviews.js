@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const {
   models: {Review, Product, User},
-} = require('../db');
+} = require('../../db');
 
 module.exports = router;
 
@@ -9,7 +9,7 @@ module.exports = router;
 router.get('/', async (req, res, next) => {
   try {
     const reviews = await Review.findAll({
-      include: [Product, User]
+      include: [Product, User],
     });
 
     res.status(200).json(reviews);

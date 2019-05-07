@@ -149,6 +149,7 @@ module.exports = {
     Review,
     Order,
     Orderitem,
+    Address
   },
   methods: {
     syncAndSeed,

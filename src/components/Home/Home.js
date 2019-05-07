@@ -1,9 +1,5 @@
 import React from 'react';
-
-import Navbar from './Nav';
-import Catalog from './Catalog';
-
-import '../styles/Home.css';
+import './Home.css';
 
 const Home = props => {
   const {products} = props;

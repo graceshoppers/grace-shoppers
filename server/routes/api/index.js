@@ -1,5 +1,5 @@
 const router = require('express').Router();
-module.exports=router;
+module.exports = router;
 
 //redirect to the right api
 router.use('/products', require('./products'));

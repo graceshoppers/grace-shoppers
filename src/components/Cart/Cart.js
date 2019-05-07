@@ -1,5 +1,4 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import CartItem, {parseCost} from './CartItem';
 import {NavLink} from 'react-router-dom';
 
