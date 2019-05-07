@@ -7,7 +7,7 @@ import './Cart.css';
 
 const CartItem = props => {
   const {attributes, displayTopBorder} = props;
-  const {name, imageName, unitCost} = attributes;
+  const {name, imageName, unitCost, quantity} = attributes;
 
   return (
     <div
@@ -23,14 +23,16 @@ const CartItem = props => {
               {name}
             </Link>
             <div className="col-md-2 d-flex flex-row-reverse">
-              {`${parseCost(unitCost)}`}
+              {`${parseCost(unitCost * quantity)}`}
             </div>
           </div>
           <div className="row d-flex flex-row align-items-center cart-item-options">
             <div className="col-md-2">Delete</div>
             <div className="col-md-4">Save for later</div>
             <div className="col-md-3" />
-            <div className="col-md-3 d-flex flex-row-reverse">Quantity: 1</div>
+            <div className="col-md-3 d-flex flex-row-reverse">
+              Quantity: {quantity}
+            </div>
           </div>
         </div>
       </div>

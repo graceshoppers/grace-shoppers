@@ -26,7 +26,7 @@ export const addProductToCart = product => {
       .then(res =>
         dispatch({
           type: ADD_PRODUCT_TO_CART,
-          newCartItem: res.data,
+          cart: res.data,
         })
       )
       .catch(e => console.error(e));

@@ -7,7 +7,10 @@ import CartItem from './CartItem';
 import './Cart.css';
 
 const Cart = ({cart}) => {
-  const totalCost = cart.reduce((acc, next) => acc + next.unitCost, 0);
+  const totalCost = cart.reduce(
+    (subtotal, item) => subtotal + item.unitCost * item.quantity,
+    0
+  );
 
   return (
     <div className="cart-container">

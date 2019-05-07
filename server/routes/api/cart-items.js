@@ -6,7 +6,8 @@ module.exports = router;
 // If there is no req.session.cart, returns empty array.
 
 router.get('/', (req, res, next) => {
-  res.json(req.session.cart || []);
+  if (!req.session.cart) req.session.cart = [];
+  res.json([...req.session.cart]);
 });
 
 //
@@ -30,8 +31,8 @@ router.post('/', (req, res, next) => {
     const productIndex = req.session.cart.map(e => e.id).indexOf(req.body.id);
     req.session.cart[productIndex].quantity++;
   }
-
-  res.json(req.body);
+  console.log([...req.session.cart]);
+  res.json([...req.session.cart]);
 
   // Will need some error handling in this route.
   // For example, return a 400+/500+ code if a product is out of stock.
