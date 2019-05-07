@@ -8,6 +8,7 @@ import './Cart.css';
 
 const Cart = ({cart}) => {
   const totalCost = cart.reduce((acc, next) => acc + next.unitCost, 0);
+
   return (
     <div className="cart-container">
       <div className="row d-flex flex-row">
