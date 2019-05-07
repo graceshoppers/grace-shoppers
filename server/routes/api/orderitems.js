@@ -42,8 +42,8 @@ router.put('/:id', async (req, res, next) => {
 // DELETE, deletes a orderitem
 router.delete('/:id', async (req, res, next) => {
   try {
-    const deletedOrderitem = await Orderitem.findByPk(req.params.id);
-    await Orderitem.destroy({where: {id: req.params.id}});
+    const deletedOrderitem = await Orderitem.findByPk(req.params.id * 1);
+    await Orderitem.destroy({where: {id: req.params.id * 1}});
 
     res
       .status(200)
