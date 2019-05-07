@@ -45,7 +45,6 @@ const items = [
 const Checkout = props => {
   const totalCost = items.reduce((acc, next) => acc + next.unitCost, 0);
   const {users} = props;
-  console.log(props);
   return (
     <div className="container">
       <div className="panel panel-info">
@@ -106,12 +105,13 @@ const Checkout = props => {
           </div>
         </div>
       </div>
+      <button>Place your order</button>
     </div>
   );
 };
 
 const mapStateToProps = state => ({
-  users: state
+  users: state,
 });
 
 export default connect(mapStateToProps)(Checkout);

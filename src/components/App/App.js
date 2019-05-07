@@ -6,6 +6,7 @@ import {Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {fetchProducts} from '../../redux-store/actions/product-actions';
 import {fetchReviews} from '../../redux-store/actions/review-actions';
+import {fetchUsers} from '../../redux-store/actions/user-actions';
 
 import './App.css';
 
@@ -26,6 +27,7 @@ class App extends Component {
   componentDidMount() {
     this.props.fetchProducts();
     this.props.fetchReviews();
+    this.props.fetchUsers();
   }
 
   render() {
@@ -83,6 +85,7 @@ class App extends Component {
 const mapDispatchToProps = dispatch => ({
   fetchProducts: () => dispatch(fetchProducts()),
   fetchReviews: () => dispatch(fetchReviews()),
+  fetchUsers: () => dispatch(fetchUsers()),
 });
 
 export default connect(
