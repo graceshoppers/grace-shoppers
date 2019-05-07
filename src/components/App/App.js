@@ -1,25 +1,23 @@
 /* eslint-disable react/button-has-type */
-import React, {Component, Fragment} from 'react';
-import {Route, Redirect} from 'react-router-dom';
+import React, {Component} from 'react';
+import {Route} from 'react-router-dom';
 
 // Redux imports
 import {connect} from 'react-redux';
-import {fetchProducts} from '../redux-store/actions/product-actions';
-import {fetchReviews} from '../redux-store/actions/review-actions';
+import {fetchProducts} from '../../redux-store/actions/product-actions';
+import {fetchReviews} from '../../redux-store/actions/review-actions';
+
+import './App.css';
 
 // Component imports
-import '../styles/App.css';
-import Navbar from './NavBar/Navbar';
-import Home from './Home';
-import Catalog from './Catalog/Catalog';
-import Cart from './Cart/Cart';
-import SingleProduct from './SingleProduct';
-import Login from './Login';
-import SignUp from './SignUp/SignUp';
-import AccountSettings from './AccountSettings';
-import Callback from '../Callback/Callback';
-import Auth from '../Auth/Auth';
-import history from '../history';
+import Navbar from '../NavBar/Navbar';
+import Home from '../Home/Home';
+import Catalog from '../Catalog/Catalog';
+import SingleProduct from '../SingleProduct/SingleProduct';
+import Cart from '../Cart/Cart';
+import SignUp from '../SignUp/SignUp';
+import UserProfile from '../UserProfile/UserProfile';
+import Auth from '../../Auth/Auth';
 
 const auth = new Auth();
 
@@ -66,20 +64,13 @@ class App extends Component {
         {/* Checkout/cart route */}
         <Route exact path="/cart" component={Cart} />
 
-        {/* Login Route */}
-        <Route path="/login" component={Login} />
-
-        {/* SignUp Route */}
+        {/* SignUp route */}
         <Route path="/signup" component={SignUp} />
 
-        {/* /users/accountsettings */}
-        <Route
-          exact
-          path="/users/:userId/accountsettings/"
-          component={AccountSettings}
-        />
+        {/* Profile route */}
+        <Route exact path="/profile" component={UserProfile} />
 
-        <Route path="/callback" render={props => <Callback {...props} />} />
+        <Route path="/callback" render={() => <p>Loading...</p>} />
       </div>
     );
   }

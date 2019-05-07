@@ -9,11 +9,9 @@ const AccountSettings = props => {
   });
 
   const {orders} = props;
-  console.log(orders);
   const ownOrders = orders.filter(order => order.userId === userId);
 
   const {orderitems} = props;
-  console.log(orderitems);
   return (
     <div>
       <hr />
