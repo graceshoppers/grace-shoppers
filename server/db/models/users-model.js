@@ -19,16 +19,10 @@ const User = connection.define('user', {
     allowNull: false,
     notEmpty: true,
     isEmail: true,
-<<<<<<< HEAD
-    validate:{
-      isEmail:true,
-    }
-=======
     unique: {
       args: true,
       msg: 'There is already an account this email.',
     },
->>>>>>> dbd345f6ba0467b56f94f7b3344270fac9fd1a73
   },
   isAdmin: {
     type: BOOLEAN,

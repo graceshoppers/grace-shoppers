@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import CartItem, {parseCost} from './CartItem';
+import CartItem, {parseCost} from '../Cart/CartItem';
 
 const items = [
   {

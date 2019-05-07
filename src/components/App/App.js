@@ -18,6 +18,7 @@ import Cart from '../Cart/Cart';
 import SignUp from '../SignUp/SignUp';
 import UserProfile from '../UserProfile/UserProfile';
 import Auth from '../../Auth/Auth';
+import Checkout from '../Checkout/Checkout';
 
 const auth = new Auth();
 
@@ -57,8 +58,11 @@ class App extends Component {
         {/* Product details route */}
         <Route path="/products/:id" component={SingleProduct} />
 
-        {/* Checkout/cart route */}
+        {/* cart route */}
         <Route exact path="/cart" component={Cart} />
+
+        {/* checkout route */}
+        <Route exact path="/checkout" component={Checkout} />
 
         {/* SignUp route */}
         <Route path="/signup" component={SignUp} />
