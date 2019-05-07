@@ -21,9 +21,9 @@ const products = [
   },
   {
     name: "Butterfly Ring",
-    material: "Sterling Silver, R//HARDCCODEse Gold, Blue Topaz",
+    material: "Sterling Silver, Rose Gold, Blue Topaz",
     description:
-      "Drawing inspiration from a//HARDCCODE urban garden, the Return to Tiffany® Love Bugs collection transforms an icon into something unexpected and modern. A radiant blue topaz adds a pop of color of this striking butterfly ring.",
+      "Drawing inspiration from an urban garden, the Return to Tiffany® Love Bugs collection transforms an icon into something unexpected and modern. A radiant blue topaz adds a pop of color of this striking butterfly ring.",
     imageName: "butterfly_ring.jpg",
     unitCost: 1400
   },

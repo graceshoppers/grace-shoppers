@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const {validationResult} = require('express-validator/check');
 const {
-  models: {User},
+  models: {User, Address},
 } = require('../../db');
 
 module.exports = router;
@@ -9,7 +9,14 @@ module.exports = router;
 // GET, gets all users
 router.get('/', async (req, res, next) => {
   try {
-    const users = await User.findAll({order: [['id', 'ASC']]});
+    const users = await User.findAll({
+      order: [['id', 'ASC']],
+      include: [
+        {
+          model: Address,
+        },
+      ],
+    });
     res.status(200).json(users);
   } catch (err) {
     next(err);
@@ -64,8 +71,8 @@ router.put('/:id', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
   try {
-    const deletedUser = await User.findByPk(req.params.id);
-    await User.destroy({where: {id: req.params.id}});
+    const deletedUser = await User.findByPk(req.params.id * 1);
+    await User.destroy({where: {id: req.params.id * 1}});
 
     res.status(200).json({message: 'Deleted user successfully.', deletedUser});
   } catch (err) {

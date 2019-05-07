@@ -44,8 +44,8 @@ router.put('/:id', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
   try {
-    const deletedCategory = await Category.findByPk(req.params.id);
-    await Category.destroy({where: {id: req.params.id}});
+    const deletedCategory = await Category.findByPk(req.params.id * 1);
+    await Category.destroy({where: {id: req.params.id * 1}});
 
     res
       .status(200)
