@@ -22,10 +22,6 @@ import Auth from '../../Auth/Auth';
 const auth = new Auth();
 
 class App extends Component {
-  goTo(route) {
-    this.props.history.replace(`/${route}`);
-  }
-
   componentDidMount() {
     this.props.fetchProducts();
     this.props.fetchReviews();
@@ -68,7 +64,11 @@ class App extends Component {
         <Route path="/signup" component={SignUp} />
 
         {/* Profile route */}
-        <Route exact path="/profile" component={UserProfile} />
+        <Route
+          exact
+          path="/profile"
+          render={() => <UserProfile auth={auth} />}
+        />
 
         <Route path="/callback" render={() => <p>Loading...</p>} />
       </div>
