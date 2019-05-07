@@ -1,23 +1,17 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
+import {connect} from 'react-redux';
 
-const CartButton = props => {
-  //   const {numberOfCartItems} = props;
-
+const CartButton = ({cart}) => {
   return (
     <NavLink to="/cart" className="btn">
       <i className="fas fa-shopping-cart fa-lg" />
 
-      <span className="badge badge-pill badge-primary">
-        {/* {numberOfCartItems} */}
-        99
-      </span>
+      <span className="badge badge-pill badge-primary">{cart.length}</span>
     </NavLink>
   );
 };
 
-// CartButton.propTypes = {
-//   numberOfCartItems: PropTypes.number.isRequired || PropTypes.string.isRequired,
-// };
+const mapStateToProps = ({cart}) => ({cart});
 
-export default CartButton;
+export default connect(mapStateToProps)(CartButton);
