@@ -5,6 +5,7 @@ import {
   UPDATE_USER,
   GET_USER_DETAILS_FROM_SESSION,
   LOGIN_USER,
+  DELETE_USER
 } from './action-types';
 
 // ===============================
@@ -82,5 +83,15 @@ export const loginUser = loginCredentials => {
         })
       )
       .catch(e => console.error(`Error:\n${e}`));
+  };
+};
+
+
+export const deleteUser = userId => {
+  return dispatch => {
+    return axios
+      .delete(`/api/users/${userId}`)
+      .then(res => dispatch(removeUser(userId)))
+      .catch(e => console.error(`Error updating a user:\n${e}`));
   };
 };

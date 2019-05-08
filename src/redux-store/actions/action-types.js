@@ -13,6 +13,7 @@ export const DELETE_PRODUCT = 'DELETE_PRODUCT';
 export const GET_USERS = 'GET_USERS';
 export const CREATE_USER = 'CREATE_USER';
 export const UPDATE_USER = 'UPDATE_USER';
+export const DELETE_USER = 'DELETE_USER';
 
 // User authentication actions
 export const GET_USER_DETAILS_FROM_SESSION = 'GET_USER_DETAILS_FROM_SESSION';
