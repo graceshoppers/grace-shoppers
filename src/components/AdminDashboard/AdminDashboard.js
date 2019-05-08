@@ -1,61 +1,57 @@
 import React from "react";
 import { connect } from "react-redux";
-
-const AdminDashboard = props => {
-  // const {auth} = props;
-  
-  const { users } = props;
-  const userId = props.match.params.userId * 1;
-  const user = users.find(user => {
-    return user.id === userId;
-  });
-
-  const { orders } = props;
-  console.log(orders)
-  const ownOrders = orders.filter(order => order.userId === userId)
+import {addOrder, editOrder, deleteOrder } from '../../redux-store/actions/order-actions'
+import {addProduct, editProduct, deleteProduct } from '../../redux-store/actions/product-actions'
+import {addUser, editUser, deleteUser } from '../../redux-store/actions/user-actions'
+import {addOrderitem, editOrderitem, deleteOrderitem } from '../../redux-store/actions/orderitem-actions'
+import AdminOrders from './AdminOrders'
+import AdminProducts from './AdminProducts'
+import AdminUsers from './AdminUsers'
 
 
-  const {orderitems} = props;
-  console.log(orderitems)
-  return (
-    <div>
-      <h1>Welcome</h1>
-      <h2>{user.firstName}</h2>
-      <h3>{user.lastName}</h3>
-      <h3>{user.email}</h3>
-      <br />
-      <br />
 
-      <h1>Orders</h1>
-      {ownOrders.map(ownOrder => {
-        return (
-        <ul key={ownOrder.id}>
-          <h2>{ownOrder.createdAt}</h2>
-          <h3>{ownOrder.status}</h3>
-          {orderitems.filter(orderitem => orderitem.orderId === ownOrder.id
-          ).map(orderitem =>{
-            return(
-              <div>
-                {orderitem.quantity}
-                {orderitem.product.name}
-              </div>
-            )
-          })}
-
-        </ul>)
-        
-      })}
-
+class AdminDashboard extends React.Component{
+  constructor(props){
+    super(props)
+    this.state = {
+      currentPanel:'products'
+    }
+  }
+  showProducts = () => {
+    this.setState({currentPanel:'products'})
+  }
+  showUsers = () => {
+    this.setState({currentPanel:'users'})
+  }
+  showOrders = () => {
+    this.setState({currentPanel:'orders'})
+  }
+  drawPanel = (currentPanel) =>{
+    if (currentPanel === 'products') return <AdminProducts/>
+    if (currentPanel === 'users') return <AdminUsers/>
+    if (currentPanel === 'orders') return <AdminOrders/>
+  }
+  render(){
+    const{showProducts, showUsers, showOrders, drawPanel} = this
+    
+    return (
+      <div>
+      <div className="btn-group" role="group">
+      <button type="button" onClick={showProducts} className="btn btn-secondary btn-lg">Products</button>
+      <button type="button" onClick={showUsers} className="btn btn-secondary btn-lg">Users</button>
+      <button type="button" onClick={showOrders} className="btn btn-secondary btn-lg">Orders</button>
+      </div>
+      <div>{drawPanel(this.state.currentPanel)}</div>
+      
+      
+   
     </div>
-  );
+    )
+  }
+ 
 };
 
-const mapStateToProps = state => {
-  return {
-    users: state.users,
-    orders: state.orders,
-    orderitems: state.orderitems
-  };
-};
+export default AdminDashboard;
 
-export default connect(mapStateToProps)(AdminDashboard);
+
+

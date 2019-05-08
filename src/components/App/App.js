@@ -22,6 +22,7 @@ import SignUp from '../SignUp/SignUp';
 import UserProfile from '../UserProfile/UserProfile';
 import Auth from '../../Auth/Auth';
 import Checkout from '../Checkout/Checkout';
+import AdminDashboard from '../AdminDashboard/AdminDashboard'
 
 const auth = new Auth();
 
@@ -82,6 +83,12 @@ class App extends Component {
         />
 
         <Route path="/callback" render={() => <p>Loading...</p>} />
+
+        {/* Admin routes */}
+        <Route exact path="/admin/" component={AdminDashboard}/>
+
+
+
       </div>
     );
   }
