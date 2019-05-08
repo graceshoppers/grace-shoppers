@@ -12,7 +12,7 @@ const CartButton = ({cart}) => {
     <NavLink to="/cart" className="btn">
       <i className="fas fa-shopping-cart fa-lg" />
 
-      <span className="badge badge-pill badge-primary">
+      <span className="badge badge-pill badge-light">
         {numberOfCartItems.toString()}
       </span>
     </NavLink>

@@ -69,7 +69,7 @@ const Reviews = props => {
   };
 
   return (
-    <div>
+    <div className="row">
       <h4>What our customers say...</h4>
 
       {thisProductReviews.map(thisProductReview => {

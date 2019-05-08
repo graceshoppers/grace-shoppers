@@ -19,6 +19,8 @@
   font-size: 40px;
   font-weight: bold;
   font-family: 'Courier New', Courier, monospace;
+  padding:0px;
+  margin:0px;
 }
 
 .navbar{
@@ -27,4 +29,9 @@
 
 nav{
   font-family: 'Courier New', Courier, monospace;
+}
+
+.nav-top-lightgrey-border {
+  width: 20vw;
+  border-top: 1px solid lightgrey;
 }

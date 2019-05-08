@@ -17,15 +17,15 @@ class NavBar extends Component {
 
         {/* Home link */}
         <div className="col-6 d-flex flex-column justify-content-center align-items-center">
-          <NavLink to="/" className="navbar-brand margin-right-2em">
+          <NavLink to="/" className="navbar-brand">
             <div className="home-logo">
               <div className="horizontal-flip">K</div>BMK
             </div>
           </NavLink>
-
+          <div className="nav-top-lightgrey-border"></div>
           <NavMenu />
-        </div>
 
+        </div>
         <div className="col d-flex justify-content-end align-items-center">
           {/* Profile/Login button */}
 

@@ -2,6 +2,8 @@
   max-height: 400px;
   max-width: 400px;
   object-fit: contain;
+  border-radius: 5%;
+  border: 1px solid lightgray;
 }
 
 .aspect-ratio-box{
@@ -18,4 +20,8 @@
   left:0;
   width:100%;
   height:100%;
+}
+
+div{
+  font-family: 'Courier New', Courier, monospace;
 }

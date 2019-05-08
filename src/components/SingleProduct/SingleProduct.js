@@ -40,7 +40,7 @@ const SingleProduct = props => {
               <p>{product.description}</p>
             </div>
           </div>
-          <div className="row">
+          <div className="">
             <button
               className="btn btn-dark"
               onClick={() => addProductToCart(product)}
