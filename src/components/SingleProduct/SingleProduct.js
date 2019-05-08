@@ -4,6 +4,8 @@ import {deleteProduct} from '../../redux-store/actions/product-actions';
 import {addProductToCart} from '../../redux-store/actions/cart-actions';
 import Reviews from './Reviews';
 
+import './SingleProduct.css';
+
 const SingleProduct = props => {
   const {products, match, addProductToCart, deleteProduct} = props;
   const product = findProduct(products, +match.params.id);
@@ -16,24 +18,25 @@ const SingleProduct = props => {
   };
 
   return (
-    <div>
-      <div className="row" style={{backgroundColor: '#EFECE7'}}>
-        <div className="col" align="right">
-          <img width="auto" height="600px" src={product.imageName} />
-        </div>
-        <div className="col">
-          <div className="row">
-            <h2 style={{color: 'gray'}}>{product.category.name}</h2>
-            <br />
+    <div className="container-fluid">
+      <div className="row justify-content-center">
+        <div className="col-4 align-self-center">
+          <div className="aspect-ratio-box">
+            <img
+              className="single-img aspect-ratio-box-inside"
+              src={product.imageName}
+            />
           </div>
-          <div className="row">
+        </div>
+        <div className="col-6 align-self-start d-flex flex-column">
+          <div className="">
             <h1>{product.name}</h1>
           </div>
-          <div className="row">
+          <div className="">
             <h3>{product.material}</h3>
           </div>
-          <div className="row">
-            <div className="col-10">
+          <div className="">
+            <div className="">
               <p>{product.description}</p>
             </div>
           </div>
