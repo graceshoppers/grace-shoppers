@@ -1,55 +1,60 @@
-import React from 'react';
-import {connect} from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
 const AccountSettings = props => {
   const {auth} = props;
-  //   const userId = props.match.params.userId * 1;
-  //   const user = users.find(user => {
-  //     return user.id === userId;
-  //   });
+  const { users } = props;
+  const userId = props.match.params.userId * 1;
+  const user = users.find(user => {
+    return user.id === userId;
+  });
 
-  //   const {orders} = props;
-  //   const ownOrders = orders.filter(order => order.userId === userId);
+  const { orders } = props;
+  console.log(orders)
+  const ownOrders = orders.filter(order => order.userId === userId)
 
-  //   const {orderitems} = props;
-  //   return (
-  //     <div>
-  //       <hr />
-  //       <h1>Welcome</h1>
-  //       <br />
-  //       <h2>
-  //         {userDetails.info.firstName} {userDetails.info.lastName}
-  //       </h2>
-  //       <h3>{userDetails.info.email}</h3>
 
-  //       <h1>Orders</h1>
-  //       {ownOrders.map(ownOrder => {
-  //         return (
-  //           <ul key={ownOrder.id}>
-  //             <h2>{ownOrder.createdAt}</h2>
-  //             <h3>{ownOrder.status}</h3>
-  //             PUT ORDERITEMS HERE
-  //           </ul>
-  //         );
-  //       })}
-  //     </div>
-  //   );
-
+  const {orderitems} = props;
+  console.log(orderitems)
   return (
     <div>
-      <p>Under construction</p>
+      <h1>Welcome</h1>
+      <h2>{user.firstName}</h2>
+      <h3>{user.lastName}</h3>
+      <h3>{user.email}</h3>
+      <br />
+      <br />
 
-      <button className="btn btn-danger" onClick={auth.logout.bind(this)}>
-        Logout
-      </button>
+      <h1>Orders</h1>
+      {ownOrders.map(ownOrder => {
+        return (
+        <ul key={ownOrder.id}>
+          <h2>{ownOrder.createdAt}</h2>
+          <h3>{ownOrder.status}</h3>
+          {orderitems.filter(orderitem => orderitem.orderId === ownOrder.id
+          ).map(orderitem =>{
+            return(
+              <div>
+                {orderitem.quantity}
+                {orderitem.product.name}
+              </div>
+            )
+          })}
+
+        </ul>)
+        
+      })}
+
     </div>
   );
 };
 
-const mapStateToProps = ({users, orders, orderitems}) => ({
-  users,
-  orders,
-  orderitems,
-});
+const mapStateToProps = state => {
+  return {
+    users: state.users,
+    orders: state.orders,
+    orderitems: state.orderitems
+  };
+};
 
 export default connect(mapStateToProps)(AccountSettings);
