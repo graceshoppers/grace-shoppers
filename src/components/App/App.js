@@ -7,6 +7,8 @@ import {connect} from 'react-redux';
 import {fetchProducts} from '../../redux-store/actions/product-actions';
 import {fetchReviews} from '../../redux-store/actions/review-actions';
 import {fetchUsers} from '../../redux-store/actions/user-actions';
+import {fetchOrders} from '../../redux-store/actions/order-actions';
+import {fetchOrderitems} from '../../redux-store/actions/orderitem-actions';
 
 import './App.css';
 
@@ -28,6 +30,8 @@ class App extends Component {
     this.props.fetchProducts();
     this.props.fetchReviews();
     this.props.fetchUsers();
+    this.props.fetchOrders();
+    this.props.fetchOrderitems();
   }
 
   render() {
@@ -72,8 +76,9 @@ class App extends Component {
         {/* Profile route */}
         <Route
           exact
-          path="/profile"
-          render={() => <UserProfile auth={auth} />}
+          path="/users/:userId/profile"
+          component={UserProfile}
+          // render={() => <UserProfile auth={auth} />}
         />
 
         <Route path="/callback" render={() => <p>Loading...</p>} />
@@ -86,6 +91,8 @@ const mapDispatchToProps = dispatch => ({
   fetchProducts: () => dispatch(fetchProducts()),
   fetchReviews: () => dispatch(fetchReviews()),
   fetchUsers: () => dispatch(fetchUsers()),
+  fetchOrders: () => dispatch(fetchOrders()),
+  fetchOrderitems: () => dispatch(fetchOrderitems())
 });
 
 export default connect(

@@ -2,7 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 
 const AccountSettings = props => {
-  const {auth} = props;
+  // const {auth} = props;
+  
   const { users } = props;
   const userId = props.match.params.userId * 1;
   const user = users.find(user => {
