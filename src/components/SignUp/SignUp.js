@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {addUser} from '../../redux-store/actions/user-actions';
-import TextInputGroup from './TextInputGroup';
+import TextInputGroup from '../_common/TextInputGroup';
 
 class SignUp extends Component {
   constructor() {

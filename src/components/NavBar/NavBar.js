@@ -4,11 +4,11 @@ import {NavLink} from 'react-router-dom';
 import './Nav.css';
 import NavMenu from './NavMenu';
 import SearchBar from './SearchBar';
+import UserButton from './UserButton';
 import CartButton from '../Cart/CartButton';
 
 class NavBar extends Component {
   render() {
-    const {handleChange, handleClick, handleKeyDown} = this;
     const {history, auth, isAuthenticated} = this.props;
 
     return (
@@ -27,9 +27,11 @@ class NavBar extends Component {
         </div>
 
         <div className="col d-flex justify-content-end align-items-center">
-          {/* Profile/Login button */}
+          {/*
+            Below code is for Auth0, which has not been fully implemented yet.
+          */}
 
-          {isAuthenticated ? (
+          {/* {isAuthenticated ? (
             <button className="btn" onClick={() => history.push('/profile')}>
               <i className="fas fa-user-check fa-lg" />
             </button>
@@ -37,7 +39,9 @@ class NavBar extends Component {
             <button className="btn" onClick={auth.login.bind(this)}>
               <i className="fas fa-user-circle fa-lg" />
             </button>
-          )}
+          )} */}
+
+          <UserButton history={history} />
 
           <CartButton />
         </div>
