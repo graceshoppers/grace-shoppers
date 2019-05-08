@@ -1,10 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {deleteProduct} from '../../redux-store/actions/product-actions';
+import {addProductToCart} from '../../redux-store/actions/cart-actions';
 import Reviews from './Reviews';
 
 const SingleProduct = props => {
-  const {products, match, deleteProduct} = props;
+  const {products, match, addProductToCart, deleteProduct} = props;
   const product = findProduct(products, +match.params.id);
   if (!product) return null;
 
@@ -39,9 +40,10 @@ const SingleProduct = props => {
           <div className="row">
             <button
               className="btn btn-dark"
+              onClick={() => addProductToCart(product)}
               style={{width: '200px', borderRadius: '0px'}}
             >
-              ADD TO CART
+              Add to Cart
             </button>
           </div>
         </div>
@@ -63,6 +65,7 @@ const findProduct = (productsArray, productId) =>
 const mapStateToProps = ({products}) => ({products});
 
 const mapDispatchToProps = dispatch => ({
+  addProductToCart: product => dispatch(addProductToCart(product)),
   deleteProduct: productId => dispatch(deleteProduct(productId)),
 });
 
