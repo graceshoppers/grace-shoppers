@@ -22,6 +22,7 @@ router.post(
   async (req, res, next) => {
     const errors = validationResult(req);
 
+    // If preliminary validations fail, break out of this function
     if (!errors.isEmpty())
       return res.status(400).json({errors: errorFormatter(errors.array())});
 
@@ -29,8 +30,15 @@ router.post(
       const {email, password} = req.body;
       const user = await User.findOne({where: {email}});
 
-      if (user.password === password) res.json(user);
-      else res.status(400).send({errors: ['Something went wrong']});
+      if (!user)
+        return res.status(400).json({
+          errors: {email: ['There is no account with associated email.']},
+        });
+      else if (user.password !== password)
+        return res.status(400).json({
+          errors: {password: ['Incorrect password']},
+        });
+      else return res.json(user);
     } catch (err) {
       return next(err);
     }
