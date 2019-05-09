@@ -21,7 +21,7 @@ const User = connection.define('user', {
     isEmail: true,
     unique: {
       args: true,
-      msg: 'There is already an account this email.',
+      msg: 'There is already an account with this email.',
     },
   },
   isAdmin: {
