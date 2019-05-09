@@ -1,10 +1,9 @@
 const router = require('express').Router();
 const {validationResult} = require('express-validator/check');
+const errorFormatter = require('../validations/_error-formatter');
 const {
   models: {User, Address},
 } = require('../../db');
-
-module.exports = router;
 
 // GET, gets all users
 router.get('/', async (req, res, next) => {
@@ -38,7 +37,7 @@ router.post(
   '/',
 
   // Callback functions using Express Validator
-  require('./validations/signup-validations'),
+  require('../validations/signup-validations'),
 
   async (req, res, next) => {
     const errors = validationResult(req);
@@ -47,13 +46,6 @@ router.post(
       const createdUser = await User.create(req.body);
       res.status(201).json(createdUser);
     } else {
-      const errorFormatter = errorArray =>
-        errorArray.reduce((acc, {param, msg}) => {
-          if (acc[param]) acc[param].push(msg);
-          else acc[param] = [msg];
-          return acc;
-        }, {});
-
       res.status(422).json({errors: errorFormatter(errors.array())});
     }
   }
@@ -79,3 +71,5 @@ router.delete('/:id', async (req, res, next) => {
     next(err);
   }
 });
+
+module.exports = router;

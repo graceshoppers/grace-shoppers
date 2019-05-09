@@ -1,45 +1,10 @@
+const {validationResult} = require('express-validator/check');
+const errorFormatter = require('../validations/_error-formatter');
+
 const {
   models: {User},
 } = require('../../db');
 const router = require('express').Router();
-module.exports = router;
-
-// Example model of req.session.user
-
-// req.session.user = {
-//     info: {
-//         "id": 1,
-//         "firstName": "Bao",
-//         "lastName": "Nguyen",
-//         "email": "baonguyen@email.com",
-//         "isAdmin": true,
-//         "password": "password",
-//         "createdAt": "2019-05-03T19:51:52.103Z",
-//         "updatedAt": "2019-05-03T19:51:52.103Z"
-//     },
-//     cartItems: [
-//         {
-//             "id": 1,
-//             "name": "Butterfly Ring",
-//               ...cut for brevity
-//             "category": {
-//                 "id": 1,
-//                 "name": "Rings",
-//                   ...cut for brevity
-//             }
-//         },
-//         {
-//             "id": 2,
-//             "name": "JUSTE UN CLOU Bracelet",
-//               ...cut for brevity
-//             "category": {
-//             "id": 3,
-//             "name": "Bracelets",
-//               ...cut for brevity
-//             }
-//         },
-//     ],
-// }
 
 // Checks if there is a user currently logged in
 router.get('/', (req, res, next) => {
@@ -47,18 +12,29 @@ router.get('/', (req, res, next) => {
 });
 
 // Checks if login credentials match values in database
-router.post('/login', async (req, res, next) => {
-  try {
-    const {email, password} = req.body;
-    const user = await User.findOne({where: {email}});
-    let error = null;
+router.post(
+  '/login',
 
-    if (!user) error = 'No user found with given email.';
-    else if (user.password !== password) error = 'Incorrect password.';
-    else req.session.userDetails = {...req.session.userDetails, info: user};
+  // Preliminary validations to potentially reduce the number of
+  // calls to the database.
+  require('../validations/login-validations'),
 
-    res.send(req.session.userDetails);
-  } catch (err) {
-    return next(err);
+  async (req, res, next) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty())
+      return res.status(400).json({errors: errorFormatter(errors.array())});
+
+    try {
+      const {email, password} = req.body;
+      const user = await User.findOne({where: {email}});
+
+      if (user.password === password) res.json(user);
+      else res.status(400).send({errors: ['Something went wrong']});
+    } catch (err) {
+      return next(err);
+    }
   }
-});
+);
+
+module.exports = router;
