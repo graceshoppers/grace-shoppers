@@ -1,6 +1,14 @@
 .single-img {
-  max-height: 400px;
-  max-width: 400px;
+  max-height: 380px;
+  max-width: 380px;
+  object-fit: contain;
+  border-radius: 5%;
+  border: 1px solid lightgray;
+}
+
+.single-img-small{
+  height: 100px;
+  width:100px;
   object-fit: contain;
   border-radius: 5%;
   border: 1px solid lightgray;
@@ -24,4 +32,16 @@
 
 div{
   font-family: 'Courier New', Courier, monospace;
+}
+
+.d-flex{
+  margin-top: 10px;
+}
+
+.review-container{
+  border: 5px solid green;
+}
+
+.checkborder{
+  border: 5px solid red;
 }

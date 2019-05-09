@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import './SingleProduct.css';
+
 const Reviews = props => {
   const { reviews } = props;
   const { product } = props;
@@ -69,7 +71,7 @@ const Reviews = props => {
   };
 
   return (
-    <div className="row">
+    <div className="d-flex flex-column review-container">
       <h4>What our customers say...</h4>
 
       {thisProductReviews.map(thisProductReview => {
