@@ -41,11 +41,7 @@ div {
 }
 
 .d-flex {
-  margin-top: 10px;
-}
-
-.review-container {
-  border: 5px solid green;
+  margin-top: 2%;
 }
 
 .checkborder {
@@ -58,4 +54,16 @@ div {
 
 .container-fluid{
   grid-gap: 5px;
+}
+
+
+
+/* review*/
+.review-top-lightgrey-border {
+  width: 97vw;
+  border-top: 1px solid lightgrey;
+}
+
+.review-container {
+  border: 5px solid green;
 }

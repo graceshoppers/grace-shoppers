@@ -1,11 +1,11 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react';
+import {connect} from 'react-redux';
 
 import './SingleProduct.css';
 
 const Reviews = props => {
-  const { reviews } = props;
-  const { product } = props;
+  const {reviews} = props;
+  const {product} = props;
   const thisProductReviews = reviews.filter(
     review => review.productId === product.id
   );
@@ -71,8 +71,9 @@ const Reviews = props => {
   };
 
   return (
-    <div className="d-flex flex-column review-container">
-      <h4>What our customers say...</h4>
+    <div className="d-flex flex-column">
+      <h2 className="font-italic">Reviews</h2>
+      <div className="review-top-lightgrey-border" />
 
       {thisProductReviews.map(thisProductReview => {
         const {
@@ -81,36 +82,38 @@ const Reviews = props => {
           title,
           createdAt,
           textBody,
-          recommended
+          recommended,
         } = thisProductReview;
-        const { firstName, lastName } = thisProductReview.user;
+        const {firstName, lastName} = thisProductReview.user;
 
         return (
-          <div  key={id}>
-            <div className="row">
-              <div className="col">
+          <div key={id}>
+            <div className="">
+              <div className="">
                 <h5>{title}</h5>
               </div>
             </div>
-            <div className="row">
-              <div className="col-auto">
+            <div className="">
+              <div className="">
                 {firstName}&nbsp;
                 {lastName}
               </div>
-              <div className="col">{createdAt.slice(0,10)}</div>
+              <div className="">{createdAt.slice(0, 10)}</div>
             </div>
-            <div className="row">
-              <div className="col-2">{getStars(stars)}</div>
+            <div className="">
+              <div className="">{getStars(stars)}</div>
             </div>
-            <div className="row">
-              <div className="col"><p>{textBody}</p></div>
-            </div>
-            <div className="row">
-              <div className="col">
-                <h6>Recommended: {recommended ? "Yes" : "No"}</h6>
+            <div className="">
+              <div className="">
+                <p>{textBody}</p>
               </div>
             </div>
-            <hr />
+            <div className="">
+              <div className="">
+                <h6>Recommended: {recommended ? 'Yes' : 'No'}</h6>
+              </div>
+            </div>
+            <div className="review-top-lightgrey-border" />
           </div>
         );
       })}
@@ -120,7 +123,7 @@ const Reviews = props => {
 
 const mapStateToProps = state => {
   return {
-    reviews: state.reviews
+    reviews: state.reviews,
   };
 };
 
