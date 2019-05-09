@@ -1,8 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {logoutUser} from '../../redux-store/actions/auth-actions';
 
 const AccountSettings = props => {
-  const {auth} = props;
+  const {auth, userDetails, logoutUser} = props;
+  const {firstName, lastName, email} = userDetails;
   //   const userId = props.match.params.userId * 1;
   //   const user = users.find(user => {
   //     return user.id === userId;
@@ -37,19 +39,28 @@ const AccountSettings = props => {
 
   return (
     <div>
-      <p>Under construction</p>
+      <h1>User Profile</h1>
+      <hr />
 
-      <button className="btn btn-danger" onClick={auth.logout.bind(this)}>
+      <p>Name: {`${firstName} ${lastName}`}</p>
+      <p>Email: {email}</p>
+
+      <hr />
+      <button className="btn btn-danger" onClick={logoutUser}>
         Logout
       </button>
     </div>
   );
 };
 
-const mapStateToProps = ({users, orders, orderitems}) => ({
-  users,
-  orders,
-  orderitems,
+const mapStateToProps = ({userDetails}) => ({userDetails});
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  logoutUser: () =>
+    dispatch(logoutUser()).then(() => ownProps.history.push('/')),
 });
 
-export default connect(mapStateToProps)(AccountSettings);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AccountSettings);

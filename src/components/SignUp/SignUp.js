@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {addUser} from '../../redux-store/actions/user-actions';
-import TextInputGroup from './TextInputGroup';
+import {getUserDetails} from '../../redux-store/actions/auth-actions';
+import TextInputGroup from '../_common/TextInputGroup';
 
 class SignUp extends Component {
   constructor() {
@@ -28,7 +29,10 @@ class SignUp extends Component {
 
     this.props
       .addUser(signupCredentials)
-      .then(() => this.props.history.push('/'))
+      .then(() => {
+        this.props.getUserDetails();
+        this.props.history.push('/');
+      })
       .catch(err => {
         this.setState({
           errors: err.response.data.errors,
@@ -91,6 +95,7 @@ class SignUp extends Component {
 
 const mapDispatchToProps = dispatch => ({
   addUser: signupCredentials => dispatch(addUser(signupCredentials)),
+  getUserDetails: () => dispatch(getUserDetails()),
 });
 
 export default connect(
