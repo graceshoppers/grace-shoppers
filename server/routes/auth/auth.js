@@ -8,6 +8,7 @@ const router = require('express').Router();
 
 // Checks if there is a user currently logged in
 router.get('/', (req, res, next) => {
+  if (!req.session.userDetails) req.session.userDetails = {};
   res.json(req.session.userDetails);
 });
 
@@ -30,15 +31,19 @@ router.post(
       const {email, password} = req.body;
       const user = await User.findOne({where: {email}});
 
+      // I will need to restructure the error handling
       if (!user)
-        return res.status(400).json({
+        res.status(400).json({
           errors: {email: ['There is no account with associated email.']},
         });
       else if (user.password !== password)
-        return res.status(400).json({
+        res.status(400).json({
           errors: {password: ['Incorrect password']},
         });
-      else return res.json(user);
+      else {
+        req.session.userDetails = user;
+        res.json(user);
+      }
     } catch (err) {
       return next(err);
     }

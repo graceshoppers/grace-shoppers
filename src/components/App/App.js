@@ -8,7 +8,7 @@ import {fetchProducts} from '../../redux-store/actions/product-actions';
 import {fetchCart} from '../../redux-store/actions/cart-actions';
 import {fetchReviews} from '../../redux-store/actions/review-actions';
 import {fetchUsers} from '../../redux-store/actions/user-actions';
-
+import {getUserDetails} from '../../redux-store/actions/auth-actions';
 import './App.css';
 
 // Component imports
@@ -33,6 +33,7 @@ class App extends Component {
     this.props.fetchCart();
     this.props.fetchReviews();
     this.props.fetchUsers();
+    this.props.getUserDetails();
   }
 
   render() {
@@ -90,14 +91,17 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = ({userDetails}) => ({userDetails});
+
 const mapDispatchToProps = dispatch => ({
   fetchProducts: () => dispatch(fetchProducts()),
   fetchCart: () => dispatch(fetchCart()),
   fetchReviews: () => dispatch(fetchReviews()),
   fetchUsers: () => dispatch(fetchUsers()),
+  getUserDetails: () => dispatch(getUserDetails()),
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(App);

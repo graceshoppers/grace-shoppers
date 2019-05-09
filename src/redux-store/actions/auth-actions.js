@@ -1,5 +1,19 @@
 import axios from 'axios';
-import {LOGIN_USER} from './action-types';
+import {GET_USER_DETAILS, LOGIN_USER} from './action-types';
+
+// ===============================
+// Gets user details from Express session
+// Returns {} if there is no current session
+export const getUserDetails = () => {
+  return dispatch => {
+    return axios.get('/auth').then(res =>
+      dispatch({
+        type: GET_USER_DETAILS,
+        userDetails: res.data,
+      })
+    );
+  };
+};
 
 // ===============================
 // Attempts to log in user

@@ -29,29 +29,39 @@ class Login extends Component {
   render() {
     const {state, handleSubmit} = this;
     const {errors} = state;
-    console.log(this.props.userDetails);
+
     return (
-      <form onSubmit={handleSubmit}>
-        <TextInputGroup
-          inputName="email"
-          inputType="email"
-          labelDisplayText="Email"
-          errors={errors.email}
-        />
+      <div>
+        <form onSubmit={handleSubmit}>
+          <TextInputGroup
+            inputName="email"
+            inputType="email"
+            labelDisplayText="Email"
+            errors={errors.email}
+          />
 
-        <TextInputGroup
-          inputName="password"
-          inputType="password"
-          labelDisplayText="Password"
-          errors={errors.password}
-        />
+          <TextInputGroup
+            inputName="password"
+            inputType="password"
+            labelDisplayText="Password"
+            errors={errors.password}
+          />
 
-        <div className="form-group">
-          <button type="submit" className="btn btn-primary">
-            Login
-          </button>
-        </div>
-      </form>
+          <div className="form-group">
+            <button type="submit" className="btn btn-primary">
+              Login
+            </button>
+          </div>
+        </form>
+
+        <button
+          type="submit"
+          className="btn btn-primary"
+          onClick={() => this.props.history.push('/signup')}
+        >
+          Sign Up
+        </button>
+      </div>
     );
   }
 }

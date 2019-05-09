@@ -2,8 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 const UserButton = props => {
-  const {goTo} = props;
-  const isLoggedIn = true;
+  const {userDetails, goTo} = props;
+  const isLoggedIn = !!Object.keys(userDetails).length;
 
   return (
     <div>
@@ -20,11 +20,13 @@ const UserButton = props => {
   );
 };
 
+const mapStateToProps = ({userDetails}) => ({userDetails});
+
 const mapDispatchToProps = (dispatch, ownProps) => ({
   goTo: urlExtension => ownProps.history.push(urlExtension),
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(UserButton);

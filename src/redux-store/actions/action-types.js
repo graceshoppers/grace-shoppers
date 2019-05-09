@@ -19,7 +19,7 @@ export const CREATE_USER = 'CREATE_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 
 // User authentication actions
-export const GET_USER_DETAILS_FROM_SESSION = 'GET_USER_DETAILS_FROM_SESSION';
+export const GET_USER_DETAILS = 'GET_USER_DETAILS';
 export const LOGIN_USER = 'LOGIN_USER';
 
 //Review actions
