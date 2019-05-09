@@ -27,17 +27,17 @@ class AdminDashboard extends React.Component{
     this.setState({currentPanel:'orders'})
   }
   drawPanel = (currentPanel) =>{
-    if (currentPanel === 'products') return <AdminProducts/>
-    if (currentPanel === 'users') return <AdminUsers/>
-    if (currentPanel === 'orders') return <AdminOrders/>
+    if (currentPanel === 'products') return <div className="container"><AdminProducts/></div>
+    if (currentPanel === 'users') return <div className="container"><AdminUsers/></div>
+    if (currentPanel === 'orders') return <div className="container"><AdminOrders/></div>
   }
   render(){
     const{showProducts, showUsers, showOrders, drawPanel} = this
     
     return (
       <div>
-      <div className="btn-group" role="group">
-      <button type="button" onClick={showProducts} className="btn btn-light btn-lg">Products</button>
+      <div className="container" role="group">
+      <button type="button" onClick={showProducts} className="btn btn-light btn-lg ">Products</button>
       <button type="button" onClick={showUsers} className="btn btn-light btn-lg">Users</button>
       <button type="button" onClick={showOrders} className="btn btn-light btn-lg">Orders</button>
       </div>

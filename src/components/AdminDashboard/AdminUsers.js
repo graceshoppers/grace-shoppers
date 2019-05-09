@@ -8,6 +8,22 @@ import {
 
 const AdminUsers = props => {
   const { users } = props;
+
+  const mapUsers = users => {
+    return users.map(user => {
+      const { id, firstName, lastName, isAdmin, email } = user;
+      return (
+        <tr key={id}>
+          <td>{firstName}</td>
+          <td>{lastName}</td>
+          <td>{isAdmin ? "Admin" : "User"}</td>
+          <td>{email}</td>
+          <td />
+        </tr>
+      );
+    });
+  };
+
   return (
     <table className="table table-hover">
       <thead>
@@ -19,20 +35,7 @@ const AdminUsers = props => {
         </tr>
       </thead>
 
-      <tbody>
-        {users.map(user => {
-          const {firstName,lastName, isAdmin, email} = user
-          return (
-            <tr>
-              <td>{firstName}</td>
-              <td>{lastName}</td>
-              <td>{isAdmin ? "Admin" : "User"}</td>
-              <td>{email}</td>
-              <td></td>
-            </tr>
-          );
-        })}
-      </tbody>
+      <tbody>{mapUsers(users)}</tbody>
     </table>
   );
 };

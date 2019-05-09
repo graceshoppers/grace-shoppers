@@ -7,29 +7,39 @@ import {
 } from "../../redux-store/actions/product-actions";
 
 const AdminProducts = props => {
-  const { products } = props;
+  const { products, deleteProduct } = props;
+
+  const mapProductTableBody = products => {
+    return products.map(product => {
+      const { id, name, unitCost, stock } = product;
+      return (
+        <tr key={id}>
+          <td>{name}</td>
+          <td>{unitCost}</td>
+          <td>{stock === 0 ? "Out of Stock" : "In Stock"}</td>
+          <td><button className='btn' onClick={()=>deleteProduct(id)}>Delete</button></td>
+        </tr>
+      );
+    });
+  };
+
   return (
     <table className="table table-hover">
       <thead>
         <tr>
-          <th width='30%' scope="col">Name</th>
-          <th width='10%' scope="col">Unit Cost</th>
-          <th width='auto' scope="col">Status</th>
+          <th width="30%" scope="col">
+            Name
+          </th>
+          <th width="15%" scope="col">
+            Unit Cost
+          </th>
+          <th width="20%" scope="col">
+            Status
+          </th>
+          <th><button className='btn'>ADD PRODUCT</button></th>
         </tr>
       </thead>
-
-      <tbody>
-        {products.map(product => {
-          const {name, unitCost, stock} = product
-          return (
-            <tr>
-              <td>{name}</td>
-              <td>{unitCost}</td>
-              <td>{stock===0?"Out of Stock":"In Stock"}</td>
-            </tr>
-          );
-        })}
-      </tbody>
+      <tbody>{mapProductTableBody(products)}</tbody>
     </table>
   );
 };

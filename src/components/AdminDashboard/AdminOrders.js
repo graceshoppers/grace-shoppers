@@ -14,26 +14,32 @@ import {
 
 const AdminOrders = props => {
   const { orders, orderitems } = props;
-  return (
-    <div>
-      {orders.map(order => {
-        return (
-          <div>
-            {order.id}
-            {order.status}
-            {orderitems.filter(orderitem => order.id === orderitem.orderId)
+  return(
+    <div>{displayOrders(orders, orderitems)}</div>
+  )
+ }
+
+
+
+const displayOrders = (orders, orderitems) =>{
+
+    return (orders.map(order => {
+      return (
+        <div key={order.id} style={{border:"1px solid black", marginBottom:"40px"}}>
+          <h3>{order.status}  </h3>
+          <h4>{order.createdAt}</h4>
+          {orderitems
+            .filter(orderitem => order.id === orderitem.orderId)
             .map(orderitem => {
-                return(
-                    <div>
-                    {orderitem.product.name}x{orderitem.quantity}
-                    </div>
-                )
+              return (
+                <div key={orderitem.id} style={{borderLeft:"solid 5px red", marginBottom:"10px"}} >
+                  <img width="50px" height="50px" src={orderitem.product.imageName}/>{orderitem.product.name}x{orderitem.quantity}
+                </div>
+              );
             })}
-          </div>
-        );
-      })}
-    </div>
-  );
+        </div>
+      );
+    }))
 };
 
 const mapStateToProps = state => {
