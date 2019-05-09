@@ -12,6 +12,7 @@
   object-fit: contain;
   border-radius: 5%;
   border: 1px solid lightgray;
+  margin: 5px;
 }
 
 .aspect-ratio-box{

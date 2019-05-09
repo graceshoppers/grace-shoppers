@@ -47,7 +47,7 @@ class SingleProduct extends Component {
         <div className="d-flex flex-column">
           <div className="container-fluid">
             <div className="row justify-content-between">
-              <div className="col-1 d-flex flex-column justify-content-center checkborder">
+              <div className="col-1 d-flex flex-column ">
                 <img
                   className="single-img-small"
                   src={'trinity_ring.jpg'}
@@ -64,13 +64,13 @@ class SingleProduct extends Component {
                   onClick={({target: {src}}) => handleClick(src)}
                 />
               </div>
-              <div className="col-4 justify-content-center align-items-center checkborder">
-                <div className="aspect-ratio-box">
-                  <img
-                    className="single-img aspect-ratio-box-inside"
-                    src={currentImg}
-                  />
-                </div>
+              <div className="col-4">
+                  <div className="aspect-ratio-box">
+                    <img
+                      className="single-img aspect-ratio-box-inside"
+                      src={currentImg}
+                    />
+                  </div>
               </div>
               <div className="col-6 align-self-start d-flex flex-column">
                 <h1>{name}</h1>
