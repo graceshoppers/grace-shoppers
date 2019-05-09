@@ -42,7 +42,7 @@ class SingleProduct extends Component {
 
     if (!this.state.product.name) return <div />;
 
-    const {match, addProductToCart, deleteProduct} = this.props;
+    const {addProductToCart} = this.props;
     const {product, currentImg} = this.state;
     const {sideImage, imageName, name, material, description} = product;
     const avgReviews = reviews => {
@@ -56,22 +56,36 @@ class SingleProduct extends Component {
         <div className="container-fluid">
           <div className="row justify-content-between">
             <div className="col-1 d-flex flex-column ">
+              <img
+                className={`single-img-small ${
+                  imageName === currentImg ||
+                  imageName ===
+                    currentImg.substring(
+                      currentImg.lastIndexOf('/') + 1,
+                      currentImg.length
+                    )
+                    ? 'active-img'
+                    : ''
+                }`}
+                src={imageName}
+                onClick={({target}) => handleClick(target)}
+              />
               {sideImage.map(image => (
                 <img
                   className={`single-img-small ${
-                    image === currentImg ? 'active-img' : ''
+                    image === currentImg ||
+                    image ===
+                      currentImg.substring(
+                        currentImg.lastIndexOf('/') + 1,
+                        currentImg.length
+                      )
+                      ? 'active-img'
+                      : ''
                   }`}
                   src={image}
                   onClick={({target}) => handleClick(target)}
                 />
               ))}
-              <img
-                className={`single-img-small ${
-                  imageName === currentImg || imageName === currentImg.substring(currentImg.lastIndexOf('/')+1,currentImg.length) ? 'active-img' : ''
-                }`}
-                src={imageName}
-                onClick={({target}) => handleClick(target)}
-              />
             </div>
             <div className="col-4">
               <div className="aspect-ratio-box">
@@ -95,7 +109,6 @@ class SingleProduct extends Component {
                 </button>
               </div>
             </div>
-
           </div>
         </div>
         <Reviews product={this.state.product} />
