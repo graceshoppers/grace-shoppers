@@ -29,7 +29,6 @@ class App extends Component {
     this.props.fetchProducts();
     this.props.fetchCart();
     this.props.fetchReviews();
-    this.props.fetchUsers();
   }
 
   render() {

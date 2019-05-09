@@ -15,6 +15,8 @@ li {
 
 .product-container{
   position: relative;
+  border-radius: 5%;
+
 }
 
 .catalog-img {
@@ -24,6 +26,8 @@ li {
   position: block;
   opacity: 1;
   transition: 0.5s ease;
+  border-radius: 5%;
+  border: solid 1px lightgray;
 }
 
 .middle {
@@ -35,6 +39,7 @@ li {
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   text-align: center;
+  border-radius: 5%;
 }
 
 .product-name {
