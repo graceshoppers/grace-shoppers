@@ -81,11 +81,11 @@ class SingleProduct extends Component {
                 />
               </div>
             </div>
-            <div className="col-6 align-self-start d-flex flex-column">
-              <h1>{name}</h1>
+            <div className="col-5 align-self-start d-flex flex-column">
+              <h1>{name.toUpperCase()}</h1>
               <h3>{material}</h3>
               <p>{description}</p>
-              <div className="">
+              <div>
                 <button
                   className="btn btn-dark"
                   onClick={() => addProductToCart(this.state.product)}
@@ -95,6 +95,7 @@ class SingleProduct extends Component {
                 </button>
               </div>
             </div>
+
           </div>
         </div>
         <Reviews product={this.state.product} />

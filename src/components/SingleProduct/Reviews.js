@@ -72,7 +72,7 @@ const Reviews = props => {
 
   return (
     <div className="d-flex flex-column">
-      <h2 className="font-italic">Reviews</h2>
+      <h2>REVIEWS</h2>
       <div className="review-top-lightgrey-border" />
 
       {thisProductReviews.map(thisProductReview => {
