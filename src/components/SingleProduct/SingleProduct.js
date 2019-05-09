@@ -36,80 +36,70 @@ class SingleProduct extends Component {
   }
 
   render() {
-    const handleClick = ({src,className}) => {
-      const currentImg = src.substring(src.lastIndexOf('/') + 1, src.length);
-      className = ''
-      this.setState({currentImg});
+    const handleClick = ({src}) => {
+      this.setState({currentImg: src});
     };
 
-    if (this.state.product.name) {
-      const {match, addProductToCart, deleteProduct} = this.props;
-      const {product, currentImg} = this.state;
-      const {imageName, name, material, description} = product;
+    if (!this.state.product.name) return <div />;
 
-      const avgReviews = reviews => {
-        let allStars = 0;
-        reviews.forEach(review => (allStars += review.stars));
-        return allStars / reviews.length;
-      };
+    const {match, addProductToCart, deleteProduct} = this.props;
+    const {product, currentImg} = this.state;
+    const {sideImage, imageName, name, material, description} = product;
+    const avgReviews = reviews => {
+      let allStars = 0;
+      reviews.forEach(review => (allStars += review.stars));
+      return allStars / reviews.length;
+    };
 
-      return (
-        <div className="d-flex flex-column">
-          <div className="container-fluid">
-            <div className="row justify-content-between">
-              <div className="col-1 d-flex flex-column ">
+    return (
+      <div className="d-flex flex-column">
+        <div className="container-fluid">
+          <div className="row justify-content-between">
+            <div className="col-1 d-flex flex-column ">
+              {sideImage.map(image => (
                 <img
-                  className="single-img-small"
-                  src={'trinity_ring.jpg'}
+                  className={`single-img-small ${
+                    image === currentImg ? 'active-img' : ''
+                  }`}
+                  src={image}
                   onClick={({target}) => handleClick(target)}
                 />
+              ))}
+              <img
+                className={`single-img-small ${
+                  imageName === currentImg || imageName === currentImg.substring(currentImg.lastIndexOf('/')+1,currentImg.length) ? 'active-img' : ''
+                }`}
+                src={imageName}
+                onClick={({target}) => handleClick(target)}
+              />
+            </div>
+            <div className="col-4">
+              <div className="aspect-ratio-box">
                 <img
-                  className="single-img-small"
-                  src={'wrap-necklace.jpg'}
-                  onClick={({target}) => handleClick(target)}
-                />
-                <img
-                  className="single-img-small active-img"
-                  src={imageName}
-                  onClick={({target}) => handleClick(target)}
+                  className="single-img aspect-ratio-box-inside"
+                  src={currentImg}
                 />
               </div>
-              <div className="col-4">
-                <div className="aspect-ratio-box">
-                  <img
-                    className="single-img aspect-ratio-box-inside"
-                    src={currentImg}
-                  />
-                </div>
-              </div>
-              <div className="col-6 align-self-start d-flex flex-column">
-                <h1>{name}</h1>
-                <h3>{material}</h3>
-                <p>{description}</p>
-                <div className="">
-                  <button
-                    className="btn btn-dark"
-                    onClick={() => addProductToCart(this.state.product)}
-                    style={{width: '200px', borderRadius: '0px'}}
-                  >
-                    Add to Cart
-                  </button>
-                </div>
+            </div>
+            <div className="col-6 align-self-start d-flex flex-column">
+              <h1>{name}</h1>
+              <h3>{material}</h3>
+              <p>{description}</p>
+              <div className="">
+                <button
+                  className="btn btn-dark"
+                  onClick={() => addProductToCart(this.state.product)}
+                  style={{width: '200px', borderRadius: '0px'}}
+                >
+                  Add to Cart
+                </button>
               </div>
             </div>
           </div>
-          <Reviews product={this.state.product} />
-          {/* <button
-            style={{ color: "red", marginRight: "1em" }}
-            onClick={() => deleteProduct(product.id)}
-          >
-            Delete Product
-          </button> */}
         </div>
-      );
-    } else {
-      return <div />;
-    }
+        <Reviews product={this.state.product} />
+      </div>
+    );
   }
 }
 
