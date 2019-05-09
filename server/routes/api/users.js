@@ -44,6 +44,7 @@ router.post(
 
     if (errors.isEmpty()) {
       const createdUser = await User.create(req.body);
+      req.session.userDetails = createdUser;
       res.status(201).json(createdUser);
     } else {
       res.status(422).json({errors: errorFormatter(errors.array())});
