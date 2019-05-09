@@ -82,7 +82,7 @@ class App extends Component {
         <Route
           exact
           path="/profile"
-          render={() => <UserProfile auth={auth} />}
+          render={({history}) => <UserProfile auth={auth} history={history} />}
         />
 
         <Route path="/callback" render={() => <p>Loading...</p>} />

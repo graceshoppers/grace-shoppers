@@ -50,4 +50,9 @@ router.post(
   }
 );
 
+router.post('/logout', (req, res, next) => {
+  req.session.destroy();
+  res.json({});
+});
+
 module.exports = router;
