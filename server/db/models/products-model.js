@@ -1,34 +1,39 @@
-const connection = require('../database');
+const connection = require("../database");
 const {
-  Sequelize: {STRING, DOUBLE, TEXT},
+  Sequelize: { STRING, DOUBLE, TEXT, INTEGER }
 } = connection;
 
-const Product = connection.define('product', {
+const Product = connection.define("product", {
   name: {
     type: STRING,
     allowNull: false,
-    notEmpty: true,
+    notEmpty: true
   },
   material: {
     type: STRING,
     allowNull: false,
-    notEmpty: true,
+    notEmpty: true
   },
   description: {
     type: TEXT,
     allowNull: false,
-    notEmpty: true,
+    notEmpty: true
   },
   imageName: {
     type: STRING,
     allowNull: false,
-    notEmpty: true,
+    notEmpty: true
   },
   unitCost: {
     type: DOUBLE,
     allowNull: false,
-    notEmpty: true,
+    notEmpty: true
   },
+  stock: {
+    type: INTEGER,
+    allowNull: false,
+    notEmpty: true
+  }
 });
 
 module.exports = Product;

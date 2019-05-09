@@ -37,9 +37,9 @@ class AdminDashboard extends React.Component{
     return (
       <div>
       <div className="btn-group" role="group">
-      <button type="button" onClick={showProducts} className="btn btn-secondary btn-lg">Products</button>
-      <button type="button" onClick={showUsers} className="btn btn-secondary btn-lg">Users</button>
-      <button type="button" onClick={showOrders} className="btn btn-secondary btn-lg">Orders</button>
+      <button type="button" onClick={showProducts} className="btn btn-light btn-lg">Products</button>
+      <button type="button" onClick={showUsers} className="btn btn-light btn-lg">Users</button>
+      <button type="button" onClick={showOrders} className="btn btn-light btn-lg">Orders</button>
       </div>
       <div>{drawPanel(this.state.currentPanel)}</div>
       
