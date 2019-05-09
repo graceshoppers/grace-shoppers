@@ -6,43 +6,56 @@
   border: 1px solid lightgray;
 }
 
-.single-img-small{
+.single-img-small {
   height: 100px;
-  width:100px;
+  width: 100px;
   object-fit: contain;
   border-radius: 5%;
   border: 1px solid lightgray;
   margin: 5px;
+  opacity: 0.4;
 }
 
-.aspect-ratio-box{
-  height:0;
+.active-img {
+  opacity: 1;
+}
+
+.aspect-ratio-box {
+  height: 0;
   overflow: hidden;
   padding-top: 100%;
   background: white;
   position: relative;
 }
 
-.aspect-ratio-box-inside{
+.aspect-ratio-box-inside {
   position: absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
-div{
+div {
   font-family: 'Courier New', Courier, monospace;
 }
 
-.d-flex{
+.d-flex {
   margin-top: 10px;
 }
 
-.review-container{
+.review-container {
   border: 5px solid green;
 }
 
-.checkborder{
+.checkborder {
   border: 5px solid red;
+}
+
+.row{
+  grid-gap: 5px;
+}
+
+.container-fluid{
+  grid-gap: 5px;
 }
