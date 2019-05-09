@@ -1,6 +1,6 @@
 const connection = require('../database');
 const {
-  Sequelize: {STRING, DOUBLE, TEXT},
+  Sequelize: {STRING, DOUBLE, TEXT,ARRAY},
 } = connection;
 
 const Product = connection.define('product', {
@@ -23,6 +23,9 @@ const Product = connection.define('product', {
     type: STRING,
     allowNull: false,
     notEmpty: true,
+  },
+  sideImage:{
+    type: ARRAY(STRING),
   },
   unitCost: {
     type: DOUBLE,
