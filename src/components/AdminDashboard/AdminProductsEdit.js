@@ -83,10 +83,11 @@ class AdminProductsEdit extends React.Component {
             </div>
             <div className="col-1">
               <button
+              style={{width:'35px'}}
                 className="btn btn-outline-dark"
                 onClick={() => deleteProduct(id)}
               >
-                del
+                -
               </button>
             </div>
           </div>

@@ -41,19 +41,19 @@ const createUser = newUser => ({
 
 // ===============================
 // Edit a user in database
-export const editUser = updatedUserInfo => {
+export const editUser = user => {
   const id = user.id;
   return dispatch => {
     return axios
-      .put(`/api/users/${id}`, updatedUserInfo)
+      .put(`/api/users/${id}`, user)
       .then(res => dispatch(updateUser(res.data)))
       .catch(e => console.error(`Error updating a user:\n${e}`));
   };
 };
 
-const updateUser = updatedUser => ({
+const updateUser = user => ({
   type: UPDATE_USER,
-  updatedUser,
+  user,
 });
 
 // ===============================
@@ -95,3 +95,9 @@ export const deleteUser = userId => {
       .catch(e => console.error(`Error updating a user:\n${e}`));
   };
 };
+
+
+const removeUser = userId => ({
+  type: DELETE_USER,
+  userId,
+});
