@@ -21,8 +21,7 @@ const Product = connection.define("product", {
   },
   imageName: {
     type: STRING,
-    allowNull: false,
-    notEmpty: true
+    defaultValue: ''
   },
   unitCost: {
     type: DOUBLE,
