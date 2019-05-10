@@ -7,8 +7,9 @@ router.use('/categories', require('./categories'));
 router.use('/users', require('./users'));
 router.use('/reviews', require('./reviews'));
 router.use('/orders', require('./orders'));
-router.use('/orderitems', require('./orderitems'));
+router.use('/order-items', require('./order-items'));
 router.use('/addresses', require('./addresses'));
+router.use('/cart-items', require('./cart-items'));
 
 router.use((req, res, next) => {
   res.status(404).send('API Not Found');

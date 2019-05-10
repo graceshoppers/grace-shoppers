@@ -2,7 +2,7 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 
 export default () => (
-  <ul className="navbar-nav">
+  <ul className="navbar-nav d-flex justify-content-center align-items-center">
     <NavLink to="/catalog/rings" className="navbar-brand">
       Rings
     </NavLink>
@@ -15,5 +15,6 @@ export default () => (
     <NavLink to="/catalog/necklaces" className="navbar-brand">
       Necklaces
     </NavLink>
+
   </ul>
 );

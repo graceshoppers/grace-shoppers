@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import {
   GET_USERS,
   CREATE_USER,
@@ -7,6 +8,7 @@ import {
   LOGIN_USER,
   DELETE_USER
 } from './action-types';
+
 
 // ===============================
 // Get all users from database
@@ -56,6 +58,7 @@ const updateUser = user => ({
   user,
 });
 
+
 // ===============================
 // Gets session information from Express app
 export const getUserDetailsFromSession = () => {
@@ -101,3 +104,4 @@ const removeUser = userId => ({
   type: DELETE_USER,
   userId,
 });
+

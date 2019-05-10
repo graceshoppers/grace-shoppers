@@ -1,0 +1,28 @@
+.cart-container {
+    margin: 4em 2em;
+}
+
+.cart-item {
+    margin: 1em;
+    padding: 2em 1em 1em 1em;
+}
+
+.cart-image {
+    width: 96px;
+    height: 96px;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+}
+
+.cart-item-options {
+    margin-top: 5em;
+    font-size: 11px;
+}
+
+.shopping-cart-title {
+    margin: 1em 0 0 1.25em;
+}
+
+.top-lightgrey-border {
+    border-top: 1px solid lightgrey;
+}

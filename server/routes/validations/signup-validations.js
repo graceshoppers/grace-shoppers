@@ -16,9 +16,7 @@ module.exports = [
   ...checkRequiredFields,
 
   // Checks if email input is in email format
-  check('email', 'Please enter a valid email address.')
-    .isEmail()
-    .trim(),
+  check('email', 'Please enter a valid email address.').isEmail(),
 
   // Checks length of password
   check('password', 'Password must be more than 4 characters.').isLength({

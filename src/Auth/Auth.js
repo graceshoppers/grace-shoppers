@@ -13,7 +13,7 @@ export default class Auth {
         scope: 'openid',
       },
     },
-    signUpLink: 'http://localhost:3000/#/signup',
+    signUpLink: '/#/signup',
   });
 
   constructor() {
