@@ -1,6 +1,6 @@
 const connection = require("../database");
 const {
-  Sequelize: { STRING, DOUBLE, TEXT, INTEGER }
+  Sequelize: { STRING, DOUBLE, TEXT, BOOLEAN }
 } = connection;
 
 const Product = connection.define("product", {
@@ -29,7 +29,7 @@ const Product = connection.define("product", {
     notEmpty: true
   },
   stock: {
-    type: INTEGER,
+    type: BOOLEAN,
     allowNull: false,
     notEmpty: true
   }

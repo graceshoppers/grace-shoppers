@@ -7,7 +7,7 @@ const makeFakeProduct = () => {
     description: faker.lorem.paragraph(),
     material: faker.commerce.productMaterial(),
     imageName: faker.image.imageUrl(400,400,"fashion",true),
-    stock: faker.random.number({'min':0})
+    stock: faker.random.boolean()
 
   };
 };
