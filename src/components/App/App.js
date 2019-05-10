@@ -23,6 +23,7 @@ import Auth from '../../Auth/Auth';
 
 import Cart from '../Cart/Cart';
 import Checkout from '../Checkout/Checkout';
+import ThankYou from '../ThankYou/ThankYou';
 
 const auth = new Auth();
 
@@ -82,7 +83,10 @@ class App extends Component {
           path="/profile"
           render={({history}) => <UserProfile auth={auth} history={history} />}
         />
+        {/* Thank you route */}
+        <Route path="/thank_you" render={() => <ThankYou />}/>
 
+        {/* Callback Route */}
         <Route path="/callback" render={() => <p>Loading...</p>} />
       </div>
     );
