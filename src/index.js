@@ -4,7 +4,7 @@ import {HashRouter as Router} from 'react-router-dom';
 import {Provider} from 'react-redux';
 
 import store from './redux-store/store';
-import App from './components/App';
+import App from './components/App/App';
 
 render(
   <Provider store={store}>

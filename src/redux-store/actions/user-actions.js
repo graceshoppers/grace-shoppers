@@ -23,8 +23,7 @@ export const addUser = newUser => {
   return dispatch => {
     return axios
       .post('/api/users', newUser)
-      .then(res => dispatch(createUser(res.data)))
-      .catch(e => console.log(`Error creating a user:\n${e}`));
+      .then(res => dispatch(createUser(res.data)));
   };
 };
 

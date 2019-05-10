@@ -1,0 +1,37 @@
+.fixed-container {
+  flex: 1;
+  top: 0px;
+  position: sticky;
+  z-index: 9999;
+  display: flex;
+}
+
+.horizontal-flip {
+  -moz-transform: scale(-1, 1);
+  -webkit-transform: scale(-1, 1);
+  -o-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  transform: scale(-1, 1);
+  display: inline-block;
+}
+
+.home-logo {
+  font-size: 40px;
+  font-weight: bold;
+  font-family: 'Courier New', Courier, monospace;
+  padding:0px;
+  margin:0px;
+}
+
+.navbar{
+  background-color: white;
+}
+
+nav{
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.nav-top-lightgrey-border {
+  width: 20vw;
+  border-top: 1px solid lightgrey;
+}

@@ -1,8 +1,8 @@
-const faker = require("faker");
+const faker = require('faker');
 
 const makeFakeOrderItem = () => {
   return {
-    quantity: faker.random.number({ min: 1, max: 99 })
+    quantity: faker.random.number({min: 1, max: 99}),
   };
 };
 

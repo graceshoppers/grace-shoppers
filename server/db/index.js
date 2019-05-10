@@ -8,8 +8,9 @@ const {
   orders,
   products,
   orderitems,
-  reviews
-} = require("./seeds");
+  reviews,
+  addresses,
+} = require('./seeds');
 
 // Sequelize models
 const {
@@ -18,8 +19,9 @@ const {
   Product,
   Review,
   Order,
-  Orderitem
-} = require("./models");
+  Orderitem,
+  Address,
+} = require('./models');
 
 Product.belongsTo(Category);
 Category.hasMany(Product);
@@ -39,6 +41,9 @@ Review.belongsTo(Product);
 Review.belongsTo(User);
 User.hasMany(Review);
 
+Address.belongsTo(User);
+User.hasMany(Address);
+
 // Clears database tables and repopulates it with seed data
 const syncAndSeed = () => {
   connection
@@ -51,7 +56,9 @@ const syncAndSeed = () => {
 
       const [rings, bracelets, earrings, necklaces] = resolvedCategories;
 
-      const resolvedProducts = await Promise.all(products.map(product => Product.create(product)));
+      const resolvedProducts = await Promise.all(
+        products.map(product => Product.create(product))
+      );
 
       const [
         ring1,
@@ -62,9 +69,8 @@ const syncAndSeed = () => {
         earrings2,
         necklace1,
         necklace2,
-        ...nonHardcodedProducts] = resolvedProducts
-
-      console.log(Array.isArray(resolvedProducts));
+        ...nonHardcodedProducts
+      ] = resolvedProducts;
 
       rings.setProducts([ring1, ring2]);
       bracelets.setProducts([bracelet1, bracelet2]);
@@ -105,18 +111,32 @@ const syncAndSeed = () => {
         );
       });
       resolvedReviews.forEach(async resolvedReview => {
-        await resolvedReview.setProduct(Math.ceil(Math.random() * resolvedProducts.length)); 
+        await resolvedReview.setProduct(
+          Math.ceil(Math.random() * resolvedProducts.length)
+        );
       });
 
       //Assign userIds randomly to orders
       resolvedOrders.forEach(async resolvedOrder => {
-        resolvedOrder.setUser(Math.ceil(Math.random() *resolvedUsers.length))
-      })
+        resolvedOrder.setUser(Math.ceil(Math.random() * resolvedUsers.length));
+      });
 
       //Assign productIds randomly to orderitems
       resolvedOrderitems.forEach(async resolvedOrderitem => {
-        resolvedOrderitem.setProduct(Math.ceil(Math.random() * resolvedProducts.length))
-      })
+        resolvedOrderitem.setProduct(
+          Math.ceil(Math.random() * resolvedProducts.length)
+        );
+      });
+
+      //Assign addressIds randomly to users
+      const resolvedAddresses = await Promise.all(
+        addresses.map(address => Address.create(address))
+      );
+      await Promise.all(
+        resolvedAddresses.map(address =>
+          address.setUser(Math.ceil(Math.random() * resolvedUsers.length))
+        )
+      );
     })
     .then(() => console.log('db seeded'))
     .catch(err => console.log(err));
@@ -127,6 +147,10 @@ module.exports = {
     User,
     Category,
     Product,
+    Review,
+    Order,
+    Orderitem,
+    Address,
   },
   methods: {
     syncAndSeed,
