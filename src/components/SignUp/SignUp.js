@@ -44,7 +44,7 @@ class SignUp extends Component {
     const {errors} = this.state;
 
     return (
-      <div className="card container" style={{marginTop: '2em'}}>
+      <div className="card container" style={{marginTop: '2em', width: '40vw'}}>
         <h2>Sign Up</h2>
         <hr />
         <form onSubmit={this.handleSubmit}>

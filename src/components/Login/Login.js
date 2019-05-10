@@ -31,7 +31,8 @@ class Login extends Component {
     const {errors} = state;
 
     return (
-      <div>
+      <div className="container" style={{width: '40vw'}}>
+        <h3>Login</h3>
         <form onSubmit={handleSubmit}>
           <TextInputGroup
             inputName="email"
