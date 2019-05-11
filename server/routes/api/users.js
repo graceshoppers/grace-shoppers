@@ -13,7 +13,6 @@ router.get('/', async (req, res, next) => {
       include: [
         {
           model: Address,
-          model: Order,
         },
       ],
     });
