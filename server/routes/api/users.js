@@ -2,7 +2,7 @@ const router = require('express').Router();
 const {validationResult} = require('express-validator/check');
 const errorFormatter = require('../validations/_error-formatter');
 const {
-  models: {User, Address},
+  models: {User, Address, Order},
 } = require('../../db');
 
 // GET, gets all users
@@ -13,6 +13,7 @@ router.get('/', async (req, res, next) => {
       include: [
         {
           model: Address,
+          model: Order,
         },
       ],
     });

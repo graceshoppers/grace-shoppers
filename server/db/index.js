@@ -116,6 +116,14 @@ const syncAndSeed = () => {
         );
       });
 
+      //Assign random orderID to users
+      resolvedOrders.forEach(
+        async order =>
+          await order.setUser(
+            Math.ceil(Math.random() * resolvedUsers.length)
+          )
+      );
+
       //Assign userIds randomly to orders
       resolvedOrders.forEach(async resolvedOrder => {
         resolvedOrder.setUser(Math.ceil(Math.random() * resolvedUsers.length));

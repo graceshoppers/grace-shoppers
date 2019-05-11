@@ -72,6 +72,7 @@ class SingleProduct extends Component {
               />
               {sideImage.map(image => (
                 <img
+                  key={image}
                   className={`single-img-small ${
                     image === currentImg ||
                     image ===

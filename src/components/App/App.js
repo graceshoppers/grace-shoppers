@@ -92,7 +92,7 @@ class App extends Component {
         <Route
           exact
           path="/profile"
-          render={({history}) => <UserProfile auth={auth} history={history} />}
+          render={props => <UserPage props={props} />}
         />
         {/* Thank you route */}
         <Route path="/thank_you" render={() => <ThankYou />} />
