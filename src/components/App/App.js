@@ -119,10 +119,9 @@ const mapDispatchToProps = dispatch => ({
   fetchProducts: () => dispatch(fetchProducts()),
   fetchCart: () => dispatch(fetchCart()),
   fetchReviews: () => dispatch(fetchReviews()),
-
   fetchUsers: () => dispatch(fetchUsers()),
   fetchOrders: () => dispatch(fetchOrders()),
-  fetchOrderitems: () => dispatch(fetchOrderitems())
+  fetchOrderitems: () => dispatch(fetchOrderitems()),
   getUserDetails: () => dispatch(getUserDetails()),
 
 });
