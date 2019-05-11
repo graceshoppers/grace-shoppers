@@ -2,19 +2,24 @@ const router = require('express').Router();
 const {validationResult} = require('express-validator/check');
 const errorFormatter = require('../validations/_error-formatter');
 const {
-  models: {User, Address},
+  models: {User, Order, Orderitem, Address},
 } = require('../../db');
 
 // GET, gets all users
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
-      order: [['id', 'ASC']],
       include: [
         {
-          model: Address,
+          model: Order,
         },
+        // Commented out for the time being because there was too much
+        // going on in /api/users.
+        // {
+        //   model: Address,
+        // },
       ],
+      order: [['id', 'ASC'], [Order, 'createdAt', 'ASC']],
     });
     res.status(200).json(users);
   } catch (err) {
@@ -40,7 +45,13 @@ router.post(
 
     try {
       const createdUser = await User.create(req.body);
+      const userCart = await Order.create({
+        status: 'Cart',
+        userId: createdUser.id,
+      });
+
       req.session.userDetails = createdUser;
+      req.session.cart = userCart;
       res.status(201).json(createdUser);
     } catch (err) {
       // I need to create a more dynamic error handler.
