@@ -37,8 +37,16 @@ const AccountSettings = props => {
   //     </div>
   //   );
 
+  const { orders } = props;
+  console.log(orders)
+  const ownOrders = orders.filter(order => order.userId === userId)
+
+
+  const {orderitems} = props;
+  console.log(orderitems)
   return (
     <div>
+
       <h1>User Profile</h1>
       <hr />
 
@@ -49,9 +57,11 @@ const AccountSettings = props => {
       <button className="btn btn-danger" onClick={logoutUser}>
         Logout
       </button>
+
     </div>
   );
 };
+
 
 const mapStateToProps = ({userDetails}) => ({userDetails});
 
@@ -59,6 +69,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   logoutUser: () =>
     dispatch(logoutUser()).then(() => ownProps.history.push('/')),
 });
+
 
 export default connect(
   mapStateToProps,
