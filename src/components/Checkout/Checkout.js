@@ -1,77 +1,52 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 
 import CartItem from '../Cart/CartItem';
 import parseCost from '../../shared/parse-cost';
+import CartList from '../Cart/CartList';
 
 const Checkout = props => {
-  const {cart, users} = props;
-  const totalCost = cart.reduce(
-    (subtotal, item) => subtotal + item.unitCost * item.quantity,
-    0
-  );
-
+  const {cart} = props;
   return (
     <div className="container">
       <div className="panel panel-info">
         <h3 className="panel-heading">Shipping Address</h3>
         <div className="panel-body">
-          <p>
-            user.name
-            <br />
-            user.address
-            <br />
-            <button className="btn">Change</button>
-          </p>
+          <div className="form-group">
+            <label>Address Line 1</label>
+            <input type="text" className="form-control mb-2"/>
+            <label>Address Line 2</label>
+            <input type="text" className="form-control mb-2"/>
+            <label>City</label>
+            <input type="text" className="form-control mb-2"/>
+            <label>State</label>
+            <input type="text" className="form-control mb-2"/>
+            <label>Zip Code</label>
+            <input type="text" className="form-control mb-2"/>
+            <label>Country</label>
+            <input type="text" className="form-control mb-2"/>
+            <label>Phone Number</label>
+            <input type="text" className="form-control mb-2"/>
+          </div>
         </div>
       </div>
 
       <div className="panel panel-info">
         <h3 className="panel-heading">Payment Method</h3>
         <div className="panel-body">
-          <p>
-            user.name
-            <br />
-            user.address
-            <br />
-            <button className="btn">Change</button>
-          </p>
+          <div className="form-group">
+              <label>Card Number</label>
+              <input type="text" className="form-control mb-2"/>
+              <label>Name on card</label>
+              <input type="text" className="form-control mb-2"/>
+              <label>Expiration date</label>
+              <input type="text" className="form-control mb-2"/>
+            </div>
         </div>
       </div>
-
-      <div>
-        <h3 className="panel-heading">Shopping Cart</h3>
-        <div className="black-divider-thin" style={{margin: '2em 0 0'}} />
-        {cart.map((item, index) => (
-          <CartItem
-            key={item.id}
-            attributes={item}
-            displayTopBorder={index === 0 ? false : true}
-          />
-        ))}
-        <div className="black-divider-thick" style={{margin: '2em 1.5em 0'}} />
-        {/*
-          -------------
-          Total section
-          -------------
-          */}
-        <div className="container">
-          <div className="row d-flex flex-row">
-            <div className="col-md-9">
-              <h3 className="shopping-cart-title">Total</h3>
-            </div>
-            <div
-              className="col-md-2 d-flex flex-row-reverse"
-              style={{marginLeft: '19px'}}
-            >
-              <h5 className="shopping-cart-title">{`${parseCost(
-                totalCost
-              )}`}</h5>
-            </div>
-          </div>
-        </div>
-      </div>
-      <button>Place your order</button>
+        <CartList cart={cart}/>
+      <button type="submit" className="btn btn-success mt-2 mb-2" ><Link to="/thank_you">Place your order</Link></button>
     </div>
   );
 };

@@ -48,8 +48,8 @@ const users = [
   },
 ];
 
-// for (let i = users.length; i < 100; i++) {
-//   users.push(makeFakeUser());
-// }
+for (let i = users.length; i < 25; i++) {
+  users.push(makeFakeUser());
+}
 
 module.exports = users;
