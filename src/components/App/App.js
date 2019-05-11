@@ -44,12 +44,11 @@ class App extends Component {
     this.props.fetchOrders();
     this.props.fetchOrderitems();
     this.props.getUserDetails();
-
   }
 
   render() {
     const {isAuthenticated} = auth;
-    console.log(this.props.userDetails);
+
     return (
       <div className="container-fluid">
         <Route
@@ -92,10 +91,8 @@ class App extends Component {
         {/* Profile route */}
         <Route
           exact
-
           path="/profile"
           render={({history}) => <UserProfile auth={auth} history={history} />}
-
         />
         {/* Thank you route */}
         <Route path="/thank_you" render={() => <ThankYou />} />
@@ -104,10 +101,7 @@ class App extends Component {
         <Route path="/callback" render={() => <p>Loading...</p>} />
 
         {/* Admin routes */}
-        <Route exact path="/admin/" component={AdminDashboard}/>
-
-
-
+        <Route exact path="/admin/" component={AdminDashboard} />
       </div>
     );
   }
@@ -122,9 +116,8 @@ const mapDispatchToProps = dispatch => ({
 
   fetchUsers: () => dispatch(fetchUsers()),
   fetchOrders: () => dispatch(fetchOrders()),
-  fetchOrderitems: () => dispatch(fetchOrderitems())
+  fetchOrderitems: () => dispatch(fetchOrderitems()),
   getUserDetails: () => dispatch(getUserDetails()),
-
 });
 
 export default connect(
