@@ -25,6 +25,7 @@ const getProducts = products => ({
 // ===============================
 // Create a new product in database
 export const addProduct = product => {
+    console.log(product)
   return dispatch => {
     return axios
       .post('/api/products', product)

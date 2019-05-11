@@ -1,5 +1,14 @@
 import axios from 'axios';
-import {GET_USERS, CREATE_USER, UPDATE_USER} from './action-types';
+
+import {
+  GET_USERS,
+  CREATE_USER,
+  UPDATE_USER,
+  GET_USER_DETAILS_FROM_SESSION,
+  LOGIN_USER,
+  DELETE_USER
+} from './action-types';
+
 
 // ===============================
 // Get all users from database
@@ -34,17 +43,65 @@ const createUser = newUser => ({
 
 // ===============================
 // Edit a user in database
-export const editUser = updatedUserInfo => {
+export const editUser = user => {
   const id = user.id;
   return dispatch => {
     return axios
-      .put(`/api/users/${id}`, updatedUserInfo)
+      .put(`/api/users/${id}`, user)
       .then(res => dispatch(updateUser(res.data)))
       .catch(e => console.error(`Error updating a user:\n${e}`));
   };
 };
 
-const updateUser = updatedUser => ({
+const updateUser = user => ({
   type: UPDATE_USER,
-  updatedUser,
+  user,
 });
+
+
+// ===============================
+// Gets session information from Express app
+export const getUserDetailsFromSession = () => {
+  return dispatch => {
+    return axios
+      .get('/auth')
+      .then(res =>
+        dispatch({
+          type: GET_USER_DETAILS_FROM_SESSION,
+          userDetails: res.data,
+        })
+      )
+      .catch(e => console.error(`Error:\n${e}`));
+  };
+};
+
+export const loginUser = loginCredentials => {
+  return dispatch => {
+    return axios
+      .post('/auth/login', loginCredentials)
+      .then(res =>
+        dispatch({
+          type: LOGIN_USER,
+          userDetails: res.data,
+        })
+      )
+      .catch(e => console.error(`Error:\n${e}`));
+  };
+};
+
+
+export const deleteUser = userId => {
+  return dispatch => {
+    return axios
+      .delete(`/api/users/${userId}`)
+      .then(res => dispatch(removeUser(userId)))
+      .catch(e => console.error(`Error updating a user:\n${e}`));
+  };
+};
+
+
+const removeUser = userId => ({
+  type: DELETE_USER,
+  userId,
+});
+
