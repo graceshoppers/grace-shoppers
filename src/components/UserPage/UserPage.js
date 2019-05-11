@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {logoutUser} from '../../redux-store/actions/auth-actions';
 
 const AccountSettings = props => {
-  const {auth, userDetails, logoutUser} = props;
+  const {userDetails, logoutUser} = props;
   const {firstName, lastName, email} = userDetails;
   //   const userId = props.match.params.userId * 1;
   //   const user = users.find(user => {

@@ -18,7 +18,7 @@ import SingleProduct from '../SingleProduct/SingleProduct';
 
 import Login from '../Login/Login';
 import SignUp from '../SignUp/SignUp';
-import UserProfile from '../UserProfile/UserProfile';
+import UserPage from '../UserPage/UserPage';
 import Auth from '../../Auth/Auth';
 
 import Cart from '../Cart/Cart';
@@ -80,7 +80,7 @@ class App extends Component {
         <Route
           exact
           path="/profile"
-          render={({history}) => <UserProfile auth={auth} history={history} />}
+          render={({history}) => <UserPage history={history} />}
         />
 
         <Route path="/callback" render={() => <p>Loading...</p>} />

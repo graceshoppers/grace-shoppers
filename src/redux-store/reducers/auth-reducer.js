@@ -10,7 +10,6 @@ export default (state = {}, action) => {
     case LOGIN_USER:
     case LOGOUT_USER:
       return {...action.userDetails};
-
     default:
       return state;
   }
