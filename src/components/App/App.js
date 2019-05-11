@@ -37,7 +37,7 @@ class App extends Component {
 
   render() {
     const {isAuthenticated} = auth;
-
+    console.log(this.props.userDetails);
     return (
       <div className="container-fluid">
         <Route
@@ -84,7 +84,7 @@ class App extends Component {
           render={({history}) => <UserProfile auth={auth} history={history} />}
         />
         {/* Thank you route */}
-        <Route path="/thank_you" render={() => <ThankYou />}/>
+        <Route path="/thank_you" render={() => <ThankYou />} />
 
         {/* Callback Route */}
         <Route path="/callback" render={() => <p>Loading...</p>} />
