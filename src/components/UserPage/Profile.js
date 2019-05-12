@@ -191,13 +191,19 @@ class Profile extends Component {
                 ) : (
                   ''
                 )}
+                {password.length <= 4 ? (
+                  <div>Password must be longer than 4 characters</div>
+                ) : (
+                  ''
+                )}
               </div>
               <div>
                 <button
                   type="submit"
                   disabled={
                     password === this.props.userDetails.password ||
-                    password !== confirmPassword
+                    password !== confirmPassword ||
+                    password.length <= 4
                   }
                 >
                   Confirm
