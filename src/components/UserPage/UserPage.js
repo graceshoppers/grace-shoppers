@@ -10,8 +10,9 @@ class AccountSettings extends Component {
     const {userDetails, logoutUser} = this.props;
     //defend against first render before App component did mount run
     if (!userDetails) return <div />;
-    const {firstName, lastName, email} = userDetails;
+
     const {orders, addresses} = userDetails;
+    console.log(userDetails);
 
     return (
       <div>
