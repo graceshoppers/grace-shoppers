@@ -13,19 +13,13 @@ class AccountSettings extends Component {
     const {firstName, lastName, email} = userDetails;
     const {orders, addresses} = userDetails;
 
-    console.log(userDetails);
-
     return (
       <div>
+        <button className="btn btn-danger" onClick={logoutUser}>
+          Logout
+        </button>
         <div>
-          <h1>User Profile</h1>
-          <hr />
-          <p>Name: {`${firstName} ${lastName}`}</p>
-          <p>Email: {email}</p>
-          <hr />
-          <button className="btn btn-danger" onClick={logoutUser}>
-            Logout
-          </button>
+          <NavLink to="/userpage/profile">View Account Information</NavLink>
         </div>
         <div>
           <h1>Past Orders</h1>

@@ -8,7 +8,7 @@ const UserButton = props => {
   return (
     <div>
       {isLoggedIn ? (
-        <button className="btn" onClick={() => goTo('/profile')}>
+        <button className="btn" onClick={() => goTo('/userpage')}>
           <i className="fas fa-user-check fa-lg" />
         </button>
       ) : (
