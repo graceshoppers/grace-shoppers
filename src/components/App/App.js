@@ -95,8 +95,10 @@ class App extends Component {
         <Route exact path="/userpage/profile" component={Profile} />
         <Route path="/userpage/pastorders" component={PastOrders} />
 
+
         {/* Profile edit route */}
-        <Route path="/userpage/profile/edit/:field" component={Profile}/>
+        <Route exact path="/userpage/profile/edit/:field" component={Profile}/>
+        <Route path ='/userpage/profile/edit/address/:id' component={Profile}/>
 
         {/* Thank you route */}
         <Route path="/thank_you" render={() => <ThankYou />} />

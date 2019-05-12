@@ -254,6 +254,9 @@ class Profile extends Component {
                   <br />
                   Additional Instructions: {additionalInstruction}
                 </p>
+                <NavLink to={`/userpage/profile/edit/address/${id}`}>
+                  <button>Edit</button>
+                </NavLink>
               </div>
             );
           })}
