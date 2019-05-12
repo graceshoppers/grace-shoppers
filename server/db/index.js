@@ -1,5 +1,5 @@
 // Database connection
-const connection = require('./database');
+const connection = require("./database");
 
 //Seed db
 const {
@@ -9,8 +9,8 @@ const {
   products,
   orderitems,
   reviews,
-  addresses,
-} = require('./seeds');
+  addresses
+} = require("./seeds");
 
 // Sequelize models
 const {
@@ -20,8 +20,8 @@ const {
   Review,
   Order,
   Orderitem,
-  Address,
-} = require('./models');
+  Address
+} = require("./models");
 
 Product.belongsTo(Category);
 Category.hasMany(Product);
@@ -47,7 +47,7 @@ User.hasMany(Address);
 // Clears database tables and repopulates it with seed data
 const syncAndSeed = () => {
   connection
-    .sync({force: true})
+    .sync({ force: true })
     .then(async () => {
       // Hardcoded products from before are preserved
       const resolvedCategories = await Promise.all(
@@ -79,9 +79,18 @@ const syncAndSeed = () => {
 
       //Assign categoryIds randomly to products
       nonHardcodedProducts.forEach(async nonHardcodedProduct => {
-        nonHardcodedProduct.setCategory(
-          Math.ceil(Math.random() * categories.length)
-        );
+        const categoryId = Math.ceil(Math.random() * categories.length);
+        
+        //Hardcoded 16 pictures per category
+        const randomImageNo = Math.ceil(Math.random() * 16) 
+        console.log(nonHardcodedProduct.imageName)
+        if (categoryId === 1 ) nonHardcodedProduct.imageName = `/rings/${randomImageNo}.jpeg`
+        if (categoryId === 2 ) nonHardcodedProduct.imageName = `/bracelets/${randomImageNo}.jpeg`
+        if (categoryId === 3 ) nonHardcodedProduct.imageName = `/earrings/${randomImageNo}.jpeg`
+        if (categoryId === 4 ) nonHardcodedProduct.imageName = `/necklaces/${randomImageNo}.jpeg`
+ 
+        nonHardcodedProduct.update({imageName:nonHardcodedProduct.imageName})
+        nonHardcodedProduct.setCategory(categoryId);
       });
 
       //Assign orderIds randomly to orderitems
@@ -138,7 +147,7 @@ const syncAndSeed = () => {
         )
       );
     })
-    .then(() => console.log('db seeded'))
+    .then(() => console.log("db seeded"))
     .catch(err => console.log(err));
 };
 
@@ -150,9 +159,9 @@ module.exports = {
     Review,
     Order,
     Orderitem,
-    Address,
+    Address
   },
   methods: {
-    syncAndSeed,
-  },
+    syncAndSeed
+  }
 };
