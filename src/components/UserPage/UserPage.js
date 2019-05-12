@@ -11,8 +11,7 @@ class AccountSettings extends Component {
     //defend against first render before App component did mount run
     if (!userDetails) return <div />;
 
-    const {orders, addresses} = userDetails;
-    console.log(userDetails);
+    const {orders} = userDetails;
 
     return (
       <div>

@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {NavLink} from 'react-router-dom';
+import {editUser} from '../../redux-store/actions/user-actions';
 
 class Profile extends Component {
   constructor() {
     super();
     this.state = {
+      id: 0,
       firstName: '',
       lastName: '',
       email: '',
@@ -18,26 +20,33 @@ class Profile extends Component {
   componentDidMount() {
     if (this.props.userDetails) {
       const {
-        userDetails: {firstName, lastName, email, addresses},
+        userDetails: {id, firstName, lastName, email, addresses},
       } = this.props;
-      this.setState({firstName, lastName, email, addresses});
+      this.setState({id, firstName, lastName, email, addresses});
     }
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.userDetails !== this.props.userDetails) {
       const {
-        userDetails: {firstName, lastName, email, addresses},
+        userDetails: {id, firstName, lastName, email, addresses},
       } = this.props;
-      this.setState({firstName, lastName, email, addresses});
+      this.setState({id, firstName, lastName, email, addresses});
     }
   }
 
   handleSubmit = evt => {
     evt.preventDefault();
-    const {firstName, lastName, email, password} = this.state;
-    const newProfile = {firstName, lastName, email, password};
-    console.log(newProfile);
+    const {history, editUser, getUserDetails} = this.props;
+    const {id, firstName, lastName, email, password} = this.state;
+
+    const newProfile =
+      password !== ''
+        ? {id, firstName, lastName, email, password}
+        : {id, firstName, lastName, email};
+    console.log(this.props.userDetails);
+    editUser(newProfile);
+    history.push('/userpage/profile');
   };
 
   handleChange = evt => {
@@ -72,7 +81,7 @@ class Profile extends Component {
         {field === 'name' ? (
           <form onSubmit={this.handleSubmit}>
             <div className="d-flex justify-content-between">
-              <div class="d-inline-block">
+              <div className="d-inline-block">
                 First Name:{' '}
                 <input
                   type="text"
@@ -248,5 +257,11 @@ class Profile extends Component {
 }
 
 const mapStateToProps = ({userDetails}) => userDetails;
+const mapDispatchToProps = dispatch => ({
+  editUser: newProfile => dispatch(editUser(newProfile)),
+});
 
-export default connect(mapStateToProps)(Profile);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Profile);
