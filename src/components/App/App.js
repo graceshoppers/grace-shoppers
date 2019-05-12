@@ -39,12 +39,10 @@ class App extends Component {
     this.props.fetchProducts();
     this.props.fetchCart();
     this.props.fetchReviews();
-
     this.props.fetchUsers();
     this.props.fetchOrders();
     this.props.fetchOrderitems();
     this.props.getUserDetails();
-
   }
 
   render() {
@@ -119,7 +117,6 @@ const mapDispatchToProps = dispatch => ({
   fetchProducts: () => dispatch(fetchProducts()),
   fetchCart: () => dispatch(fetchCart()),
   fetchReviews: () => dispatch(fetchReviews()),
-
   fetchUsers: () => dispatch(fetchUsers()),
   fetchOrders: () => dispatch(fetchOrders()),
   fetchOrderitems: () => dispatch(fetchOrderitems()),

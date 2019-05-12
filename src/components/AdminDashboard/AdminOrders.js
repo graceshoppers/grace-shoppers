@@ -22,7 +22,7 @@ const AdminOrders = props => {
 
 
 const displayOrders = (orders, orderitems) =>{
-
+  console.log(orderitems)
     return (orders.map(order => {
       return (
         <div key={order.id} style={{border:"1px solid black", marginBottom:"40px"}}>

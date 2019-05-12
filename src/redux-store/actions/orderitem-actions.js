@@ -11,7 +11,7 @@ import {
 export const fetchOrderitems = () => {
   return dispatch => {
     return axios
-      .get('/api/orderitems')
+      .get('/api/order-items')
       .then(res => dispatch(getOrderitems(res.data)))
       .catch(e => console.log(`Error fetching orderitems:\n${e}`));
   };
