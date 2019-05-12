@@ -7,6 +7,7 @@ module.exports = router;
 
 router.get('/', (req, res, next) => {
   if (!req.session.cart) req.session.cart = [];
+
   res.json([...req.session.cart]);
 });
 

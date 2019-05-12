@@ -2,7 +2,7 @@ const {validationResult} = require('express-validator/check');
 const errorFormatter = require('../validations/_error-formatter');
 
 const {
-  models: {User},
+  models: {User, Orderitem},
 } = require('../../db');
 const router = require('express').Router();
 
@@ -41,11 +41,15 @@ router.post(
           errors: {password: ['Incorrect password']},
         });
       else {
+        if (req.session.cart) await user.addToCart(...req.session.cart);
+        req.session.cart = await user.getCart();
+        console.log(req.session.cart);
         req.session.userDetails = user;
+
         res.json(user);
       }
     } catch (err) {
-      return next(err);
+      next(err);
     }
   }
 );

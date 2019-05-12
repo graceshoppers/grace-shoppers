@@ -15,3 +15,13 @@ User.prototype.createCart = function() {
 User.prototype.getCart = function() {
   return Orderitem.findAll({where: {orderId: this.cartNo}});
 };
+
+User.prototype.addToCart = function(...args) {
+  args.map(async ({productId, quantity}) => {
+    await Orderitem.create({
+      orderId: this.cartNo,
+      productId,
+      quantity,
+    });
+  });
+};

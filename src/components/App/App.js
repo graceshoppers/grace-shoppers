@@ -48,7 +48,8 @@ class App extends Component {
 
   render() {
     const {isAuthenticated} = auth;
-    console.log(this.props.userDetails);
+    console.log(`userDetails:`, this.props.userDetails);
+    console.log(`cart:`, this.props.cart);
     return (
       <div className="container-fluid">
         <Route
@@ -107,7 +108,7 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({userDetails}) => ({userDetails});
+const mapStateToProps = ({userDetails, cart}) => ({userDetails, cart});
 
 const mapDispatchToProps = dispatch => ({
   fetchProducts: () => dispatch(fetchProducts()),
