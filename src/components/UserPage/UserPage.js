@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import {logoutUser} from '../../redux-store/actions/auth-actions';
 import parseCost from '../../shared/parse-cost';
 import {getUserDetails} from '../../redux-store/actions/auth-actions';
 import {NavLink} from 'react-router-dom';
 
-class AccountSettings extends Component {
-  render() {
-    const {userDetails, logoutUser} = this.props;
+const UserPage = props => {
+    const {userDetails, logoutUser} = props;
     //defend against first render before App component did mount run
+    console.log(userDetails);
     if (!userDetails) return <div />;
 
     const {orders} = userDetails;
@@ -22,7 +22,7 @@ class AccountSettings extends Component {
           <NavLink to="/userpage/profile">View Account Information</NavLink>
         </div>
         <div>
-          <h1>Past Orders</h1>
+          {/* <h1>Past Orders</h1>
           {orders.map(order => {
             const {id, status} = order;
             const orderValue = order.orderitems.reduce(
@@ -44,12 +44,11 @@ class AccountSettings extends Component {
                 <hr />
               </div>
             );
-          })}
+          })} */}
         </div>
       </div>
     );
   }
-}
 
 const mapStateToProps = ({userDetails}) => userDetails;
 
@@ -62,4 +61,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AccountSettings);
+)(UserPage);

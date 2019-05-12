@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {NavLink} from 'react-router-dom';
-import {editUser} from '../../redux-store/actions/user-actions';
+import {
+  editUser,
+  updateUserDetails,
+} from '../../redux-store/actions/user-actions';
 
 class Profile extends Component {
   constructor() {
@@ -37,7 +40,7 @@ class Profile extends Component {
 
   handleSubmit = evt => {
     evt.preventDefault();
-    const {history, editUser, getUserDetails} = this.props;
+    const {history, editUser, updateUserDetails} = this.props;
     const {id, firstName, lastName, email, password} = this.state;
 
     const newProfile =
@@ -46,6 +49,8 @@ class Profile extends Component {
         : {id, firstName, lastName, email};
     console.log(this.props.userDetails);
     editUser(newProfile);
+    // updateUserDetails(id);
+    console.log(this.props.userDetails);
     history.push('/userpage/profile');
   };
 
@@ -259,6 +264,7 @@ class Profile extends Component {
 const mapStateToProps = ({userDetails}) => userDetails;
 const mapDispatchToProps = dispatch => ({
   editUser: newProfile => dispatch(editUser(newProfile)),
+  updateUserDetails: id => dispatch(updateUserDetails(id)),
 });
 
 export default connect(

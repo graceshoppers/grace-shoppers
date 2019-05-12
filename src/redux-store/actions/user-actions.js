@@ -4,11 +4,11 @@ import {
   GET_USERS,
   CREATE_USER,
   UPDATE_USER,
-  GET_USER_DETAILS_FROM_SESSION,
+  GET_USER_DETAILS,
+  UPDATE_ONE_USERDETAILS,
   LOGIN_USER,
-  DELETE_USER
+  DELETE_USER,
 } from './action-types';
-
 
 // ===============================
 // Get all users from database
@@ -58,7 +58,14 @@ const updateUser = user => ({
   user,
 });
 
-
+export const updateUserDetails = id => {
+  return dispatch => {
+    return axios
+      .get(`api/users/${id}`)
+      .then(res => dispatch({type: UPDATE_ONE_USERDETAILS, userDetails: res.data}))
+      .catch(err => console.error(`Error updating user details:\n${err}`));
+  };
+};
 // ===============================
 // Gets session information from Express app
 export const getUserDetailsFromSession = () => {
@@ -89,7 +96,6 @@ export const loginUser = loginCredentials => {
   };
 };
 
-
 export const deleteUser = userId => {
   return dispatch => {
     return axios
@@ -99,9 +105,7 @@ export const deleteUser = userId => {
   };
 };
 
-
 const removeUser = userId => ({
   type: DELETE_USER,
   userId,
 });
-
