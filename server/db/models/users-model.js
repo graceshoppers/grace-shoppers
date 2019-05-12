@@ -1,6 +1,6 @@
 const connection = require('../database');
 const {
-  Sequelize: {STRING, BOOLEAN},
+  Sequelize: {STRING, INTEGER, BOOLEAN, ARRAY, JSON},
 } = connection;
 
 const User = connection.define('user', {
@@ -22,7 +22,6 @@ const User = connection.define('user', {
     unique: {
       args: true,
       msg: 'There is already an account registered to this email.',
-
     },
   },
   isAdmin: {
@@ -36,6 +35,10 @@ const User = connection.define('user', {
       notEmpty: true,
       len: [5, 20],
     },
+  },
+  cartNo: {
+    // Please note that this field just holds the cart's no.
+    type: INTEGER,
   },
 });
 

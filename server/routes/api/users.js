@@ -10,16 +10,13 @@ router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
       include: [
-        {
-          model: Order,
-        },
         // Commented out for the time being because there was too much
         // going on in /api/users.
         // {
         //   model: Address,
         // },
       ],
-      order: [['id', 'ASC'], [Order, 'createdAt', 'ASC']],
+      order: [['id', 'ASC']],
     });
     res.status(200).json(users);
   } catch (err) {
@@ -45,13 +42,21 @@ router.post(
 
     try {
       const createdUser = await User.create(req.body);
-      const userCart = await Order.create({
-        status: 'Cart',
-        userId: createdUser.id,
+      await createdUser.createCart();
+      await Orderitem.create({
+        quantity: 5,
+        orderId: createdUser.cartNo,
+        productId: 1,
       });
+      await Orderitem.create({
+        quantity: 55,
+        orderId: createdUser.cartNo,
+        productId: 2,
+      });
+      const userCart = await createdUser.getCart();
 
-      req.session.userDetails = createdUser;
-      req.session.cart = userCart;
+      req.session.userDetails = {...createdUser.get(), cart: userCart};
+
       res.status(201).json(createdUser);
     } catch (err) {
       // I need to create a more dynamic error handler.
