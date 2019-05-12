@@ -37,8 +37,8 @@ class SingleProduct extends Component {
 
   render() {
     const handleClick = ({src}) => {
-      console.log(src);
       this.setState({currentImg: src});
+      console.log(this.state);
     };
 
     if (!this.state.product.name) return <div />;
@@ -60,11 +60,7 @@ class SingleProduct extends Component {
               <img
                 className={`single-img-small ${
                   imageName === currentImg ||
-                  imageName ===
-                    currentImg.substring(
-                      currentImg.lastIndexOf('/') + 1,
-                      currentImg.length
-                    )
+                  imageName === currentImg.replace('http://localhost:3000', '')
                     ? 'active-img'
                     : ''
                 }`}
@@ -76,11 +72,7 @@ class SingleProduct extends Component {
                   key={image}
                   className={`single-img-small ${
                     image === currentImg ||
-                    image ===
-                      currentImg.substring(
-                        currentImg.lastIndexOf('/') + 1,
-                        currentImg.length
-                      )
+                    image === currentImg.replace('http://localhost:3000', '')
                       ? 'active-img'
                       : ''
                   }`}
