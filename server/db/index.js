@@ -83,7 +83,6 @@ const syncAndSeed = () => {
         
         //Hardcoded 16 pictures per category
         const randomImageNo = Math.ceil(Math.random() * 16) 
-        console.log(nonHardcodedProduct.imageName)
         if (categoryId === 1 ) nonHardcodedProduct.imageName = `/rings/${randomImageNo}.jpeg`
         if (categoryId === 2 ) nonHardcodedProduct.imageName = `/bracelets/${randomImageNo}.jpeg`
         if (categoryId === 3 ) nonHardcodedProduct.imageName = `/earrings/${randomImageNo}.jpeg`
