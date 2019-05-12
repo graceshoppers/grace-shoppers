@@ -44,6 +44,9 @@ User.hasMany(Review);
 Address.belongsTo(User);
 User.hasMany(Address);
 
+Order.belongsTo(Address);
+Address.hasMany(Order)
+
 // Clears database tables and repopulates it with seed data
 const syncAndSeed = () => {
   connection

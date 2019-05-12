@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-  models: {Order, User},
+  models: {Order, User, Address},
 } = require('../../db');
 
 module.exports = router;
@@ -9,7 +9,7 @@ module.exports = router;
 router.get('/', async (req, res, next) => {
   try {
     const orders = await Order.findAll({
-      include: [User],
+      include: [User, Address],
     });
 
     res.status(200).json(orders);
