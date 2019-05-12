@@ -149,6 +149,14 @@ const syncAndSeed = () => {
           address.setUser(Math.ceil(Math.random() * resolvedUsers.length))
         )
       );
+
+       //Assign addressIds randomly to Orders
+      await Promise.all(
+        resolvedOrders.map(resolvedOrder =>
+          resolvedOrder.setAddress(Math.ceil(Math.random() * resolvedAddresses.length))
+        )
+      );
+
     })
     .then(() => console.log("db seeded"))
     .catch(err => console.log(err));
