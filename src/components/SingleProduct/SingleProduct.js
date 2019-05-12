@@ -37,6 +37,7 @@ class SingleProduct extends Component {
 
   render() {
     const handleClick = ({src}) => {
+      console.log(src);
       this.setState({currentImg: src});
     };
 
