@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {NavLink} from 'react-router-dom';
-import {
-  editUser,
-  updateUserDetails,
-} from '../../redux-store/actions/user-actions';
+import {editUser} from '../../redux-store/actions/user-actions';
+import {updateUserDetails} from '../../redux-store/actions/auth-actions';
 
 class Profile extends Component {
   constructor() {
@@ -47,10 +45,8 @@ class Profile extends Component {
       password !== ''
         ? {id, firstName, lastName, email, password}
         : {id, firstName, lastName, email};
-    console.log(this.props.userDetails);
     editUser(newProfile);
-    // updateUserDetails(id);
-    console.log(this.props.userDetails);
+    updateUserDetails(id);
     history.push('/userpage/profile');
   };
 

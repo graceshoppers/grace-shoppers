@@ -57,15 +57,6 @@ const updateUser = user => ({
   type: UPDATE_USER,
   user,
 });
-
-export const updateUserDetails = id => {
-  return dispatch => {
-    return axios
-      .get(`api/users/${id}`)
-      .then(res => dispatch({type: UPDATE_ONE_USERDETAILS, userDetails: res.data}))
-      .catch(err => console.error(`Error updating user details:\n${err}`));
-  };
-};
 // ===============================
 // Gets session information from Express app
 export const getUserDetailsFromSession = () => {
