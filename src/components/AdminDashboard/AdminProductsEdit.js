@@ -68,15 +68,15 @@ class AdminProductsEdit extends React.Component {
             <div className="col-2">
               <input className="form-control" type="text" name="material" defaultValue={material} />
             </div>
-            <div className="col-2" width="40%">
+            <div className="col-3" width="40%">
               <textarea className="form-control" type="text" name="description" defaultValue={description} />
             </div>
-            <div className="col-2">
+            <div className="col-1">
               <input className="form-control" type="text" name="unitCost" defaultValue={unitCost} />
             </div>
             <div className="col-2">
             
-              <select className="form-control" name="stock">
+              <select className="form-control" name="stock" defaultValue={stock}>
                 <option value="true">In Stock</option>
                 <option value="false">Out of Stock</option>
               </select>
@@ -105,12 +105,12 @@ class AdminProductsEdit extends React.Component {
           </div>
           <div className="col-2">{name}</div>
           <div className="col-2">{material}</div>
-          <div className="col-2" width="40%">
+          <div className="col-3" width="40%">
             {description}
           </div>
-          <div className="col-2">{unitCost}</div>
+          <div className="col-1">{unitCost}</div>
           <div className="col-2">
-            {stock === 0 ? 'Out of Stock' : 'In Stock'}
+            {stock ? 'In Stock' : 'Out of Stock'}
           </div>
           <div className="col-1">
             <button
