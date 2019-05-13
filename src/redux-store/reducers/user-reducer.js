@@ -3,7 +3,6 @@ import {
   CREATE_USER,
   UPDATE_USER,
   DELETE_USER,
-  UPDATE_ONE_USERDETAILS,
 } from '../actions/action-types';
 
 export default (state = [], action) => {
