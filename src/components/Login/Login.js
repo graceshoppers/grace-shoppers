@@ -18,7 +18,7 @@ class Login extends Component {
 
     this.props
       .loginUser(loginCredentials)
-      .then(() => this.props.history.push('/'))
+      .then(() => this.props.history.push('/catalog'))
       .catch(err => {
         this.setState({
           errors: err.response.data.errors,

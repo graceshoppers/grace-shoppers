@@ -36,10 +36,6 @@ const User = connection.define('user', {
       len: [5, 20],
     },
   },
-  cartNo: {
-    // Please note that this field just holds the cart's no.
-    type: INTEGER,
-  },
 });
 
 module.exports = User;

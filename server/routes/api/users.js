@@ -58,8 +58,11 @@ router.post(
 
     try {
       const createdUser = await User.create(req.body);
-      const userWithCartNo = await createdUser.createCart();
-      req.session.userDetails = userWithCartNo;
+      const createdCart = await Order.create({
+        status: 'Cart',
+        userId: createdUser.id,
+      });
+      req.session.userDetails = createdUser;
 
       // If the user had items in his/her cart prior to signing up,
       // include the items into the database with the orderId being the user's cartNo,
@@ -69,7 +72,7 @@ router.post(
         await Promise.all(
           req.session.cart.map(({id, quantity}) =>
             Orderitem.create({
-              orderId: userWithCartNo.cartNo,
+              orderId: createdCart.id,
               productId: id,
               quantity,
             })
