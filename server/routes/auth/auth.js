@@ -50,9 +50,10 @@ router.post(
           errors: {password: ['Incorrect password']},
         });
       else {
-        if (req.session.cart) await user.addToCart(...req.session.cart);
+        if (!req.session.cart) req.session.cart = [];
+        await user.addToCart(...req.session.cart);
         req.session.cart = await user.getCart();
-        console.log(req.session.cart);
+
         req.session.userDetails = user;
 
         res.json(user);

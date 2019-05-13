@@ -5,23 +5,25 @@ const {User, Order, Orderitem} = require('../models');
 // Example:
 //     const user = await User.create({ firstName: 'Bob', lastName: 'Smith', ... })
 //     await user.createCart()
-User.prototype.createCart = function() {
-  return Order.create({status: 'Cart', userId: this.id}).then(
-    cart => (this.cartNo = cart.id)
-  );
+User.prototype.createCart = async function() {
+  const cart = await Order.create({status: 'Cart', userId: this.id});
+  await User.update({cartNo: cart.id}, {where: {id: this.id}});
+  return cart.id;
 };
 
 // Allows API routes to call getCart function on found user instances
-User.prototype.getCart = function() {
-  return Orderitem.findAll({where: {orderId: this.cartNo}});
+User.prototype.getCart = async function() {
+  return await Orderitem.findAll({where: {orderId: this.cartNo}});
 };
 
-User.prototype.addToCart = function(...args) {
-  args.map(async ({productId, quantity}) => {
-    await Orderitem.create({
-      orderId: this.cartNo,
-      productId,
-      quantity,
-    });
-  });
+User.prototype.addToCart = async function(...args) {
+  return await Promise.all(
+    args.map(({id, quantity}) =>
+      Orderitem.create({
+        orderId: this.cartNo,
+        id,
+        quantity,
+      })
+    )
+  );
 };

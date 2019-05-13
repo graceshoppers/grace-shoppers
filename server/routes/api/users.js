@@ -58,13 +58,23 @@ router.post(
 
     try {
       const createdUser = await User.create(req.body);
-      await createdUser.createCart();
+      const cartId = await createdUser.createCart();
 
-      const cart = await createdUser.getCart();
+      if (req.session.cart)
+        await Promise.all(
+          req.session.cart.map(({id, quantity}) =>
+            Orderitem.create({orderId: cartId, id, quantity})
+          )
+        );
 
-      req.session.userDetails = {...createdUser.get(), cart: cart};
+      // This is not what I want. How do I get around Sequelize sending me
+      // non-updated objects?
+      req.session.userDetails = await User.findOne({
+        where: {id: createdUser.id},
+        include: [{model: Order, where: {id: cartId}, include: [Orderitem]}],
+      });
 
-      res.status(201).json(createdUser);
+      res.status(201).json(req.session.userDetails);
     } catch (err) {
       // I need to create a more dynamic error handler.
       // Right now, this handler does not take password errors into account.
