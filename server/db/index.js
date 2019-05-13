@@ -44,6 +44,9 @@ User.hasMany(Review);
 Address.belongsTo(User);
 User.hasMany(Address);
 
+Order.belongsTo(Address);
+Address.hasMany(Order)
+
 // Clears database tables and repopulates it with seed data
 const syncAndSeed = () => {
   connection
@@ -192,6 +195,14 @@ const syncAndSeed = () => {
           address.setUser(Math.ceil(Math.random() * resolvedUsers.length))
         )
       );
+
+       //Assign addressIds randomly to Orders
+      await Promise.all(
+        resolvedOrders.map(resolvedOrder =>
+          resolvedOrder.setAddress(Math.ceil(Math.random() * resolvedAddresses.length))
+        )
+      );
+
     })
     .then(() => console.log('db seeded'))
     .catch(err => console.log(err));
