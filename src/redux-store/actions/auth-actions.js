@@ -1,5 +1,10 @@
 import axios from 'axios';
-import {GET_USER_DETAILS, LOGIN_USER, LOGOUT_USER,UPDATE_ONE_USERDETAILS} from './action-types';
+import {
+  GET_USER_DETAILS,
+  LOGIN_USER,
+  LOGOUT_USER,
+  UPDATE_ONE_USERDETAILS,
+} from './action-types';
 
 // ===============================
 // Gets user details from Express session
@@ -9,12 +14,14 @@ import {GET_USER_DETAILS, LOGIN_USER, LOGOUT_USER,UPDATE_ONE_USERDETAILS} from '
 // Errors are caught where this function is invoked.
 export const getUserDetails = () => {
   return dispatch => {
-    return axios.get('/auth').then(res =>
-      dispatch({
-        type: GET_USER_DETAILS,
-        userDetails: res.data,
-      })
-    );
+    return axios.get('/auth').then(res => {
+      if (res.data.id) {
+        dispatch({
+          type: GET_USER_DETAILS,
+          userDetails: res.data,
+        });
+      }
+    });
   };
 };
 
@@ -35,12 +42,14 @@ export const updateUserDetails = id => {
 // Errors are caught where this function is invoked.
 export const loginUser = loginCredentials => {
   return dispatch => {
-    return axios.post('/auth/login', loginCredentials).then(res =>
-      dispatch({
-        type: LOGIN_USER,
-        userDetails: res.data,
-      })
-    );
+    return axios.post('/auth/login', loginCredentials).then(res => {
+      if (res.data.id) {
+        dispatch({
+          type: LOGIN_USER,
+          userDetails: res.data,
+        });
+      }
+    });
   };
 };
 

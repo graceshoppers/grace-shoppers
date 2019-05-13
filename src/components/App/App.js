@@ -52,14 +52,24 @@ class App extends Component {
 
     return (
       <div className="container-fluid">
+        {/* render Nav route */}
         <Route
-          render={({history}) => (
+          render={({history, match, location}) => (
             <Navbar
               isAuthenticated={isAuthenticated()}
               auth={auth}
               history={history}
+              match={match}
+              location={location}
             />
           )}
+        />
+
+        {/* Landing page route */}
+        <Route
+          exact
+          path="/"
+          render={props => <Home props={props} noNav={this.noNav} />}
         />
 
         {/* Catelog with search results route */}
@@ -86,18 +96,14 @@ class App extends Component {
         {/* SignUp route */}
         <Route path="/signup" component={SignUp} />
 
-        {/* Landing page route */}
-        <Route exact path="/" component={Home} />
-
         {/* Profile route */}
         <Route exact path="/userpage" component={UserPage} />
         <Route exact path="/userpage/profile" component={Profile} />
         <Route path="/userpage/pastorders" component={PastOrders} />
 
-
         {/* Profile edit route */}
-        <Route exact path="/userpage/profile/edit/:field" component={Profile}/>
-        <Route path ='/userpage/profile/edit/address/:id' component={Profile}/>
+        <Route exact path="/userpage/profile/edit/:field" component={Profile} />
+        <Route path="/userpage/profile/edit/address/:id" component={Profile} />
 
         {/* Thank you route */}
         <Route path="/thank_you" render={() => <ThankYou />} />
