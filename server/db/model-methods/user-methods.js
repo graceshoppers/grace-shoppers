@@ -16,14 +16,15 @@ User.prototype.getCart = async function() {
   return await Orderitem.findAll({where: {orderId: this.cartNo}});
 };
 
-User.prototype.addToCart = async function(...args) {
-  return await Promise.all(
-    args.map(({id, quantity}) =>
-      Orderitem.create({
-        orderId: this.cartNo,
-        id,
-        quantity,
-      })
-    )
-  );
-};
+// Commented out because it wasn't working
+// User.prototype.addToCart = async function(...args) {
+//   return await Promise.all(
+//     args.map(({id, quantity}) =>
+//       Orderitem.create({
+//         orderId: this.cartNo,
+//         id,
+//         quantity,
+//       })
+//     )
+//   );
+// };

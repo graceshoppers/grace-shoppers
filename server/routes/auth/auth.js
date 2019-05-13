@@ -50,9 +50,12 @@ router.post(
           errors: {password: ['Incorrect password']},
         });
       else {
-        if (!req.session.cart) req.session.cart = [];
-        await user.addToCart(...req.session.cart);
-        req.session.cart = await user.getCart();
+        if (req.session.cart && req.session.cart.length)
+          await Promise.all(
+            req.session.cart.map(({id, quantity}) =>
+              Orderitem.create({orderId: cartId, id, quantity})
+            )
+          );
 
         req.session.userDetails = user;
 

@@ -53,14 +53,24 @@ class App extends Component {
     console.log(`cart:`, this.props.cart);
     return (
       <div className="container-fluid">
+        {/* render Nav route */}
         <Route
-          render={({history}) => (
+          render={({history, match, location}) => (
             <Navbar
               isAuthenticated={isAuthenticated()}
               auth={auth}
               history={history}
+              match={match}
+              location={location}
             />
           )}
+        />
+
+        {/* Landing page route */}
+        <Route
+          exact
+          path="/"
+          render={props => <Home props={props} noNav={this.noNav} />}
         />
 
         {/* Catelog with search results route */}
@@ -86,9 +96,6 @@ class App extends Component {
 
         {/* SignUp route */}
         <Route path="/signup" component={SignUp} />
-
-        {/* Landing page route */}
-        <Route exact path="/" component={Home} />
 
         {/* Profile route */}
         <Route exact path="/userpage" component={UserPage} />

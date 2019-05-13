@@ -3,7 +3,6 @@
   top: 0px;
   position: sticky;
   z-index: 9999;
-  display: flex;
 }
 
 .horizontal-flip {
@@ -28,7 +27,16 @@
 }
 
 nav{
+  margin-top:0px;
+  padding-top:0px;
+  top:0px;
   font-family: 'Courier New', Courier, monospace;
+}
+
+ul .active{
+  border-bottom: 1px solid lightgrey;
+  border-top:1px solid lightgrey;
+  border-radius:10%;
 }
 
 .nav-top-lightgrey-border {
