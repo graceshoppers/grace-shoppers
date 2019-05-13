@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GET_USER_DETAILS, LOGIN_USER, LOGOUT_USER} from './action-types';
+import {GET_USER_DETAILS, LOGIN_USER, LOGOUT_USER,UPDATE_ONE_USERDETAILS} from './action-types';
 
 // ===============================
 // Gets user details from Express session
@@ -15,6 +15,17 @@ export const getUserDetails = () => {
         userDetails: res.data,
       })
     );
+  };
+};
+
+export const updateUserDetails = id => {
+  return dispatch => {
+    return axios
+      .get(`api/users/${id}`)
+      .then(res =>
+        dispatch({type: UPDATE_ONE_USERDETAILS, userDetails: res.data})
+      )
+      .catch(err => console.error(`Error updating user details:\n${err}`));
   };
 };
 

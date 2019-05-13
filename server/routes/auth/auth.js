@@ -2,7 +2,7 @@ const {validationResult} = require('express-validator/check');
 const errorFormatter = require('../validations/_error-formatter');
 
 const {
-  models: {User, Orderitem},
+  models: {User, Order, Address, Orderitem, Product},
 } = require('../../db');
 const router = require('express').Router();
 
@@ -29,7 +29,16 @@ router.post(
 
     try {
       const {email, password} = req.body;
-      const user = await User.findOne({where: {email}});
+      const user = await User.findOne({
+        where: {email},
+        include: [
+          {
+            model: Order,
+            include: [{model: Orderitem, include: [{model: Product}]}],
+          },
+          {model: Address},
+        ],
+      });
 
       // I will need to restructure the error handling
       if (!user)
