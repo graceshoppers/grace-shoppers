@@ -8,7 +8,7 @@ const {User, Order, Orderitem} = require('../models');
 User.prototype.createCart = async function() {
   const cart = await Order.create({status: 'Cart', userId: this.id});
   await User.update({cartNo: cart.id}, {where: {id: this.id}});
-  return cart.id;
+  return User.findOne({where: {id: this.id}});
 };
 
 // Allows API routes to call getCart function on found user instances

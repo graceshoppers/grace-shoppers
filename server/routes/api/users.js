@@ -2,7 +2,7 @@ const router = require('express').Router();
 const {validationResult} = require('express-validator/check');
 const errorFormatter = require('../validations/_error-formatter');
 const {
-  models: {User, Order, Orderitem, Address},
+  models: {User, Order, Orderitem, Product, Address},
 } = require('../../db');
 
 // GET, gets all users
@@ -58,21 +58,23 @@ router.post(
 
     try {
       const createdUser = await User.create(req.body);
-      const cartId = await createdUser.createCart();
+      const userWithCartNo = await createdUser.createCart();
+      req.session.userDetails = userWithCartNo;
+
+      // If the user had items in his/her cart prior to signing up,
+      // include the items into the database with the orderId being the user's cartNo,
+      // which is an orderId.
 
       if (req.session.cart)
         await Promise.all(
           req.session.cart.map(({id, quantity}) =>
-            Orderitem.create({orderId: cartId, id, quantity})
+            Orderitem.create({
+              orderId: userWithCartNo.cartNo,
+              productId: id,
+              quantity,
+            })
           )
         );
-
-      // This is not what I want. How do I get around Sequelize sending me
-      // non-updated objects?
-      req.session.userDetails = await User.findOne({
-        where: {id: createdUser.id},
-        include: [{model: Order, where: {id: cartId}, include: [Orderitem]}],
-      });
 
       res.status(201).json(req.session.userDetails);
     } catch (err) {

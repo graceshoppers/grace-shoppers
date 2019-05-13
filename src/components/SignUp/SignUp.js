@@ -31,7 +31,7 @@ class SignUp extends Component {
       .addUser(signupCredentials)
       .then(() => {
         this.props.getUserDetails();
-        this.props.history.push('/');
+        this.props.history.push('/catalog');
       })
       .catch(err => {
         this.setState({

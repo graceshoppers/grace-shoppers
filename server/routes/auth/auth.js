@@ -53,13 +53,19 @@ router.post(
         if (req.session.cart && req.session.cart.length)
           await Promise.all(
             req.session.cart.map(({id, quantity}) =>
-              Orderitem.create({orderId: cartId, id, quantity})
+              Orderitem.create({orderId: cartId, productId: id, quantity})
             )
           );
 
-        req.session.userDetails = user;
+        req.session.userDetails = await User.findOne({
+          where: {id: user.id},
+          include: [
+            {model: Order, where: {id: user.cartNo}, include: [Orderitem]},
+          ],
+        });
+        req.session.cart = req.session.userDetails.orders[0].orderitems;
 
-        res.json(user);
+        res.json(req.session.userDetails);
       }
     } catch (err) {
       next(err);
