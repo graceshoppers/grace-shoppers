@@ -11,19 +11,21 @@ const Home = props => {
           paddingBottom: '-50px',
           marginBottom: '-100px',
           display: 'inline-block',
+          zIndex: 999,
         }}
       >
         <div className="horizontal-flip">K</div>BMK
       </div>
-      <h1>Fine Jewelry</h1>
+      <h1 style={{zIndex:999}}>Fine Jewelry</h1>
       <img
-        src="line.jpg"
+        src="line1.jpg"
         style={{
-          height: '200px',
+          objectFit: 'cover',
+          height: '150px',
           width: '600px',
           display: 'inline-block',
-          marginTop: '-70px',
-          marginBottom: '-50px',
+          marginTop: '-50px',
+          marginBottom: '-40px',
         }}
       />
       <NavLink

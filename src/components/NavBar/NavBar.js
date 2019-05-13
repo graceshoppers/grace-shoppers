@@ -27,14 +27,14 @@ class NavBar extends Component {
           </NavLink>
           {/* <div className="nav-top-lightgrey-border" /> */}
           <img
-            src="line.jpg"
+            src="line1.jpg"
             style={{
               objectFit:'cover',
               height: '35px',
               width: '400px',
               display: 'inline-block',
               marginTop: '-20px',
-              marginBottom: '-5px',
+              marginBottom: '-15px',
               paddingRight:'12px'
             }}
           />
