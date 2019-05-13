@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {deleteProduct} from '../../redux-store/actions/product-actions';
 import {addProductToCart} from '../../redux-store/actions/cart-actions';
-import {addReview} from '../../redux-store/actions/review-actions'
 import Reviews from './Reviews';
 import ReviewForm from './ReviewForm'
 
@@ -119,7 +118,7 @@ class SingleProduct extends Component {
           </div>
         </div>
         <br></br>
-        {showReviewForm ?<ReviewForm />:''}
+        {showReviewForm ?<ReviewForm productId={product.id}/>:''}
         <Reviews product={this.state.product} />
       </div>
     );
@@ -131,7 +130,6 @@ const mapStateToProps = ({products,userDetails}) => ({products,userDetails});
 const mapDispatchToProps = dispatch => ({
   addProductToCart: product => dispatch(addProductToCart(product)),
   deleteProduct: productId => dispatch(deleteProduct(productId)),
-  addReview: () => dispatch(addReview(review))
 });
 
 export default connect(

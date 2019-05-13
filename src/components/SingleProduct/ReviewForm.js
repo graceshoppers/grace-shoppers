@@ -1,15 +1,30 @@
 import React from "react";
 import { connect } from "react-redux";
+import {addReview} from '../../redux-store/actions/review-actions'
 
 const ReviewForm = props => {
-  console.log(props.userDetails);
+    const {addReview} = props;
+
+    const handleSubmit = (event) =>{
+        event.preventDefault();
+
+        const newReview = {
+            textBody:event.target.review.value,
+            title:event.target.title.value,
+            recommended:event.target.recommended.value,
+            stars:event.target.stars.value,
+            productId:props.productId,
+            userId:props.userDetails.userDetails.id
+        }
+        console.log(newReview)
+        addReview(newReview)
+    }
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <h2>Add a Review</h2>
       <div className="row">
         <div className="form-group col-2">
           <input
-            id="title"
             className="form-control"
             name="title"
             type="text"
@@ -17,8 +32,10 @@ const ReviewForm = props => {
           />
         </div>
         <div className="col-1">
-          <select className="form-control">
-          <option value="rate" disabled selected>Rate</option>
+          <select name="stars" className="form-control" defaultValue="Rate">
+            <option value="Rate" disabled>
+              Rate
+            </option>
             <option value="5">5★</option>
             <option value="4">4★</option>
             <option value="3">3★</option>
@@ -37,13 +54,19 @@ const ReviewForm = props => {
         </div>
 
         <div className="col-2">
-        <select className="form-control">
-          <option value="rate" disabled selected>Recommended</option>
+          <select name="recommended" className="form-control" defaultValue="Recommendation">
+            <option value="Recommendation" disabled>
+              Recommended
+            </option>
             <option value={true}>Yes</option>
             <option value={false}>No</option>
           </select>
         </div>
-        <div className="col-1"><button type="submit" className="btn btn-dark">Add</button></div>
+        <div className="col-1">
+          <button type="submit" className="btn btn-dark">
+            Add
+          </button>
+        </div>
       </div>
     </form>
   );
@@ -51,4 +74,4 @@ const ReviewForm = props => {
 
 const mapStateToProps = ({ userDetails }) => ({ userDetails });
 
-export default connect(mapStateToProps)(ReviewForm);
+export default connect(mapStateToProps, {addReview} )(ReviewForm);
