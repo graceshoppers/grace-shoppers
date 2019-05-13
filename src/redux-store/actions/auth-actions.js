@@ -5,6 +5,7 @@ import {
   LOGOUT_USER,
   UPDATE_ONE_USERDETAILS,
 } from './action-types';
+import {fetchCart} from './cart-actions';
 
 // ===============================
 // Gets user details from Express session
@@ -44,6 +45,7 @@ export const loginUser = loginCredentials => {
   return dispatch => {
     return axios.post('/auth/login', loginCredentials).then(res => {
       if (res.data.id) {
+        dispatch(fetchCart());
         dispatch({
           type: LOGIN_USER,
           userDetails: res.data,
@@ -57,11 +59,12 @@ export const loginUser = loginCredentials => {
 // Logs out user using req.session.destroy
 export const logoutUser = () => {
   return dispatch => {
-    return axios.post('/auth/logout').then(res =>
-      dispatch({
+    return axios.post('/auth/logout').then(res => {
+      dispatch(fetchCart());
+      return dispatch({
         type: LOGOUT_USER,
         userDetails: res.data,
-      })
-    );
+      });
+    });
   };
 };
