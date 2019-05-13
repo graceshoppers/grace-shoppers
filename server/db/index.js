@@ -49,7 +49,7 @@ Address.hasMany(Order)
 
 // Clears database tables and repopulates it with seed data
 const syncAndSeed = () => {
-  connection
+  return connection
     .sync({force: true})
     .then(async () => {
       // Hardcoded products from before are preserved

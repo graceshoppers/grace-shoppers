@@ -107,6 +107,7 @@ class App extends Component {
 
         {/* Thank you route */}
         <Route path="/thank_you" render={() => <ThankYou />} />
+        <Route exact path="/thank_you/:id" render={({match}) => <ThankYou id={match.params.id}/>} />
 
         {/* Callback Route */}
         <Route path="/callback" render={() => <p>Loading...</p>} />
