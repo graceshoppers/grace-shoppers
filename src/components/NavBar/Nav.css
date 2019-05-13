@@ -31,6 +31,12 @@ nav{
   font-family: 'Courier New', Courier, monospace;
 }
 
+ul .active{
+  border-bottom: 1px solid lightgrey;
+  border-top:1px solid lightgrey;
+  border-radius:10%;
+}
+
 .nav-top-lightgrey-border {
   width: 20vw;
   border-top: 1px solid lightgrey;

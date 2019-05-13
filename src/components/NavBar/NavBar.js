@@ -26,7 +26,17 @@ class NavBar extends Component {
               <div className="horizontal-flip">K</div>BMK
             </div>
           </NavLink>
-          <div className="nav-top-lightgrey-border" />
+          {/* <div className="nav-top-lightgrey-border" /> */}
+          <img
+            src="line.jpg"
+            style={{
+              height: '200px',
+              width: '300px',
+              display: 'inline-block',
+              marginTop:'-100px',
+              marginBottom: '-85px',
+            }}
+          />
           <NavMenu />
         </div>
         <div className="col d-flex justify-content-end align-items-center">
