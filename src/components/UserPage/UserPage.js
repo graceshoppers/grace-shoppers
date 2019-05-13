@@ -10,19 +10,27 @@ import './UserPage.css';
 const UserPage = props => {
   const {userDetails, logoutUser} = props;
   //defend against first render before App component did mount run
-  console.log(userDetails);
   if (!userDetails) return <div />;
 
   const {orders} = userDetails;
 
   return (
-    <div>
-      <button className="btn btn-danger" onClick={logoutUser}>
+    <div className="d-flex flex-column">
+      <div className='d-flex justify-content-evenly'>
+        <NavLink to="/userpage/profile" style={{textDecoration: 'none'}}>
+          <div className="option-card">View Account Information</div>
+        </NavLink>
+        <NavLink to="/userpage/orders" style={{textDecoration: 'none'}}>
+          <div className="option-card">View Orders</div>
+        </NavLink>
+      </div>
+      <button
+        className="btn btn-danger"
+        onClick={logoutUser}
+        style={{width: '100px', marginLeft:'10px'}}
+      >
         Logout
       </button>
-      <div>
-        <NavLink to="/userpage/profile">View Account Information</NavLink>
-      </div>
       <div>
         {/* <h1>Past Orders</h1>
           {orders.map(order => {
