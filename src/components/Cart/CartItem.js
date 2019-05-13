@@ -19,7 +19,7 @@ const CartItem = props => {
       <div className="media-body">
         <div className="container">
           <div className="row d-flex flex-row align-items-center">
-            <Link to="#" className="col-md-10">
+            <Link to={`/products/${attributes.id}`} className="col-md-10">
               {name}
             </Link>
             <div className="col-md-2 d-flex flex-row-reverse">
@@ -28,7 +28,6 @@ const CartItem = props => {
           </div>
           <div className="row d-flex flex-row align-items-center cart-item-options">
             <div className="col-md-2">Delete</div>
-            <div className="col-md-4">Save for later</div>
             <div className="col-md-3" />
             <div className="col-md-3 d-flex flex-row-reverse">
               Quantity: {quantity}

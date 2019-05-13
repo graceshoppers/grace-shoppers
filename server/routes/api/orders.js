@@ -21,7 +21,11 @@ router.get('/', async (req, res, next) => {
 // POST, creates a new order
 router.post('/', async (req, res, next) => {
   try {
-    const createdOrder = await Order.create(req.body);
+    const createdOrder = await Order.create({
+      status: 'Processing',
+      orderitems: req.body.orderitems,
+      userId: req.body.userId,
+    });
     res.status(201).json(createdOrder);
   } catch (err) {
     next(err);

@@ -5,12 +5,12 @@ import CartList from './CartList';
 import './Cart.css';
 import CartCheckout from './CartCheckout';
 
-const Cart = ({cart}) => {
+const Cart = ({cart, history}) => {
   return (
     <div className="cart-container">
       <div className="row d-flex flex-row">
         <CartList cart={cart}/>
-        <CartCheckout />
+        <CartCheckout history={history}/>
       </div>
     </div>
   );
