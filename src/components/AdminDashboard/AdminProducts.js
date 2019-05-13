@@ -34,8 +34,8 @@ const AdminProducts = props => {
           <div className="col-1" style={{width: '5px'}} />
           <div className="col-2">Name</div>
           <div className="col-2">Material</div>
-          <div className="col-2">Description</div>
-          <div className="col-2">Unit Cost</div>
+          <div className="col-3">Description</div>
+          <div className="col-1">Unit Cost</div>
           <div className="col-2">Stock</div>
           <div className="col-1">+/-</div>
         </div>
@@ -48,10 +48,10 @@ const AdminProducts = props => {
             <div className="col-2">
               <input className="form-control" type="text" name="material" />
             </div>
-            <div className="col-2">
+            <div className="col-3">
               <input className="form-control" type="text" name="description" />
             </div>
-            <div className="col-2">
+            <div className="col-1">
               <input className="form-control" type="text" name="unitCost" />
             </div>
             <div className="col-2">
