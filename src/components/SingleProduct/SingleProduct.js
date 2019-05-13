@@ -38,7 +38,6 @@ class SingleProduct extends Component {
   render() {
     const handleClick = ({src}) => {
       this.setState({currentImg: src});
-      console.log(this.state);
     };
 
     if (!this.state.product.name) return <div />;
