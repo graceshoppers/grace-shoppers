@@ -43,6 +43,8 @@ class SingleProduct extends Component {
       this.setState({currentImg: src});
     };
 
+    const {userDetails} = this.props
+
     if (!this.state.product.name) return <div />;
 
     const {addProductToCart} = this.props;
@@ -103,13 +105,15 @@ class SingleProduct extends Component {
                 >
                   Add to Cart
                 </button>
-                <button
+
+
+                {userDetails.userDetails? <button
                   className="btn btn-light"
                   onClick={() => this.setState({showReviewForm:!this.state.showReviewForm})}
                   style={{width: '200px', borderRadius: '0px'}}
                 >
                   Review
-                </button>
+                </button>:''}
               </div>
             </div>
           </div>
@@ -122,7 +126,7 @@ class SingleProduct extends Component {
   }
 }
 
-const mapStateToProps = ({products}) => ({products});
+const mapStateToProps = ({products,userDetails}) => ({products,userDetails});
 
 const mapDispatchToProps = dispatch => ({
   addProductToCart: product => dispatch(addProductToCart(product)),
