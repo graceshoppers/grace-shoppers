@@ -23,7 +23,9 @@ import SingleProduct from '../SingleProduct/SingleProduct';
 
 import Login from '../Login/Login';
 import SignUp from '../SignUp/SignUp';
-import UserProfile from '../UserProfile/UserProfile';
+import UserPage from '../UserPage/UserPage';
+import Profile from '../UserPage/Profile';
+import PastOrders from '../UserPage/PastOrders';
 import Auth from '../../Auth/Auth';
 
 import Cart from '../Cart/Cart';
@@ -44,7 +46,6 @@ class App extends Component {
     this.props.fetchOrders();
     this.props.fetchOrderitems();
     this.props.getUserDetails();
-
   }
 
   render() {
@@ -90,24 +91,23 @@ class App extends Component {
         <Route exact path="/" component={Home} />
 
         {/* Profile route */}
-        <Route
-          exact
+        <Route exact path="/userpage" component={UserPage} />
+        <Route exact path="/userpage/profile" component={Profile} />
+        <Route path="/userpage/pastorders" component={PastOrders} />
 
-          path="/profile"
-          render={({history}) => <UserProfile auth={auth} history={history} />}
 
-        />
+        {/* Profile edit route */}
+        <Route exact path="/userpage/profile/edit/:field" component={Profile}/>
+        <Route path ='/userpage/profile/edit/address/:id' component={Profile}/>
+
         {/* Thank you route */}
-        <Route path="/thank_you" render={() => <ThankYou />}/>
+        <Route path="/thank_you" render={() => <ThankYou />} />
 
         {/* Callback Route */}
         <Route path="/callback" render={() => <p>Loading...</p>} />
 
         {/* Admin routes */}
-        <Route exact path="/admin/" component={AdminDashboard}/>
-
-
-
+        <Route exact path="/admin" component={AdminDashboard} />
       </div>
     );
   }
@@ -124,7 +124,6 @@ const mapDispatchToProps = dispatch => ({
   fetchOrders: () => dispatch(fetchOrders()),
   fetchOrderitems: () => dispatch(fetchOrderitems()),
   getUserDetails: () => dispatch(getUserDetails()),
-
 });
 
 export default connect(
