@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import {
   addOrder,
-  editOrder,
   deleteOrder
 } from "../../redux-store/actions/order-actions";
 
@@ -11,40 +10,67 @@ import {
   editOrderitem,
   deleteOrderitem
 } from "../../redux-store/actions/orderitem-actions";
+import AdminOrdersEdit from './AdminOrdersEdit'
 
 const AdminOrders = props => {
   const { orders, orderitems } = props;
-
-  console.log(orders[1])
-  console.log(orderitems[1])
   return <div>{displayOrders(orders, orderitems)}</div>;
 };
 
+const handleChange = (event) =>{
+
+}
+
 const displayOrders = (orders, orderitems) => {
   return orders.map(order => {
-    const {firstName, lastName} = order.user
+    const { firstName, lastName } = order.user;
+    const {
+      fullName,
+      addressLine1,
+      addressLine2,
+      city,
+      state,
+      zip,
+      country,
+      phoneNumber,
+      additionalInstruction
+    } = order.address;
     return (
       <div
         className="table"
         key={order.id}
         style={{ border: "1px solid black", marginBottom: "40px" }}
       >
+      
+           <AdminOrdersEdit order={order}/>
+
         <div className="row">
-          <div className="col"><h3>{order.status}</h3></div>
-          <div className="col"> 
-              <button style={{width:'35px'}} type="submit" className="btn btn-dark">
-                +
-              </button>
-            </div>
+          <div className="col">
+            ON: {order.createdAt.slice(11, 16)} {order.createdAt.slice(0, 10)}
+          </div>
         </div>
         <div className="row">
-          <div className="col">Ordered on: {order.createdAt.slice(11,16)} {order.createdAt.slice(0,10)}</div>
+          <div className="col">
+            {" "}
+            BY: {firstName} {lastName}
+          </div>
         </div>
         <div className="row">
-          <div className="col">Ordered by: {firstName} {lastName}</div>
+          <div className="col">
+            {" "}
+            TO: {fullName} <br />
+            {addressLine1} {addressLine2}
+            <br /> {city} {state} {zip} {country} {phoneNumber}
+          </div>
         </div>
 
-    
+        <div className="row" style={{ marginBottom: "5px", marginTop: "30px" }}>
+          <div className="col">
+            {" "}
+            Additional Instructions: {additionalInstruction}
+          </div>
+        </div>
+
         {orderitems
           .filter(orderitem => order.id === orderitem.orderId)
           .map(orderitem => {
@@ -58,7 +84,7 @@ const displayOrders = (orders, orderitems) => {
                   height="50px"
                   src={orderitem.product.imageName}
                 />
-                {orderitem.product.name}x{orderitem.quantity}
+                {orderitem.product.name} x {orderitem.quantity}
               </div>
             );
           })}
@@ -78,7 +104,6 @@ export default connect(
   mapStateToProps,
   {
     addOrder,
-    editOrder,
     deleteOrder,
     addOrderitem,
     editOrderitem,
