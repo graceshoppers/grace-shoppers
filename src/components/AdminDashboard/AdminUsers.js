@@ -10,13 +10,11 @@ const AdminUsers = props => {
 
   const changeType = (user) =>{
     user.isAdmin = !user.isAdmin
-    console.log(user)
     editUser(user)
   }
 
   const mapUsersTableBody = users => {
     return users.map(user => {
-      console.log(user)
       const { id, firstName, lastName, isAdmin, email } = user;
       return (
         <tr key={id}>
@@ -56,7 +54,6 @@ const AdminUsers = props => {
 };
 
 const mapStateToProps = state => {
-  console.log(state.users)
   return {
     users: state.users
   };
