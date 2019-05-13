@@ -53,13 +53,6 @@ class App extends Component {
 
     return (
       <div className="container-fluid">
-        {/* Landing page route */}
-        <Route
-          exact
-          path="/"
-          render={props => <Home props={props} noNav={this.noNav} />}
-        />
-
         {/* render Nav route */}
         <Route
           render={({history, match, location}) => (
@@ -71,6 +64,13 @@ class App extends Component {
               location={location}
             />
           )}
+        />
+
+        {/* Landing page route */}
+        <Route
+          exact
+          path="/"
+          render={props => <Home props={props} noNav={this.noNav} />}
         />
 
         {/* Catelog with search results route */}

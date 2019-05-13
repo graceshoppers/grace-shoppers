@@ -14,15 +14,14 @@ class NavBar extends Component {
 
     return (
       <nav
-        className="row navbar navbar-expand-lg navbar-light fixed-container"
+        className="row navbar navbar-expand navbar-light fixed-container"
         style={{display: `${isDisplayed}`}}
       >
         <SearchBar history={history} />
-
         {/* Home link */}
-        <div className="col-6 d-flex flex-column justify-content-center align-items-center">
+        <div className="col-6 d-flex flex-column justify-content-center align-items-center" style={{padding:'0px',margin:'0px'}}>
           <NavLink to="/" className="navbar-brand">
-            <div className="home-logo">
+            <div className="home-logo" style={{zIndex: 999,padding:'0px'}}>
               <div className="horizontal-flip">K</div>BMK
             </div>
           </NavLink>
@@ -30,11 +29,13 @@ class NavBar extends Component {
           <img
             src="line.jpg"
             style={{
-              height: '200px',
-              width: '300px',
+              objectFit:'cover',
+              height: '35px',
+              width: '400px',
               display: 'inline-block',
-              marginTop:'-100px',
-              marginBottom: '-85px',
+              marginTop: '-20px',
+              marginBottom: '-5px',
+              paddingRight:'12px'
             }}
           />
           <NavMenu />
