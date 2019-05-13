@@ -53,12 +53,22 @@ class App extends Component {
 
     return (
       <div className="container-fluid">
+        {/* Landing page route */}
         <Route
-          render={({history}) => (
+          exact
+          path="/"
+          render={props => <Home props={props} noNav={this.noNav} />}
+        />
+
+        {/* render Nav route */}
+        <Route
+          render={({history, match, location}) => (
             <Navbar
               isAuthenticated={isAuthenticated()}
               auth={auth}
               history={history}
+              match={match}
+              location={location}
             />
           )}
         />
@@ -87,18 +97,14 @@ class App extends Component {
         {/* SignUp route */}
         <Route path="/signup" component={SignUp} />
 
-        {/* Landing page route */}
-        <Route exact path="/" component={Home} />
-
         {/* Profile route */}
         <Route exact path="/userpage" component={UserPage} />
         <Route exact path="/userpage/profile" component={Profile} />
         <Route path="/userpage/pastorders" component={PastOrders} />
 
-
         {/* Profile edit route */}
-        <Route exact path="/userpage/profile/edit/:field" component={Profile}/>
-        <Route path ='/userpage/profile/edit/address/:id' component={Profile}/>
+        <Route exact path="/userpage/profile/edit/:field" component={Profile} />
+        <Route path="/userpage/profile/edit/address/:id" component={Profile} />
 
         {/* Thank you route */}
         <Route path="/thank_you" render={() => <ThankYou />} />

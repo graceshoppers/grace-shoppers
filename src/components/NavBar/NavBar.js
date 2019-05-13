@@ -9,10 +9,14 @@ import CartButton from '../Cart/CartButton';
 
 class NavBar extends Component {
   render() {
-    const {history, auth, isAuthenticated} = this.props;
+    const {location, history, auth, isAuthenticated} = this.props;
+    const isDisplayed = location.pathname === '/' ? 'none' : '';
 
     return (
-      <nav className="row navbar navbar-expand-lg navbar-light fixed-container">
+      <nav
+        className="row navbar navbar-expand-lg navbar-light fixed-container"
+        style={{display: `${isDisplayed}`}}
+      >
         <SearchBar history={history} />
 
         {/* Home link */}
@@ -22,9 +26,8 @@ class NavBar extends Component {
               <div className="horizontal-flip">K</div>BMK
             </div>
           </NavLink>
-          <div className="nav-top-lightgrey-border"></div>
+          <div className="nav-top-lightgrey-border" />
           <NavMenu />
-
         </div>
         <div className="col d-flex justify-content-end align-items-center">
           {/*
