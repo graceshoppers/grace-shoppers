@@ -15,10 +15,10 @@ class Login extends Component {
     event.preventDefault();
     const {email, password} = event.target;
     const loginCredentials = {email: email.value, password: password.value};
-
+    console.log(this.props.history);
     this.props
       .loginUser(loginCredentials)
-      .then(() => this.props.history.push('/'))
+      .then(() => this.props.history.goBack())
       .catch(err => {
         this.setState({
           errors: err.response.data.errors,

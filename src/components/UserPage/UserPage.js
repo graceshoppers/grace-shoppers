@@ -5,24 +5,26 @@ import parseCost from '../../shared/parse-cost';
 import {getUserDetails} from '../../redux-store/actions/auth-actions';
 import {NavLink} from 'react-router-dom';
 
+import './UserPage.css';
+
 const UserPage = props => {
-    const {userDetails, logoutUser} = props;
-    //defend against first render before App component did mount run
-    console.log(userDetails);
-    if (!userDetails) return <div />;
+  const {userDetails, logoutUser} = props;
+  //defend against first render before App component did mount run
+  console.log(userDetails);
+  if (!userDetails) return <div />;
 
-    const {orders} = userDetails;
+  const {orders} = userDetails;
 
-    return (
+  return (
+    <div>
+      <button className="btn btn-danger" onClick={logoutUser}>
+        Logout
+      </button>
       <div>
-        <button className="btn btn-danger" onClick={logoutUser}>
-          Logout
-        </button>
-        <div>
-          <NavLink to="/userpage/profile">View Account Information</NavLink>
-        </div>
-        <div>
-          {/* <h1>Past Orders</h1>
+        <NavLink to="/userpage/profile">View Account Information</NavLink>
+      </div>
+      <div>
+        {/* <h1>Past Orders</h1>
           {orders.map(order => {
             const {id, status} = order;
             const orderValue = order.orderitems.reduce(
@@ -45,16 +47,16 @@ const UserPage = props => {
               </div>
             );
           })} */}
-        </div>
       </div>
-    );
-  }
+    </div>
+  );
+};
 
 const mapStateToProps = ({userDetails}) => userDetails;
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   logoutUser: () =>
-    dispatch(logoutUser()).then(() => ownProps.history.push('/')),
+    dispatch(logoutUser()).then(() => ownProps.history.goBack()),
   getUserDetails: () => dispatch(getUserDetails()),
 });
 

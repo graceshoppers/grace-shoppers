@@ -4,6 +4,8 @@ import {NavLink} from 'react-router-dom';
 import {editUser} from '../../redux-store/actions/user-actions';
 import {updateUserDetails} from '../../redux-store/actions/auth-actions';
 
+import './UserPage.css';
+
 class Profile extends Component {
   constructor() {
     super();
@@ -223,7 +225,7 @@ class Profile extends Component {
 
         <hr />
         <h1>Addresses</h1>
-        <div>
+        <div className="d-flex">
           {addresses.map(address => {
             const {
               id,
@@ -238,9 +240,9 @@ class Profile extends Component {
               additionalInstruction,
             } = address;
             return (
-              <div key={id}>
+              <div key={id} className="address-card">
                 <p>
-                  {fullName}
+                  <span style={{fontWeight: 'bold'}}>{fullName}</span>
                   <br />
                   {addressLine1}
                   <br />
@@ -252,11 +254,19 @@ class Profile extends Component {
                   <br />
                   Phone Number: {phoneNumber}
                   <br />
-                  Additional Instructions: {additionalInstruction}
+                  Additional Instructions:{' '}
+                  {additionalInstruction.substring(0, 32) + '...'}
                 </p>
-                <NavLink to={`/userpage/profile/edit/address/${id}`}>
-                  <button>Edit</button>
-                </NavLink>
+                <div className="d-flex justify-content-end">
+                  <div>
+                    <NavLink to={`/userpage/profile/edit/address/${id}`}>
+                      <button style={{margin: '2px', flex: '1'}}>Edit</button>
+                    </NavLink>
+                  </div>
+                  <div>
+                    <button style={{margin: '2px', flex: '1'}}>Delete</button>
+                  </div>
+                </div>
               </div>
             );
           })}
