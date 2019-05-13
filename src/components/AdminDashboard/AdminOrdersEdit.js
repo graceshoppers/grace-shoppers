@@ -14,7 +14,7 @@ class AdminOrdersEdit extends React.Component {
     this.setState(prevState => ({ edittable: !prevState.edittable }));
   };
 
-  handleSubmit = event => {
+  handleSubmit = async (event) => {
     event.preventDefault();
     const { editOrder } = this.props;
     console.log(event.target.status.value);
@@ -27,7 +27,13 @@ class AdminOrdersEdit extends React.Component {
     //   stock: event.target.stock.value
     // };
 
-    // this.props.editOrder(productToEdit);
+    const orderToEdit = {
+        id:this.props.order.id,
+        status:event.target.status.value
+    }
+
+
+    await this.props.editOrder(orderToEdit);
     this.setState(prevState => ({ edittable: !prevState.edittable }));
   };
 

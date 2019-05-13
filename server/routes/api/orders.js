@@ -32,8 +32,8 @@ router.post('/', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
   try {
     await Order.update(req.body, {where: {id: req.params.id * 1}});
-    const updatedOrder = await Order.findByPk(req.params.id * 1);
-    res.status(200).json(updatedOrder);
+    const updatedOrder = await Order.findAll({where:{id:req.params.id * 1},include:[User, Address]});
+    res.status(200).json(updatedOrder[0]);
   } catch (err) {
     next(err);
   }

@@ -23,6 +23,7 @@ const handleChange = (event) =>{
 
 const displayOrders = (orders, orderitems) => {
   return orders.map(order => {
+    console.log(order)
     const { firstName, lastName } = order.user;
     const {
       fullName,
