@@ -48,7 +48,7 @@ const users = [
   },
 ];
 
-for (let i = users.length; i < 25; i++) {
+for (let i = users.length; i < 1; i++) {
   users.push(makeFakeUser());
 }
 

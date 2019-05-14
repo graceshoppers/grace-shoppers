@@ -104,7 +104,7 @@ const products = [
   },
 ];
 
-for (let i = products.length; i < 400; i++) {
+for (let i = products.length; i < 150; i++) {
   products.push(makeFakeProduct());
 }
 

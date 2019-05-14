@@ -15,10 +15,10 @@ class Login extends Component {
     event.preventDefault();
     const {email, password} = event.target;
     const loginCredentials = {email: email.value, password: password.value};
-    console.log(this.props.history);
+
     this.props
       .loginUser(loginCredentials)
-      .then(() => this.props.history.goBack())
+      .then(() => this.props.history.push('/catalog'))
       .catch(err => {
         this.setState({
           errors: err.response.data.errors,
@@ -31,7 +31,8 @@ class Login extends Component {
     const {errors} = state;
 
     return (
-      <div>
+      <div className="container" style={{width: '40vw'}}>
+        <h3>Login</h3>
         <form onSubmit={handleSubmit}>
           <TextInputGroup
             inputName="email"

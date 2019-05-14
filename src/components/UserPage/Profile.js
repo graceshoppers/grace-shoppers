@@ -23,8 +23,12 @@ class Profile extends Component {
   componentDidMount() {
     if (this.props.userDetails) {
       const {
-        userDetails: {id, firstName, lastName, email, addresses},
-      } = this.props;
+        id,
+        firstName,
+        lastName,
+        email,
+        addresses,
+      } = this.props.userDetails;
       this.setState({id, firstName, lastName, email, addresses});
     }
   }
@@ -32,8 +36,12 @@ class Profile extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.userDetails !== this.props.userDetails) {
       const {
-        userDetails: {id, firstName, lastName, email, addresses},
-      } = this.props;
+        id,
+        firstName,
+        lastName,
+        email,
+        addresses,
+      } = this.props.userDetails;
       this.setState({id, firstName, lastName, email, addresses});
     }
   }
@@ -63,7 +71,8 @@ class Profile extends Component {
   };
 
   render() {
-    if (!this.props.userDetails) return <div />;
+    if (!Object.keys(this.props.userDetails).length) return <div />;
+
     const {
       firstName,
       lastName,
@@ -248,14 +257,16 @@ class Profile extends Component {
                   <br />
                   {addressLine2}
                   <br />
-                  {city}, {state} {zip}
+                  {city}
+                  <br />
+                  {state} {zip}
                   <br />
                   {country}
                   <br />
-                  Phone Number: {phoneNumber}
+                  Phone Number: {phoneNumber.substring(0, 12)}
                   <br />
                   Additional Instructions:{' '}
-                  {additionalInstruction.substring(0, 32) + '...'}
+                  {additionalInstruction.substring(0, 18) + '...'}
                 </p>
                 <div className="d-flex justify-content-end">
                   <div>
@@ -276,7 +287,7 @@ class Profile extends Component {
   }
 }
 
-const mapStateToProps = ({userDetails}) => userDetails;
+const mapStateToProps = ({userDetails}) => ({userDetails});
 const mapDispatchToProps = dispatch => ({
   editUser: newProfile => dispatch(editUser(newProfile)),
   updateUserDetails: id => dispatch(updateUserDetails(id)),

@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {deleteProduct} from '../../redux-store/actions/product-actions';
 import {addProductToCart} from '../../redux-store/actions/cart-actions';
 import Reviews from './Reviews';
+import ReviewForm from './ReviewForm'
 
 import './SingleProduct.css';
 
@@ -12,6 +13,7 @@ class SingleProduct extends Component {
     this.state = {
       product: {},
       currentImg: '',
+      showReviewForm:false
     };
   }
 
@@ -40,10 +42,12 @@ class SingleProduct extends Component {
       this.setState({currentImg: src});
     };
 
+    const {userDetails} = this.props
+
     if (!this.state.product.name) return <div />;
 
     const {addProductToCart} = this.props;
-    const {product, currentImg} = this.state;
+    const {product, currentImg, showReviewForm} = this.state;
     const {sideImage, imageName, name, material, description} = product;
     const avgReviews = reviews => {
       let allStars = 0;
@@ -100,17 +104,28 @@ class SingleProduct extends Component {
                 >
                   Add to Cart
                 </button>
+
+
+                {userDetails? <button
+                  className="btn btn-light"
+                  onClick={() => this.setState({showReviewForm:!this.state.showReviewForm})}
+                  style={{width: '200px', borderRadius: '0px'}}
+                >
+                  Review
+                </button>:''}
               </div>
             </div>
           </div>
         </div>
+        <br></br>
+        {showReviewForm ?<ReviewForm productId={product.id}/>:''}
         <Reviews product={this.state.product} />
       </div>
     );
   }
 }
 
-const mapStateToProps = ({products}) => ({products});
+const mapStateToProps = ({products,userDetails}) => ({products,userDetails});
 
 const mapDispatchToProps = dispatch => ({
   addProductToCart: product => dispatch(addProductToCart(product)),

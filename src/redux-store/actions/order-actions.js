@@ -24,12 +24,12 @@ const getOrders = orders => ({
 
 // ===============================
 // Create a new order in database
-export const addOrder = order => {
+export const addOrder = () => {
   return dispatch => {
-    return axios
-      .post('/api/orders', order)
-      .then(res => dispatch(createOrder(res.data)))
-      .catch(e => console.log(`Error creating a order:\n${e}`));
+    return axios.post('/api/orders').then(res => {
+      dispatch(createOrder(res.data));
+      return res.data;
+    });
   };
 };
 

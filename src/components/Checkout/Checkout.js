@@ -1,43 +1,50 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import CartList from '../Cart/CartList';
+import {fetchCart} from '../../redux-store/actions/cart-actions';
 import {addOrder} from '../../redux-store/actions/order-actions';
+import {updateUserDetails} from '../../redux-store/actions/auth-actions';
 
 class Checkout extends Component {
-  constructor(){
+  constructor() {
     super();
-    this.checkout = this.checkout.bind(this);
   }
-  checkout(){
-    const {cart, user} = this.props;
-    const order = {
-      orderitems: cart,
-      userId: user.userDetails.id,
-    };
-    this.props.addOrder(order)
-      .then(({newOrder}) => {
-        this.props.history.push(`/thank_you/${newOrder.id}`)
+
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props
+      .addOrder()
+      .then(newOrder => {
+        this.props.fetchCart();
+        this.props.updateUserDetails(this.props.userDetails.id);
+        this.props.history.push(`/thank-you`);
       })
       .catch(e => console.log(e));
   };
-  render(){
-    const {cart} = this.props;
+  render() {
+    const {cart, userDetails} = this.props;
+    if (!Object.keys(userDetails).length) this.props.history.push('/login');
+
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <div className="container">
-          <CartList cart={cart}/>
+          <CartList cart={cart} />
           <div className="panel panel-info">
             <h3 className="panel-heading">Shipping Address</h3>
             <div className="panel-body">
               <div className="form-group">
                 <label>Address Line 1</label>
-                <input type="text" className="form-control mb-2" required/>
+                <input type="text" className="form-control mb-2" required />
                 <label>Address Line 2</label>
-                <input type="text" className="form-control mb-2"/>
+                <input type="text" className="form-control mb-2" />
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <label htmlFor="inputCity">City</label>
-                    <input type="text" className="form-control" id="inputCity" />
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="inputCity"
+                    />
                   </div>
                   <div className="form-group col-md-4">
                     <label htmlFor="inputState">State</label>
@@ -52,9 +59,14 @@ class Checkout extends Component {
                   </div>
                 </div>
                 <label>Country</label>
-                <input type="text" className="form-control mb-2" required/>
+                <input type="text" className="form-control mb-2" required />
                 <label>Phone Number</label>
-                <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" className="form-control mb-2" required/>
+                <input
+                  type="tel"
+                  pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+                  className="form-control mb-2"
+                  required
+                />
               </div>
             </div>
           </div>
@@ -63,27 +75,34 @@ class Checkout extends Component {
             <h3 className="panel-heading">Payment Method</h3>
             <div className="panel-body">
               <div className="form-group">
-                  <label>Card Number</label>
-                  <input type="text" className="form-control mb-2" required/>
-                  <label>Name on card</label>
-                  <input type="text" className="form-control mb-2" required/>
-                  <label>Expiration date</label>
-                  <input type="text" className="form-control mb-2" required/>
-                </div>
+                <label>Card Number</label>
+                <input type="text" className="form-control mb-2" required />
+                <label>Name on card</label>
+                <input type="text" className="form-control mb-2" required />
+                <label>Expiration date</label>
+                <input type="text" className="form-control mb-2" required />
+              </div>
             </div>
           </div>
-          <button type="submit" className="btn btn-success mt-2 mb-2" onClick={() => this.checkout()}>Checkout</button>
-      </div>
-    </form>
+
+          <button type="submit" className="btn btn-success mt-2 mb-2">
+            Checkout
+          </button>
+        </div>
+      </form>
     );
-  };
+  }
 }
 
-const mapStateToProps = ({cart, userDetails}) => ({cart, user: userDetails});
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addOrder: (order) => dispatch(addOrder(order)),
-  };
-};
+const mapStateToProps = ({cart, userDetails}) => ({cart, userDetails});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
+const mapDispatchToProps = dispatch => ({
+  fetchCart: () => dispatch(fetchCart()),
+  addOrder: order => dispatch(addOrder(order)),
+  updateUserDetails: id => dispatch(updateUserDetails(id)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Checkout);

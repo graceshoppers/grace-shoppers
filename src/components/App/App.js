@@ -33,6 +33,7 @@ import Checkout from '../Checkout/Checkout';
 
 import AdminDashboard from '../AdminDashboard/AdminDashboard';
 import ThankYou from '../ThankYou/ThankYou';
+import AddressEdit from '../UserPage/AddressEdit';
 
 const auth = new Auth();
 
@@ -49,7 +50,7 @@ class App extends Component {
 
   render() {
     const {isAuthenticated} = auth;
-
+    console.log(this.props.userDetails);
     return (
       <div className="container-fluid">
         {/* render Nav route */}
@@ -66,11 +67,7 @@ class App extends Component {
         />
 
         {/* Landing page route */}
-        <Route
-          exact
-          path="/"
-          render={props => <Home props={props} noNav={this.noNav} />}
-        />
+        <Route exact path="/" component={Home} />
 
         {/* Catelog with search results route */}
         <Route path="/catalog/search/:searchTerm" component={Catalog} />
@@ -99,15 +96,17 @@ class App extends Component {
         {/* Profile route */}
         <Route exact path="/userpage" component={UserPage} />
         <Route exact path="/userpage/profile" component={Profile} />
-        <Route path="/userpage/pastorders" component={PastOrders} />
+        <Route path="/userpage/orders" component={PastOrders} />
 
         {/* Profile edit route */}
         <Route exact path="/userpage/profile/edit/:field" component={Profile} />
-        <Route path="/userpage/profile/edit/address/:id" component={Profile} />
+        <Route
+          path="/userpage/profile/edit/address/:id"
+          component={AddressEdit}
+        />
 
         {/* Thank you route */}
-        <Route path="/thank_you" render={() => <ThankYou />} />
-        <Route exact path="/thank_you/:id" render={({match}) => <ThankYou id={match.params.id}/>} />
+        <Route path="/thank-you" component={ThankYou} />
 
         {/* Callback Route */}
         <Route path="/callback" render={() => <p>Loading...</p>} />
@@ -119,7 +118,7 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({userDetails}) => ({userDetails});
+const mapStateToProps = ({userDetails, cart}) => ({userDetails, cart});
 
 const mapDispatchToProps = dispatch => ({
   fetchProducts: () => dispatch(fetchProducts()),

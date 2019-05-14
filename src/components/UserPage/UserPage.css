@@ -1,24 +1,43 @@
-.address-card{
-  width:325px;
-  height:325px;
+.address-card {
+  width: 325px;
+  height: 325px;
   border: 1px solid lightgray;
-  border-radius: 5%;
-  margin: 5px;
-  padding: 10px;
-  display:flex;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 20px;
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.address-card p{
+.address-card p {
   flex: 3;
 }
 
-.address-card button{
+.address-card button {
   flex: 1;
-  border-radius: 10%;
+  border-radius: 10px;
 }
 
-.address-card button:hover{
+.address-card button:hover {
   background: lightgrey;
+}
+
+/*============
+UserPage*/
+
+.option-card {
+  height: 100px;
+  width: 300px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+}
+
+.option-card:hover {
+  background: #ededed;
 }

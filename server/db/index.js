@@ -45,7 +45,7 @@ Address.belongsTo(User);
 User.hasMany(Address);
 
 Order.belongsTo(Address);
-Address.hasMany(Order)
+Address.hasMany(Order);
 
 // Clears database tables and repopulates it with seed data
 const syncAndSeed = () => {
@@ -157,6 +157,11 @@ const syncAndSeed = () => {
       const resolvedUsers = await Promise.all(
         users.map(user => User.create(user))
       );
+      const resolvedCarts = await Promise.all(
+        resolvedUsers.map(user =>
+          Order.create({status: 'Cart', userId: user.id})
+        )
+      );
       resolvedReviews.forEach(async resolvedReview => {
         await resolvedReview.setUser(
           Math.ceil(Math.random() * resolvedUsers.length)
@@ -196,16 +201,33 @@ const syncAndSeed = () => {
         )
       );
 
-       //Assign addressIds randomly to Orders
+      //Assign addressIds randomly to Orders
       await Promise.all(
         resolvedOrders.map(resolvedOrder =>
-          resolvedOrder.setAddress(Math.ceil(Math.random() * resolvedAddresses.length))
+          resolvedOrder.setAddress(
+            Math.ceil(Math.random() * resolvedAddresses.length)
+          )
         )
       );
-
     })
     .then(() => console.log('db seeded'))
     .catch(err => console.log(err));
+};
+
+const seedProducts = () => {
+  return connection
+    .sync({force: true})
+    .then(() => Promise.all(categories.map(c => Category.create(c))))
+    .then(categories => {
+      return Promise.all(
+        products.map((p, i) => {
+          return Product.create({
+            ...p,
+            categoryId: categories[i % categories.length].id,
+          });
+        })
+      );
+    });
 };
 
 module.exports = {
@@ -220,5 +242,6 @@ module.exports = {
   },
   methods: {
     syncAndSeed,
+    seedProducts,
   },
 };
