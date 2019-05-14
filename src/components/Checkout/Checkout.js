@@ -23,9 +23,10 @@ class Checkout extends Component {
       })
       .catch(e => console.log(e));
   };
+
   render() {
     const {cart, userDetails} = this.props;
-    if (!Object.keys(userDetails).length) this.props.history.push('/login');
+    if (!Object.keys(userDetails).length) return <div />;
 
     return (
       <form onSubmit={this.handleSubmit}>
