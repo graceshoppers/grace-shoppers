@@ -1,24 +1,23 @@
 import React from "react";
 import { connect } from "react-redux";
-import {addReview} from '../../redux-store/actions/review-actions'
+import { addReview } from "../../redux-store/actions/review-actions";
 
 const ReviewForm = props => {
-    const {addReview} = props;
+  const { addReview } = props;
 
-    const handleSubmit = (event) =>{
-        event.preventDefault();
+  const handleSubmit = event => {
+    event.preventDefault();
 
-        const newReview = {
-            textBody:event.target.review.value,
-            title:event.target.title.value,
-            recommended:event.target.recommended.value,
-            stars:event.target.stars.value,
-            productId:props.productId,
-            userId:props.userDetails.userDetails.id
-        }
-        console.log(newReview)
-        addReview(newReview)
-    }
+    const newReview = {
+      textBody: event.target.review.value,
+      title: event.target.title.value,
+      recommended: event.target.recommended.value,
+      stars: event.target.stars.value,
+      productId: props.productId,
+      userId: props.userDetails.id
+    };
+    addReview(newReview);
+  };
   return (
     <form onSubmit={handleSubmit}>
       <h2>Add a Review</h2>
@@ -54,7 +53,11 @@ const ReviewForm = props => {
         </div>
 
         <div className="col-2">
-          <select name="recommended" className="form-control" defaultValue="Recommendation">
+          <select
+            name="recommended"
+            className="form-control"
+            defaultValue="Recommendation"
+          >
             <option value="Recommendation" disabled>
               Recommended
             </option>
@@ -74,4 +77,7 @@ const ReviewForm = props => {
 
 const mapStateToProps = ({ userDetails }) => ({ userDetails });
 
-export default connect(mapStateToProps, {addReview} )(ReviewForm);
+export default connect(
+  mapStateToProps,
+  { addReview }
+)(ReviewForm);

@@ -14,24 +14,13 @@ class AdminOrdersEdit extends React.Component {
     this.setState(prevState => ({ edittable: !prevState.edittable }));
   };
 
-  handleSubmit = async (event) => {
+  handleSubmit = async event => {
     event.preventDefault();
     const { editOrder } = this.props;
-    console.log(event.target.status.value);
-    // const productToEdit = {
-    //   id: this.props.product.id,
-    //   name: event.target.name.value,
-    //   material: event.target.material.value,
-    //   description: event.target.description.value,
-    //   unitCost: event.target.unitCost.value,
-    //   stock: event.target.stock.value
-    // };
-
     const orderToEdit = {
-        id:this.props.order.id,
-        status:event.target.status.value
-    }
-
+      id: this.props.order.id,
+      status: event.target.status.value
+    };
 
     await this.props.editOrder(orderToEdit);
     this.setState(prevState => ({ edittable: !prevState.edittable }));
@@ -39,46 +28,35 @@ class AdminOrdersEdit extends React.Component {
 
   render() {
     const { status } = this.props.order;
-    
 
     if (this.state.edittable) {
       return (
-        <form onSubmit={this.handleSubmit}> 
-        <div className="row">
-          
-
-
-
+        <form onSubmit={this.handleSubmit}>
+          <div className="row">
             <div className="col-2">
               <select
                 className="form-control"
                 name="status"
                 defaultValue={status}
               >
-                <option value="Processing" >Processing</option>
+                <option value="Processing">Processing</option>
                 <option value="Delivered">Delivered</option>
                 <option value="Shipped">Shipped</option>
               </select>
             </div>
-           
-           
-           
+
             <div className="col-1">
-                <button
-                  className="btn btn-outline-secondary btn-sm"
-                  type="submit"
-                >
-                  <img
-                    style={{ width: "20px", height: "20px" }}
-                    src="save_icon.png"
-                  />
-                </button>
+              <button
+                className="btn btn-outline-secondary btn-sm"
+                type="submit"
+              >
+                <img
+                  style={{ width: "20px", height: "20px" }}
+                  src="save_icon.png"
+                />
+              </button>
             </div>
-
-
-
-        
-        </div>
+          </div>
         </form>
       );
     } else {
