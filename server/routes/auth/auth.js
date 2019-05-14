@@ -87,9 +87,6 @@ router.post(
           );
         }
 
-        // =======================================================
-        // =======================================================
-        // The problem code starts here.
         // Retrieve the latest cart information for logged in user
         const updatedCart = await Order.findOne({
           where: {[Sequelize.Op.and]: [{userId: user.id}, {status: 'Cart'}]},
@@ -99,10 +96,6 @@ router.post(
         req.session.cart = updatedCart.orderitems.map(item => {
           return {...item.product.get(), quantity: item.quantity};
         });
-        console.log(req.session.cart);
-        // END OF PROBLEM CODE
-        // =======================================================
-        // =======================================================
 
         res.json(req.session.userDetails);
       }
