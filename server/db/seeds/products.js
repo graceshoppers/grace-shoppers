@@ -104,8 +104,8 @@ const products = [
   },
 ];
 
-for (let i = products.length; i < 400; i++) {
-  products.push(makeFakeProduct());
-}
+// for (let i = products.length; i < 10; i++) {
+//   products.push(makeFakeProduct());
+// }
 
 module.exports = products;

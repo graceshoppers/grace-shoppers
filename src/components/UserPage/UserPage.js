@@ -10,7 +10,6 @@ import './UserPage.css';
 const UserPage = props => {
   const {userDetails, logoutUser} = props;
   //defend against first render before App component did mount run
-  console.log(userDetails);
   if (!userDetails) return <div />;
 
   const {orders} = userDetails;
@@ -52,7 +51,7 @@ const UserPage = props => {
   );
 };
 
-const mapStateToProps = ({userDetails}) => userDetails;
+const mapStateToProps = ({userDetails}) => ({userDetails});
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   logoutUser: () =>

@@ -1,14 +1,14 @@
-const faker = require("faker");
+const faker = require('faker');
 
 const makeFakeOrder = () => {
   return {
-    status: faker.random.arrayElement(["Delivered", "Processing", "Shipped"])
+    status: faker.random.arrayElement(['Delivered', 'Processing', 'Shipped']),
   };
 };
 
 const orders = [];
 
-for (let i = orders.length; i < 500; i++) {
+for (let i = orders.length; i < 1; i++) {
   orders.push(makeFakeOrder());
 }
 

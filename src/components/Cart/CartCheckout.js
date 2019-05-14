@@ -2,9 +2,11 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-const CartCheckout = (props) => {
-  const {user} = props;
-  return(
+const CartCheckout = props => {
+  const {userDetails} = props;
+  if (!Object.keys(userDetails).length) props.history.push('/login');
+
+  return (
     <div className="col-md-4">
       <div className="container">
         <div className="row align-items-start">
@@ -14,25 +16,24 @@ const CartCheckout = (props) => {
           </div>
           <div className="row justify-content-md-center">
             <div className="col">
-              <button className="btn btn-success" type="submit" onClick={() => {
-                user.userDetails ?
-                  props.history.push('/checkout')
-                :
-                  props.history.push('/login');
-              }}> Checkout
+              <button
+                className="btn btn-success"
+                type="submit"
+                onClick={() => {
+                  props.history.push('/checkout');
+                }}
+              >
+                {' '}
+                Checkout
               </button>
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
-}
-
-const mapStateToProps = ({userDetails}) => {
-  return {
-    user: userDetails,
-  };
+  );
 };
+
+const mapStateToProps = ({userDetails}) => ({userDetails});
 
 export default connect(mapStateToProps)(CartCheckout);
