@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 import {deleteProduct} from '../../redux-store/actions/product-actions';
 import {addProductToCart} from '../../redux-store/actions/cart-actions';
 import Reviews from './Reviews';
-import ReviewForm from './ReviewForm'
+import ReviewForm from './ReviewForm';
+import parseCost from '../../shared/parse-cost';
 
 import './SingleProduct.css';
 
@@ -13,7 +14,7 @@ class SingleProduct extends Component {
     this.state = {
       product: {},
       currentImg: '',
-      showReviewForm:false
+      showReviewForm: false,
     };
   }
 
@@ -42,13 +43,20 @@ class SingleProduct extends Component {
       this.setState({currentImg: src});
     };
 
-    const {userDetails} = this.props
+    const {userDetails} = this.props;
 
     if (!this.state.product.name) return <div />;
 
     const {addProductToCart} = this.props;
     const {product, currentImg, showReviewForm} = this.state;
-    const {sideImage, imageName, name, material, description} = product;
+    const {
+      sideImage,
+      imageName,
+      name,
+      material,
+      description,
+      unitCost,
+    } = product;
     const avgReviews = reviews => {
       let allStars = 0;
       reviews.forEach(review => (allStars += review.stars));
@@ -96,36 +104,41 @@ class SingleProduct extends Component {
               <h1>{name.toUpperCase()}</h1>
               <h3>{material}</h3>
               <p>{description}</p>
-              <div>
+              <div className='d-flex flex-column'>
                 <button
-                  className="btn btn-dark"
                   onClick={() => addProductToCart(this.state.product)}
-                  style={{width: '200px', borderRadius: '0px'}}
+                  style={{minWidth: '150px',maxWidth:'350px'}}
                 >
-                  Add to Cart
+                  {parseCost(unitCost)} Add to Cart
                 </button>
 
-
-                {userDetails? <button
-                  className="btn btn-light"
-                  onClick={() => this.setState({showReviewForm:!this.state.showReviewForm})}
-                  style={{width: '200px', borderRadius: '0px'}}
-                >
-                  Review
-                </button>:''}
+                {userDetails ? (
+                  <button
+                    onClick={evt =>
+                      this.setState({
+                        showReviewForm: !this.state.showReviewForm,
+                      })
+                    }
+                    style={{minWidth: '150px',maxWidth:'350px'}}
+                  >
+                    Add A Review
+                  </button>
+                ) : (
+                  ''
+                )}
               </div>
             </div>
           </div>
         </div>
-        <br></br>
-        {showReviewForm ?<ReviewForm productId={product.id}/>:''}
+        <br />
+        {showReviewForm ? <ReviewForm productId={product.id} /> : ''}
         <Reviews product={this.state.product} />
       </div>
     );
   }
 }
 
-const mapStateToProps = ({products,userDetails}) => ({products,userDetails});
+const mapStateToProps = ({products, userDetails}) => ({products, userDetails});
 
 const mapDispatchToProps = dispatch => ({
   addProductToCart: product => dispatch(addProductToCart(product)),

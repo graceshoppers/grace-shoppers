@@ -18,7 +18,7 @@ class Login extends Component {
 
     this.props
       .loginUser(loginCredentials)
-      .then(() => this.props.history.push('/catalog'))
+      .then(() => this.props.history.goBack())
       .catch(err => {
         this.setState({
           errors: err.response.data.errors,
@@ -31,8 +31,7 @@ class Login extends Component {
     const {errors} = state;
 
     return (
-      <div className="container" style={{width: '40vw'}}>
-        <h3>Login</h3>
+      <div className='container' style={{width: '50vw'}}>
         <form onSubmit={handleSubmit}>
           <TextInputGroup
             inputName="email"

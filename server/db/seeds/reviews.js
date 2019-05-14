@@ -11,7 +11,7 @@ const makeFakeReview = () => {
 
 const reviews = [];
 
-for (let i = reviews.length; i < 10; i++) {
+for (let i = reviews.length; i < 100; i++) {
   reviews.push(makeFakeReview());
 }
 

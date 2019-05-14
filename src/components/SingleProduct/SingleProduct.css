@@ -48,15 +48,13 @@ div {
   border: 5px solid red;
 }
 
-.row{
+.row {
   grid-gap: 5px;
 }
 
-.container-fluid{
+.container-fluid {
   grid-gap: 5px;
 }
-
-
 
 /* review*/
 .review-top-lightgrey-border {
@@ -66,4 +64,21 @@ div {
 
 .review-container {
   border: 5px solid green;
+}
+
+/* button */
+button {
+  border-radius: 10px;
+  border: none;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+  margin: 5px;
+}
+
+button:hover {
+  background: #f7f7f7;
+}
+
+button:focus {
+  outline: 0;
 }
