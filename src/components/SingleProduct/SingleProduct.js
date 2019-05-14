@@ -112,7 +112,7 @@ class SingleProduct extends Component {
                   {parseCost(unitCost)} | Add to Cart
                 </button>
 
-                {userDetails ? (
+                {userDetails.id ? (
                   <button
                     onClick={evt =>
                       this.setState({
