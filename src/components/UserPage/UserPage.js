@@ -5,6 +5,8 @@ import parseCost from '../../shared/parse-cost';
 import {getUserDetails} from '../../redux-store/actions/auth-actions';
 import {NavLink} from 'react-router-dom';
 
+import './UserPage.css';
+
 const UserPage = props => {
   const {userDetails, logoutUser} = props;
   //defend against first render before App component did mount run
@@ -53,7 +55,7 @@ const mapStateToProps = ({userDetails}) => ({userDetails});
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   logoutUser: () =>
-    dispatch(logoutUser()).then(() => ownProps.history.push('/')),
+    dispatch(logoutUser()).then(() => ownProps.history.goBack()),
   getUserDetails: () => dispatch(getUserDetails()),
 });
 

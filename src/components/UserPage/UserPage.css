@@ -1,0 +1,24 @@
+.address-card{
+  width:325px;
+  height:325px;
+  border: 1px solid lightgray;
+  border-radius: 5%;
+  margin: 5px;
+  padding: 10px;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.address-card p{
+  flex: 3;
+}
+
+.address-card button{
+  flex: 1;
+  border-radius: 10%;
+}
+
+.address-card button:hover{
+  background: lightgrey;
+}

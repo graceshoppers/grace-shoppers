@@ -97,7 +97,7 @@ router.post(
 
         // =======================================================
         // =======================================================
-        // Bao, the problem code starts here.
+        // The problem code starts here.
         // Retrieve the latest cart information for logged in user
         const updatedCart = await Order.findOne({
           where: {userId: user.id},

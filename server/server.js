@@ -5,8 +5,11 @@ const {
 
 const PORT = process.env.PORT || 3000;
 
+seedProducts().then(() => {
+  app.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));
+});
 //seed our db
-// syncAndSeed();
-seedProducts();
-
-app.listen(PORT, () => console.log(`listening on ${PORT}`));
+// syncAndSeed()
+//   .then(() => {
+//     app.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));
+//   });
