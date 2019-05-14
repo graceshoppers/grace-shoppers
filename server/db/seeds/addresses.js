@@ -16,7 +16,7 @@ const makeFakeAddress = () => {
 
 const addresses = [];
 
-for (let i = 0; i < 1; i++) {
+for (let i = 0; i < 20; i++) {
   const address = makeFakeAddress();
   addresses.push(address);
 }

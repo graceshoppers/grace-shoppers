@@ -96,7 +96,7 @@ class App extends Component {
         {/* Profile route */}
         <Route exact path="/userpage" component={UserPage} />
         <Route exact path="/userpage/profile" component={Profile} />
-        <Route path="/userpage/pastorders" component={PastOrders} />
+        <Route path="/userpage/orders" component={PastOrders} />
 
         {/* Profile edit route */}
         <Route exact path="/userpage/profile/edit/:field" component={Profile} />
