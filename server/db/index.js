@@ -22,7 +22,6 @@ const {
   Orderitem,
   Address,
 } = require('./models');
-require('./model-methods/user-methods');
 
 Product.belongsTo(Category);
 Category.hasMany(Product);
