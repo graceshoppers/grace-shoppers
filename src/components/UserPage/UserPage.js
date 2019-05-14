@@ -12,8 +12,6 @@ const UserPage = props => {
   //defend against first render before App component did mount run
   if (!userDetails) return <div />;
 
-  const {orders} = userDetails;
-
   return (
     <div className="container d-flex flex-column justify-content-center align-items-center">
       <div className="d-flex justify-content-evenly">
@@ -26,7 +24,7 @@ const UserPage = props => {
       </div>
       <button
         onClick={logoutUser}
-        style={{width: '100px', marginLeft: '10px',color:'#fc5050'}}
+        style={{width: '100px', marginLeft: '10px', color: '#fc5050'}}
       >
         Logout
       </button>
