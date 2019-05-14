@@ -51,11 +51,14 @@ class Profile extends Component {
       this.setState({id, firstName, lastName, email, addresses});
     }
   }
-  deleteAddress = (id) => {
-    axios.delete(`/api/addresses/${id}`)
+
+  deleteAddress = id => {
+    axios
+      .delete(`/api/addresses/${id}`)
       .then(() => this.props.updateUserDetails(this.props.userDetails.id))
       .catch(e => console.log(`Error deleting address:\n${e}`));
   };
+
   handleSubmit = evt => {
     evt.preventDefault();
     const {history, editUser, updateUserDetails} = this.props;
@@ -259,24 +262,26 @@ class Profile extends Component {
             } = address;
             return (
               <div key={id} className="address-card">
-                <p>
-                  <span style={{fontWeight: 'bold'}}>{fullName}</span>
-                  <br />
-                  {addressLine1}
-                  <br />
-                  {addressLine2}
-                  <br />
-                  {city}
-                  <br />
-                  {state} {zip}
-                  <br />
-                  {country}
-                  <br />
-                  Phone Number: {phoneNumber.substring(0, 12)}
-                  <br />
-                  Additional Instructions:{' '}
-                  {additionalInstruction.substring(0, 18) + '...'}
-                </p>
+                <div style={{overflow:'hidden', height:'275px'}}>
+                  <p>
+                    <span style={{fontWeight: 'bold'}}>{fullName}</span>
+                    <br />
+                    {addressLine1}
+                    <br />
+                    {addressLine2}
+                    <br />
+                    {city}
+                    <br />
+                    {state} {zip}
+                    <br />
+                    {country}
+                    <br />
+                    Phone Number: {phoneNumber.substring(0, 12)}
+                    <br />
+                    Additional Instructions:{' '}
+                    {additionalInstruction}
+                  </p>
+                </div>
                 <div className="d-flex justify-content-end">
                   <div>
                     <NavLink to={`/userpage/profile/edit/address/${id}`}>
@@ -284,7 +289,12 @@ class Profile extends Component {
                     </NavLink>
                   </div>
                   <div>
-                    <button style={{margin: '2px', flex: '1'}} onClick={() => this.deleteAddress(id)}>Delete</button>
+                    <button
+                      style={{margin: '2px', flex: '1'}}
+                      onClick={() => this.deleteAddress(id)}
+                    >
+                      Delete
+                    </button>
                   </div>
                 </div>
               </div>
