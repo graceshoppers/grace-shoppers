@@ -66,11 +66,7 @@ class App extends Component {
         />
 
         {/* Landing page route */}
-        <Route
-          exact
-          path="/"
-          render={props => <Home props={props} noNav={this.noNav} />}
-        />
+        <Route exact path="/" component={Home} />
 
         {/* Catelog with search results route */}
         <Route path="/catalog/search/:searchTerm" component={Catalog} />

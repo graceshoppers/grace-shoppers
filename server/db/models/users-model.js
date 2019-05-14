@@ -1,6 +1,6 @@
 const connection = require('../database');
 const {
-  Sequelize: {STRING, INTEGER, BOOLEAN, ARRAY, JSON},
+  Sequelize: {STRING, BOOLEAN},
 } = connection;
 
 const User = connection.define('user', {
