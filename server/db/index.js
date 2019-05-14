@@ -157,6 +157,11 @@ const syncAndSeed = () => {
       const resolvedUsers = await Promise.all(
         users.map(user => User.create(user))
       );
+      const resolvedCarts = await Promise.all(
+        resolvedUsers.map(user =>
+          Order.create({status: 'Cart', userId: user.id})
+        )
+      );
       resolvedReviews.forEach(async resolvedReview => {
         await resolvedReview.setUser(
           Math.ceil(Math.random() * resolvedUsers.length)

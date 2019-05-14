@@ -59,40 +59,32 @@ router.post(
         // If the user added items to cart prior to logging in,
         // append all of the items into their existing cart in the database.
         if (req.session.cart && req.session.cart.length) {
-          //   await Promise.all(
-          //     req.session.cart.map(item =>
-          //       Orderitem.create({
-          //         orderId: userCart.id,
-          //         productId: item.id,
-          //         quantity: item.quantity,
-          //       })
-          //     )
-          //   );
-
           // Manually go through each item in the cart to see if there is an existing line
           // line item with the same productId.
-          req.session.cart.forEach(async item => {
-            const itemExistsInCart = await Orderitem.findOne({
-              where: {
-                [Sequelize.Op.and]: [
-                  {orderId: userCart.id},
-                  {productId: item.id},
-                ],
-              },
-            });
-
-            if (itemExistsInCart)
-              await Orderitem.update(
-                {quantity: itemExistsInCart.quantity + item.quantity},
-                {where: {id: itemExistsInCart.id}}
-              );
-            else
-              await Orderitem.create({
-                orderId: userCart.id,
-                productId: item.id,
-                quantity: item.quantity,
+          await Promise.all(
+            req.session.cart.map(async item => {
+              const itemExistsInCart = await Orderitem.findOne({
+                where: {
+                  [Sequelize.Op.and]: [
+                    {orderId: userCart.id},
+                    {productId: item.id},
+                  ],
+                },
               });
-          });
+
+              if (itemExistsInCart)
+                return Orderitem.update(
+                  {quantity: itemExistsInCart.quantity + item.quantity},
+                  {where: {id: itemExistsInCart.id}}
+                );
+              else
+                return Orderitem.create({
+                  orderId: userCart.id,
+                  productId: item.id,
+                  quantity: item.quantity,
+                });
+            })
+          );
         }
 
         // =======================================================
@@ -104,7 +96,6 @@ router.post(
           include: [{model: Orderitem, include: [Product]}],
         });
 
-        console.log(updatedCart.orderitems.map(item => item.get()));
         req.session.cart = updatedCart.orderitems.map(item => {
           return {...item.product.get(), quantity: item.quantity};
         });

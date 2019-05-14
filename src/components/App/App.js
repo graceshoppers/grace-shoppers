@@ -49,8 +49,7 @@ class App extends Component {
 
   render() {
     const {isAuthenticated} = auth;
-    console.log(`userDetails:`, this.props.userDetails);
-    console.log(`cart:`, this.props.cart);
+
     return (
       <div className="container-fluid">
         {/* render Nav route */}
@@ -108,7 +107,11 @@ class App extends Component {
 
         {/* Thank you route */}
         <Route path="/thank_you" render={() => <ThankYou />} />
-        <Route exact path="/thank_you/:id" render={({match}) => <ThankYou id={match.params.id}/>} />
+        <Route
+          exact
+          path="/thank_you/:id"
+          render={({match}) => <ThankYou id={match.params.id} />}
+        />
 
         {/* Callback Route */}
         <Route path="/callback" render={() => <p>Loading...</p>} />
