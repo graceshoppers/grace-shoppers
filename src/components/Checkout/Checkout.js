@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import CartList from '../Cart/CartList';
+import {fetchCart} from '../../redux-store/actions/cart-actions';
 import {addOrder} from '../../redux-store/actions/order-actions';
 
 class Checkout extends Component {
@@ -13,7 +14,8 @@ class Checkout extends Component {
     this.props
       .addOrder()
       .then(newOrder => {
-        this.props.history.push(`/thank_you/${newOrder.id}`);
+        this.props.fetchCart();
+        this.props.history.push(`/thank-you`);
       })
       .catch(e => console.log(e));
   };
@@ -91,11 +93,10 @@ class Checkout extends Component {
 }
 
 const mapStateToProps = ({cart, userDetails}) => ({cart, userDetails});
-const mapDispatchToProps = dispatch => {
-  return {
-    addOrder: order => dispatch(addOrder(order)),
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  fetchCart: () => dispatch(fetchCart()),
+  addOrder: order => dispatch(addOrder(order)),
+});
 
 export default connect(
   mapStateToProps,

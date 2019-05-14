@@ -20,7 +20,7 @@
 }
 
 .collection-link:hover{
-  font-weight:bold;
+  background: url('/homebackground2.gif') no-repeat center center;
 }
 
 .home-page {
