@@ -6,26 +6,23 @@ import {addOrder} from '../../redux-store/actions/order-actions';
 class Checkout extends Component {
   constructor() {
     super();
-    this.checkout = this.checkout.bind(this);
   }
-  checkout() {
-    const {cart, user} = this.props;
-    const order = {
-      orderitems: cart,
-      userId: user.userDetails.id,
-    };
+
+  handleSubmit = event => {
+    event.preventDefault();
     this.props
-      .addOrder(order)
-      .then(({newOrder}) => {
+      .addOrder()
+      .then(newOrder => {
         this.props.history.push(`/thank_you/${newOrder.id}`);
       })
       .catch(e => console.log(e));
-  }
+  };
   render() {
     const {cart, userDetails} = this.props;
     if (!Object.keys(userDetails).length) this.props.history.push('/login');
+
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <div className="container">
           <CartList cart={cart} />
           <div className="panel panel-info">
@@ -62,7 +59,7 @@ class Checkout extends Component {
                 <label>Phone Number</label>
                 <input
                   type="tel"
-                  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                  pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
                   className="form-control mb-2"
                   required
                 />

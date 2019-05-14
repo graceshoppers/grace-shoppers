@@ -227,50 +227,54 @@ class Profile extends Component {
         <hr />
         <h1>Addresses</h1>
         <div className="d-flex">
-          {addresses.map(address => {
-            const {
-              id,
-              fullName,
-              addressLine1,
-              addressLine2,
-              city,
-              state,
-              zip,
-              country,
-              phoneNumber,
-              additionalInstruction,
-            } = address;
-            return (
-              <div key={id} className="address-card">
-                <p>
-                  <span style={{fontWeight: 'bold'}}>{fullName}</span>
-                  <br />
-                  {addressLine1}
-                  <br />
-                  {addressLine2}
-                  <br />
-                  {city}, {state} {zip}
-                  <br />
-                  {country}
-                  <br />
-                  Phone Number: {phoneNumber}
-                  <br />
-                  Additional Instructions:{' '}
-                  {additionalInstruction.substring(0, 32) + '...'}
-                </p>
-                <div className="d-flex justify-content-end">
-                  <div>
-                    <NavLink to={`/userpage/profile/edit/address/${id}`}>
-                      <button style={{margin: '2px', flex: '1'}}>Edit</button>
-                    </NavLink>
-                  </div>
-                  <div>
-                    <button style={{margin: '2px', flex: '1'}}>Delete</button>
+          {addresses.length ? (
+            addresses.map(address => {
+              const {
+                id,
+                fullName,
+                addressLine1,
+                addressLine2,
+                city,
+                state,
+                zip,
+                country,
+                phoneNumber,
+                additionalInstruction,
+              } = address;
+              return (
+                <div key={id} className="address-card">
+                  <p>
+                    <span style={{fontWeight: 'bold'}}>{fullName}</span>
+                    <br />
+                    {addressLine1}
+                    <br />
+                    {addressLine2}
+                    <br />
+                    {city}, {state} {zip}
+                    <br />
+                    {country}
+                    <br />
+                    Phone Number: {phoneNumber}
+                    <br />
+                    Additional Instructions:{' '}
+                    {additionalInstruction.substring(0, 32) + '...'}
+                  </p>
+                  <div className="d-flex justify-content-end">
+                    <div>
+                      <NavLink to={`/userpage/profile/edit/address/${id}`}>
+                        <button style={{margin: '2px', flex: '1'}}>Edit</button>
+                      </NavLink>
+                    </div>
+                    <div>
+                      <button style={{margin: '2px', flex: '1'}}>Delete</button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })
+          ) : (
+            <div>No addresses</div>
+          )}
         </div>
 
         {/* Integrates in Admin Dashboard for admin users */}
