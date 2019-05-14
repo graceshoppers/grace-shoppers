@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import {NavLink} from 'react-router-dom';
 import {editUser} from '../../redux-store/actions/user-actions';
 import {updateUserDetails} from '../../redux-store/actions/auth-actions';
+import AdminDashboard from '../AdminDashboard/AdminDashboard';
 
 import './UserPage.css';
 import axios from 'axios';
@@ -262,7 +263,7 @@ class Profile extends Component {
             } = address;
             return (
               <div key={id} className="address-card">
-                <div style={{overflow:'hidden', height:'275px'}}>
+                <div style={{overflow: 'hidden', height: '275px'}}>
                   <p>
                     <span style={{fontWeight: 'bold'}}>{fullName}</span>
                     <br />
@@ -278,8 +279,7 @@ class Profile extends Component {
                     <br />
                     Phone Number: {phoneNumber.substring(0, 12)}
                     <br />
-                    Additional Instructions:{' '}
-                    {additionalInstruction}
+                    Additional Instructions: {additionalInstruction}
                   </p>
                 </div>
                 <div className="d-flex justify-content-end">
@@ -301,6 +301,7 @@ class Profile extends Component {
             );
           })}
         </div>
+        {this.props.userDetails.isAdmin ? <AdminDashboard /> : <div />}
       </div>
     );
   }
