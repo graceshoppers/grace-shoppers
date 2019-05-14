@@ -4,6 +4,8 @@ import {addUser} from '../../redux-store/actions/user-actions';
 import {getUserDetails} from '../../redux-store/actions/auth-actions';
 import TextInputGroup from '../_common/TextInputGroup';
 
+import '../Login/Login.css';
+
 class SignUp extends Component {
   constructor() {
     super();
@@ -83,7 +85,7 @@ class SignUp extends Component {
 
           {/* Submit button */}
           <div className="form-group">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" style={{color: '#50a0fc'}}>
               Sign Up
             </button>
           </div>

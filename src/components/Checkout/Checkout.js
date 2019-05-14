@@ -5,6 +5,8 @@ import {fetchCart} from '../../redux-store/actions/cart-actions';
 import {addOrder} from '../../redux-store/actions/order-actions';
 import {updateUserDetails} from '../../redux-store/actions/auth-actions';
 
+import './Checkout.css';
+
 class Checkout extends Component {
   constructor() {
     super();
@@ -85,9 +87,7 @@ class Checkout extends Component {
             </div>
           </div>
 
-          <button type="submit" className="btn btn-success mt-2 mb-2">
-            Checkout
-          </button>
+          <button type="submit">Checkout</button>
         </div>
       </form>
     );

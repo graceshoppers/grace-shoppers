@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {loginUser} from '../../redux-store/actions/auth-actions';
 import TextInputGroup from '../_common/TextInputGroup';
 
+import './Login.css';
+
 class Login extends Component {
   constructor() {
     super();
@@ -18,7 +20,7 @@ class Login extends Component {
 
     this.props
       .loginUser(loginCredentials)
-      .then(() => this.props.history.push('/catalog'))
+      .then(() => this.props.history.push('/userpage'))
       .catch(err => {
         this.setState({
           errors: err.response.data.errors,
@@ -31,8 +33,7 @@ class Login extends Component {
     const {errors} = state;
 
     return (
-      <div className="container" style={{width: '40vw'}}>
-        <h3>Login</h3>
+      <div className="container" style={{width: '50vw'}}>
         <form onSubmit={handleSubmit}>
           <TextInputGroup
             inputName="email"
@@ -47,21 +48,23 @@ class Login extends Component {
             labelDisplayText="Password"
             errors={errors.password}
           />
-
-          <div className="form-group">
-            <button type="submit" className="btn btn-primary">
-              Login
-            </button>
+          <div className="d-flex ">
+            <div className="form-group">
+              <button type="submit" style={{color: '#50a0fc'}}>
+                Login
+              </button>
+            </div>
+            <div>
+              <button
+                type="submit"
+                onClick={() => this.props.history.push('/signup')}
+                style={{color: '#50a0fc'}}
+              >
+                Sign Up
+              </button>
+            </div>
           </div>
         </form>
-
-        <button
-          type="submit"
-          className="btn btn-primary"
-          onClick={() => this.props.history.push('/signup')}
-        >
-          Sign Up
-        </button>
       </div>
     );
   }
