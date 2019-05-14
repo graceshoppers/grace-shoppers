@@ -35,9 +35,8 @@ class Profile extends Component {
 
   componentDidUpdate(prevProps) {
     if (
-      this.props.userDetails.id &&
-      JSON.stringify(this.props.userDetails.addresses) !==
-      JSON.stringify(this.state.userDetails.addresses)
+      JSON.stringify(JSON.stringify(prevProps.userDetails)) !==
+      JSON.stringify(JSON.stringify(this.props.userDetails))
     ) {
       const {
         id,
@@ -46,7 +45,6 @@ class Profile extends Component {
         email,
         addresses,
       } = this.props.userDetails;
-      console.log(this.props.userDetails)
       this.setState({id, firstName, lastName, email, addresses});
     }
   }
@@ -76,9 +74,7 @@ class Profile extends Component {
   };
 
   render() {
-
     if (!Object.keys(this.props.userDetails).length) return <div />;
-
     const {
       firstName,
       lastName,
