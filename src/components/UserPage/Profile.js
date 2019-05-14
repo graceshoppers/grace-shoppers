@@ -249,14 +249,16 @@ class Profile extends Component {
                   <br />
                   {addressLine2}
                   <br />
-                  {city}, {state} {zip}
+                  {city}
+                  <br/>
+                  {state} {zip}
                   <br />
                   {country}
                   <br />
-                  Phone Number: {phoneNumber}
+                  Phone Number: {phoneNumber.substring(0,12)}
                   <br />
                   Additional Instructions:{' '}
-                  {additionalInstruction.substring(0, 32) + '...'}
+                  {additionalInstruction.substring(0, 18) + '...'}
                 </p>
                 <div className="d-flex justify-content-end">
                   <div>

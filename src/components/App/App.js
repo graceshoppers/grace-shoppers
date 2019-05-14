@@ -33,6 +33,7 @@ import Checkout from '../Checkout/Checkout';
 
 import AdminDashboard from '../AdminDashboard/AdminDashboard';
 import ThankYou from '../ThankYou/ThankYou';
+import AddressEdit from '../UserPage/AddressEdit';
 
 const auth = new Auth();
 
@@ -99,7 +100,7 @@ class App extends Component {
 
         {/* Profile edit route */}
         <Route exact path="/userpage/profile/edit/:field" component={Profile} />
-        <Route path="/userpage/profile/edit/address/:id" component={Profile} />
+        <Route path="/userpage/profile/edit/address/:id" component={AddressEdit} />
 
         {/* Thank you route */}
         <Route path="/thank_you" render={() => <ThankYou />} />
