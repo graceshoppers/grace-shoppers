@@ -31,6 +31,7 @@ router.post('/', async (req, res, next) => {
         ],
       },
     });
+
     await Order.update({status: 'Processing'}, {where: {id: userCart.id}});
 
     await Order.create({
@@ -46,6 +47,7 @@ router.post('/', async (req, res, next) => {
     });
 
     req.session.cart = [];
+
     res.status(201).json(newOrder);
   } catch (err) {
     next(err);
