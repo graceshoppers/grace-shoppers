@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {NavLink} from 'react-router-dom';
@@ -275,7 +276,7 @@ class Profile extends Component {
                     </NavLink>
                   </div>
                   <div>
-                    <button style={{margin: '2px', flex: '1'}}>Delete</button>
+                    <button style={{margin: '2px', flex: '1'}} onClick={() => this.deleteAddress()}>Delete</button>
                   </div>
                 </div>
               </div>

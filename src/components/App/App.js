@@ -50,7 +50,6 @@ class App extends Component {
 
   render() {
     const {isAuthenticated} = auth;
-    console.log(this.props.userDetails);
     return (
       <div className="container-fluid">
         {/* render Nav route */}
