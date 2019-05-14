@@ -8,7 +8,7 @@ const PastOrders = props => {
   return (
     <div>
       <h1>Past Orders</h1>
-      {orders.map(order => {
+      {orders.filter(order => order.status !=='Cart').map(order => {
         const {id, status} = order;
         const orderValue = order.orderitems.reduce(
           (acc, cur) => (acc += cur.quantity * cur.product.unitCost),
