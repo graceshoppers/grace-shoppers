@@ -64,7 +64,18 @@ router.post(
         status: 'Cart',
         userId: createdUser.id,
       });
-      req.session.userDetails = createdUser;
+      const updatedUser = await User.findOne({
+        where: {id: createdUser.id},
+        include: [
+          {
+            model: Order,
+            include: [{model: Orderitem, include: [{model: Product}]}],
+          },
+          {model: Address},
+        ],
+      });
+
+      req.session.userDetails = updatedUser;
 
       // If the user had items in his/her cart prior to signing up,
       // include the items into the database with the orderId being the user's cartNo,

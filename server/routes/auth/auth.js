@@ -8,9 +8,27 @@ const {
 const router = require('express').Router();
 
 // Checks if there is a user currently logged in
-router.get('/', (req, res, next) => {
-  if (!req.session.userDetails) req.session.userDetails = {};
-  res.json(req.session.userDetails);
+router.get('/', async (req, res, next) => {
+  try {
+    if (!req.session.userDetails) req.session.userDetails = {};
+    else {
+      const user = await User.findOne({
+        where: {id: req.session.userDetails.id},
+        include: [
+          {
+            model: Order,
+            include: [{model: Orderitem, include: [{model: Product}]}],
+          },
+          {model: Address},
+        ],
+      });
+      req.session.userDetails = user;
+    }
+
+    res.json(req.session.userDetails);
+  } catch (err) {
+    next(err);
+  }
 });
 
 // Checks if login credentials match values in database
