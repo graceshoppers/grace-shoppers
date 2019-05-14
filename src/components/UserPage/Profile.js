@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 /* eslint-disable complexity */
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
@@ -6,6 +7,7 @@ import {editUser} from '../../redux-store/actions/user-actions';
 import {updateUserDetails} from '../../redux-store/actions/auth-actions';
 
 import './UserPage.css';
+import axios from 'axios';
 
 class Profile extends Component {
   constructor() {
@@ -46,7 +48,11 @@ class Profile extends Component {
       this.setState({id, firstName, lastName, email, addresses});
     }
   }
-
+  deleteAddress = (id) => {
+    axios.delete(`/api/addresses/${id}`)
+      .then(() => this.props.updateUserDetails(this.props.userDetails.id))
+      .catch(e => console.log(`Error deleting address:\n${e}`));
+  };
   handleSubmit = evt => {
     evt.preventDefault();
     const {history, editUser, updateUserDetails} = this.props;
@@ -276,7 +282,7 @@ class Profile extends Component {
                     </NavLink>
                   </div>
                   <div>
-                    <button style={{margin: '2px', flex: '1'}} onClick={() => this.deleteAddress()}>Delete</button>
+                    <button style={{margin: '2px', flex: '1'}} onClick={() => this.deleteAddress(id)}>Delete</button>
                   </div>
                 </div>
               </div>
