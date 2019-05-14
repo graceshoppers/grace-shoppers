@@ -24,7 +24,7 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    if (this.props.userDetails) {
+    if (!!Object.keys(this.props.userDetails).length) {
       const {
         id,
         firstName,
