@@ -1,7 +1,6 @@
 const router = require('express').Router();
-const {
-  models: {Address},
-} = require('../../db');
+const {models} = require('../../db');
+const {Address} = models;
 
 module.exports = router;
 
@@ -28,7 +27,7 @@ router.put('/:id', async (req, res, next) => {
     await Address.update(req.body, {
       where: {id: req.params.id * 1},
     });
-    const updatedAddress = await Address.findByPK(req.params.id * 1);
+    const updatedAddress = await Address.findByPk(req.params.id * 1);
     res.status(200).json(updatedAddress);
   } catch (err) {
     next(err);
@@ -37,11 +36,10 @@ router.put('/:id', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
   try {
-    const deletedAddress = await Address.findByPK(req.params.id * 1);
     await Address.destroy({where: {id: req.params.id * 1}});
     res
       .status(200)
-      .json({message: 'Deleted address successfully.', deletedAddress});
+      .json({message: 'Deleted address successfully.'});
   } catch (err) {
     next(err);
   }
