@@ -29,7 +29,7 @@ UserPage*/
 .option-card {
   height: 100px;
   width: 300px;
-  border: 1px solid gray;
+  border: 1px solid lightgray;
   border-radius: 10px;
   margin: 10px;
   display: flex;
@@ -39,5 +39,22 @@ UserPage*/
 }
 
 .option-card:hover {
-  background: #ededed;
+  background: #f7f7f7;
+}
+
+/* button */
+button {
+  border-radius: 10px;
+  border: none;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+  margin: 5px;
+}
+
+button:hover {
+  background: #f7f7f7;
+}
+
+button:focus {
+  outline: 0;
 }

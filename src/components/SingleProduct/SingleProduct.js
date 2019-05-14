@@ -109,7 +109,7 @@ class SingleProduct extends Component {
                   onClick={() => addProductToCart(this.state.product)}
                   style={{minWidth: '150px',maxWidth:'350px'}}
                 >
-                  {parseCost(unitCost)} Add to Cart
+                  {parseCost(unitCost)} | Add to Cart
                 </button>
 
                 {userDetails ? (
