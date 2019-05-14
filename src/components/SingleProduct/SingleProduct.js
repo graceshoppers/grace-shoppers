@@ -106,7 +106,7 @@ class SingleProduct extends Component {
                 </button>
 
 
-                {userDetails.userDetails? <button
+                {userDetails? <button
                   className="btn btn-light"
                   onClick={() => this.setState({showReviewForm:!this.state.showReviewForm})}
                   style={{width: '200px', borderRadius: '0px'}}
