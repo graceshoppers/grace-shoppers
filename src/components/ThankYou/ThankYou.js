@@ -23,7 +23,7 @@ class ThankYou extends Component {
       <div className="container">
         {
           id
-          ? <div><h2>Here are your order details: </h2><h4>{JSON.stringify(order[0])}</h4>{console.log(order)}<h1>Your order is on its way!</h1></div>
+          ? <div><h2>Here are your order details: </h2><h4>{JSON.stringify(order)}</h4>{console.log(order)}<h1>Your order is on its way!</h1></div>
           : <div/>
         }
       </div>
