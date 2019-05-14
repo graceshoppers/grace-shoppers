@@ -27,11 +27,13 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const user = await User.findOne({
-      where: {id: +req.params.id},
+      where: {id: req.params.id},
       include: [
         {
-          model: Address,
+          model: Order,
+          include: [{model: Orderitem, include: [{model: Product}]}],
         },
+        {model: Address},
       ],
     });
     res.status(200).json(user);

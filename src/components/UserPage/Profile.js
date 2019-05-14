@@ -71,7 +71,8 @@ class Profile extends Component {
   };
 
   render() {
-    if (!this.props.userDetails) return <div />;
+    if (!Object.keys(this.props.userDetails).length) return <div />;
+
     const {
       firstName,
       lastName,

@@ -16,7 +16,7 @@ const Home = props => {
       >
         <div className="horizontal-flip">K</div>BMK
       </div>
-      <h1 style={{zIndex:999}}>Fine Jewelry</h1>
+      <h1 style={{zIndex: 999}}>Fine Jewelry</h1>
       <img
         src="line1.jpg"
         style={{
@@ -29,7 +29,7 @@ const Home = props => {
         }}
       />
       <NavLink
-        to="/catalog/rings"
+        to="/catalog"
         style={{padding: '0px', margin: '0px', fontSize: '20px'}}
       >
         <button className="collection-link">Explore Our Collections</button>
