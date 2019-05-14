@@ -1,31 +1,32 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import CartList from '../Cart/CartList';
+import {fetchCart} from '../../redux-store/actions/cart-actions';
 import {addOrder} from '../../redux-store/actions/order-actions';
+import {updateUserDetails} from '../../redux-store/actions/auth-actions';
 
 class Checkout extends Component {
   constructor() {
     super();
-    this.checkout = this.checkout.bind(this);
   }
-  checkout() {
-    const {cart, user} = this.props;
-    const order = {
-      orderitems: cart,
-      userId: user.userDetails.id,
-    };
+
+  handleSubmit = event => {
+    event.preventDefault();
     this.props
-      .addOrder(order)
-      .then(({newOrder}) => {
-        this.props.history.push(`/thank_you/${newOrder.id}`);
+      .addOrder()
+      .then(newOrder => {
+        this.props.fetchCart();
+        this.props.updateUserDetails(this.props.userDetails.id);
+        this.props.history.push(`/thank-you`);
       })
       .catch(e => console.log(e));
-  }
+  };
   render() {
     const {cart, userDetails} = this.props;
     if (!Object.keys(userDetails).length) this.props.history.push('/login');
+
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <div className="container">
           <CartList cart={cart} />
           <div className="panel panel-info">
@@ -62,7 +63,7 @@ class Checkout extends Component {
                 <label>Phone Number</label>
                 <input
                   type="tel"
-                  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                  pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
                   className="form-control mb-2"
                   required
                 />
@@ -94,11 +95,12 @@ class Checkout extends Component {
 }
 
 const mapStateToProps = ({cart, userDetails}) => ({cart, userDetails});
-const mapDispatchToProps = dispatch => {
-  return {
-    addOrder: order => dispatch(addOrder(order)),
-  };
-};
+
+const mapDispatchToProps = dispatch => ({
+  fetchCart: () => dispatch(fetchCart()),
+  addOrder: order => dispatch(addOrder(order)),
+  updateUserDetails: id => dispatch(updateUserDetails(id)),
+});
 
 export default connect(
   mapStateToProps,

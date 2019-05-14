@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const {
-  models: {Order, User, Address},
+  models: {Order, Orderitem, Product, User, Address},
 } = require('../../db');
+const Sequelize = require('sequelize');
 
 module.exports = router;
 
@@ -18,15 +19,36 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-// POST, creates a new order
+// POST, changes status of order of 'Cart' to 'Processing'
+// creates a new order for the cart
 router.post('/', async (req, res, next) => {
   try {
-    const createdOrder = await Order.create({
-      status: 'Processing',
-      orderitems: req.body.orderitems,
-      userId: req.body.userId,
+    const userCart = await Order.findOne({
+      where: {
+        [Sequelize.Op.and]: [
+          {userId: req.session.userDetails.id},
+          {status: 'Cart'},
+        ],
+      },
     });
-    res.status(201).json(createdOrder);
+
+    await Order.update({status: 'Processing'}, {where: {id: userCart.id}});
+
+    await Order.create({
+      status: 'Cart',
+      userId: req.session.userDetails.id,
+    });
+
+    const newOrder = await Order.findOne({
+      where: {
+        id: userCart.id,
+      },
+      include: [Orderitem],
+    });
+
+    req.session.cart = [];
+
+    res.status(201).json(newOrder);
   } catch (err) {
     next(err);
   }
