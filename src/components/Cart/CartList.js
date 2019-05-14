@@ -27,6 +27,7 @@ const CartList = ({cart}) => {
       Total section
       -------------
       */}
+      <hr />
       <div className="container">
         <div className="row d-flex flex-row">
           <div className="col-md-9">

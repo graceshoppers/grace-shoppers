@@ -8,7 +8,7 @@ const makeFakeOrder = () => {
 
 const orders = [];
 
-for (let i = orders.length; i < 1; i++) {
+for (let i = orders.length; i < 20; i++) {
   orders.push(makeFakeOrder());
 }
 
