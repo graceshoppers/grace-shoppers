@@ -9,22 +9,36 @@ import CartButton from '../Cart/CartButton';
 
 class NavBar extends Component {
   render() {
-    const {history, auth, isAuthenticated} = this.props;
+    const {location, history, auth, isAuthenticated} = this.props;
+    const isDisplayed = location.pathname === '/' ? 'none' : '';
 
     return (
-      <nav className="row navbar navbar-expand-lg navbar-light fixed-container">
+      <nav
+        className="row navbar navbar-expand navbar-light fixed-container"
+        style={{display: `${isDisplayed}`}}
+      >
         <SearchBar history={history} />
-
         {/* Home link */}
-        <div className="col-6 d-flex flex-column justify-content-center align-items-center">
+        <div className="col-6 d-flex flex-column justify-content-center align-items-center" style={{padding:'0px',margin:'0px'}}>
           <NavLink to="/" className="navbar-brand">
-            <div className="home-logo">
+            <div className="home-logo" style={{zIndex: 999,padding:'0px'}}>
               <div className="horizontal-flip">K</div>BMK
             </div>
           </NavLink>
-          <div className="nav-top-lightgrey-border"></div>
+          {/* <div className="nav-top-lightgrey-border" /> */}
+          <img
+            src="line1.jpg"
+            style={{
+              objectFit:'cover',
+              height: '35px',
+              width: '400px',
+              display: 'inline-block',
+              marginTop: '-20px',
+              marginBottom: '-15px',
+              paddingRight:'12px'
+            }}
+          />
           <NavMenu />
-
         </div>
         <div className="col d-flex justify-content-end align-items-center">
           {/*

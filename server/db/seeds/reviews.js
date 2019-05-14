@@ -1,17 +1,17 @@
-const faker = require("faker");
+const faker = require('faker');
 
 const makeFakeReview = () => {
   return {
     textBody: faker.lorem.paragraph(),
-    stars: faker.random.number({ min: 1, max: 5 }),
+    stars: faker.random.number({min: 1, max: 5}),
     title: faker.lorem.sentence(),
-    recommended: faker.random.boolean()
+    recommended: faker.random.boolean(),
   };
 };
 
 const reviews = [];
 
-for (let i = reviews.length; i < 1000; i++) {
+for (let i = reviews.length; i < 100; i++) {
   reviews.push(makeFakeReview());
 }
 

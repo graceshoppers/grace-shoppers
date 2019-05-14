@@ -14,4 +14,8 @@ const Order = connection.define('order', {
   },
 });
 
+// I would be beneficial to have some functionality
+// for the cart on the Order model.
+// Order.addHook('beforeCreate', (order, options) => {});
+
 module.exports = Order;

@@ -2,21 +2,41 @@ const router = require('express').Router();
 const {validationResult} = require('express-validator/check');
 const errorFormatter = require('../validations/_error-formatter');
 const {
-  models: {User, Address},
+  models: {User, Order, Orderitem, Product, Address},
 } = require('../../db');
 
 // GET, gets all users
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
-      order: [['id', 'ASC']],
       include: [
-        {
-          model: Address,
-        },
+        // Commented out for the time being because there was too much
+        // going on in /api/users.
+        // {
+        //   model: Address,
+        // },
       ],
+      order: [['id', 'ASC']],
     });
     res.status(200).json(users);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get('/:id', async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      where: {id: req.params.id},
+      include: [
+        {
+          model: Order,
+          include: [{model: Orderitem, include: [{model: Product}]}],
+        },
+        {model: Address},
+      ],
+    });
+    res.status(200).json(user);
   } catch (err) {
     next(err);
   }
@@ -40,8 +60,39 @@ router.post(
 
     try {
       const createdUser = await User.create(req.body);
-      req.session.userDetails = createdUser;
-      res.status(201).json(createdUser);
+      const createdCart = await Order.create({
+        status: 'Cart',
+        userId: createdUser.id,
+      });
+      const updatedUser = await User.findOne({
+        where: {id: createdUser.id},
+        include: [
+          {
+            model: Order,
+            include: [{model: Orderitem, include: [{model: Product}]}],
+          },
+          {model: Address},
+        ],
+      });
+
+      req.session.userDetails = updatedUser;
+
+      // If the user had items in his/her cart prior to signing up,
+      // include the items into the database with the orderId being the user's cartNo,
+      // which is an orderId.
+
+      if (req.session.cart)
+        await Promise.all(
+          req.session.cart.map(({id, quantity}) =>
+            Orderitem.create({
+              orderId: createdCart.id,
+              productId: id,
+              quantity,
+            })
+          )
+        );
+
+      res.status(201).json(req.session.userDetails);
     } catch (err) {
       // I need to create a more dynamic error handler.
       // Right now, this handler does not take password errors into account.

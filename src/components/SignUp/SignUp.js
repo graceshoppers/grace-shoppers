@@ -4,11 +4,13 @@ import {addUser} from '../../redux-store/actions/user-actions';
 import {getUserDetails} from '../../redux-store/actions/auth-actions';
 import TextInputGroup from '../_common/TextInputGroup';
 
+import '../Login/Login.css';
+
 class SignUp extends Component {
   constructor() {
     super();
     this.state = {
-      errors: [],
+      errors: {},
     };
   }
 
@@ -31,7 +33,7 @@ class SignUp extends Component {
       .addUser(signupCredentials)
       .then(() => {
         this.props.getUserDetails();
-        this.props.history.push('/');
+        this.props.history.push('/catalog');
       })
       .catch(err => {
         this.setState({
@@ -44,7 +46,7 @@ class SignUp extends Component {
     const {errors} = this.state;
 
     return (
-      <div className="card container" style={{marginTop: '2em'}}>
+      <div className="card container" style={{marginTop: '2em', width: '40vw'}}>
         <h2>Sign Up</h2>
         <hr />
         <form onSubmit={this.handleSubmit}>
@@ -83,7 +85,7 @@ class SignUp extends Component {
 
           {/* Submit button */}
           <div className="form-group">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" style={{color: '#50a0fc'}}>
               Sign Up
             </button>
           </div>

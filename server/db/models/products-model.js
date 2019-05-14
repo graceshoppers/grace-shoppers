@@ -1,28 +1,29 @@
-const connection = require('../database');
+const connection = require("../database");
 const {
-  Sequelize: {STRING, DOUBLE, TEXT,ARRAY},
+
+  Sequelize: { STRING, DOUBLE, TEXT, BOOLEAN, ARRAY }
+
 } = connection;
 
-const Product = connection.define('product', {
+const Product = connection.define("product", {
   name: {
     type: STRING,
     allowNull: false,
-    notEmpty: true,
+    notEmpty: true
   },
   material: {
     type: STRING,
     allowNull: false,
-    notEmpty: true,
+    notEmpty: true
   },
   description: {
     type: TEXT,
     allowNull: false,
-    notEmpty: true,
+    notEmpty: true
   },
   imageName: {
     type: STRING,
-    allowNull: false,
-    notEmpty: true,
+    defaultValue: ''
   },
   sideImage:{
     type: ARRAY(STRING),
@@ -30,8 +31,13 @@ const Product = connection.define('product', {
   unitCost: {
     type: DOUBLE,
     allowNull: false,
-    notEmpty: true,
+    notEmpty: true
   },
+  stock: {
+    type: BOOLEAN,
+    allowNull: false,
+    notEmpty: true
+  }
 });
 
 module.exports = Product;

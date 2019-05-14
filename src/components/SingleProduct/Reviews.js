@@ -6,6 +6,7 @@ import './SingleProduct.css';
 const Reviews = props => {
   const {reviews} = props;
   const {product} = props;
+  const {users} = props;
   const thisProductReviews = reviews.filter(
     review => review.productId === product.id
   );
@@ -70,6 +71,10 @@ const Reviews = props => {
     return <img width="25 px" height="25 px" src="/stars/star_empty.png" />;
   };
 
+  const lookUpUser = (userId) => {
+    return props.users.find(user => user.id === userId)
+  }
+
   return (
     <div className="d-flex flex-column">
       <h2>REVIEWS</h2>
@@ -83,8 +88,11 @@ const Reviews = props => {
           createdAt,
           textBody,
           recommended,
+          userId
         } = thisProductReview;
-        const {firstName, lastName} = thisProductReview.user;
+
+        const {firstName, lastName} = lookUpUser(userId)
+
 
         return (
           <div key={id}>
@@ -124,6 +132,7 @@ const Reviews = props => {
 const mapStateToProps = state => {
   return {
     reviews: state.reviews,
+    users: state.users
   };
 };
 

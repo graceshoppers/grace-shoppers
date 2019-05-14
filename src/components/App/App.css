@@ -4,3 +4,19 @@
   align-items: stretch;
   height: 100vh;
 }
+
+button {
+  border-radius: 10px;
+  border: none;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+  margin: 5px;
+}
+
+button:hover {
+  background: #f7f7f7;
+}
+
+button:focus {
+  outline: 0;
+}

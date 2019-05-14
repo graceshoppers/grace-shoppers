@@ -10,6 +10,7 @@ import authReducer from './reducers/auth-reducer';
 import reviewReducer from './reducers/review-reducer';
 import orderReducer from './reducers/order-reducer';
 import orderitemsReducer from './reducers/orderitem-reducer';
+import addressReducer from './reducers/addresses-reducer';
 
 const rootReducer = combineReducers({
   categories: categoryReducer,
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   reviews: reviewReducer,
   orders: orderReducer,
   orderitems: orderitemsReducer,
+  addresses: addressReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));

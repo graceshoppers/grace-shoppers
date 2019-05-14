@@ -1,81 +1,109 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import CartList from '../Cart/CartList';
+import {fetchCart} from '../../redux-store/actions/cart-actions';
+import {addOrder} from '../../redux-store/actions/order-actions';
+import {updateUserDetails} from '../../redux-store/actions/auth-actions';
 
-import CartItem from '../Cart/CartItem';
-import parseCost from '../../shared/parse-cost';
+import './Checkout.css';
 
-const Checkout = props => {
-  const {cart, users} = props;
-  const totalCost = cart.reduce(
-    (subtotal, item) => subtotal + item.unitCost * item.quantity,
-    0
-  );
+class Checkout extends Component {
+  constructor() {
+    super();
+  }
 
-  return (
-    <div className="container">
-      <div className="panel panel-info">
-        <h3 className="panel-heading">Shipping Address</h3>
-        <div className="panel-body">
-          <p>
-            user.name
-            <br />
-            user.address
-            <br />
-            <button className="btn">Change</button>
-          </p>
-        </div>
-      </div>
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props
+      .addOrder()
+      .then(newOrder => {
+        this.props.fetchCart();
+        this.props.updateUserDetails(this.props.userDetails.id);
+        this.props.history.push(`/thank-you`);
+      })
+      .catch(e => console.log(e));
+  };
 
-      <div className="panel panel-info">
-        <h3 className="panel-heading">Payment Method</h3>
-        <div className="panel-body">
-          <p>
-            user.name
-            <br />
-            user.address
-            <br />
-            <button className="btn">Change</button>
-          </p>
-        </div>
-      </div>
+  render() {
+    const {cart, userDetails} = this.props;
+    if (!Object.keys(userDetails).length) return <div />;
 
-      <div>
-        <h3 className="panel-heading">Shopping Cart</h3>
-        <div className="black-divider-thin" style={{margin: '2em 0 0'}} />
-        {cart.map((item, index) => (
-          <CartItem
-            key={item.id}
-            attributes={item}
-            displayTopBorder={index === 0 ? false : true}
-          />
-        ))}
-        <div className="black-divider-thick" style={{margin: '2em 1.5em 0'}} />
-        {/*
-          -------------
-          Total section
-          -------------
-          */}
+    return (
+      <form onSubmit={this.handleSubmit}>
         <div className="container">
-          <div className="row d-flex flex-row">
-            <div className="col-md-9">
-              <h3 className="shopping-cart-title">Total</h3>
-            </div>
-            <div
-              className="col-md-2 d-flex flex-row-reverse"
-              style={{marginLeft: '19px'}}
-            >
-              <h5 className="shopping-cart-title">{`${parseCost(
-                totalCost
-              )}`}</h5>
+          <CartList cart={cart} />
+          <div className="panel panel-info">
+            <h3 className="panel-heading">Shipping Address</h3>
+            <div className="panel-body">
+              <div className="form-group">
+                <label>Address Line 1</label>
+                <input type="text" className="form-control mb-2" required />
+                <label>Address Line 2</label>
+                <input type="text" className="form-control mb-2" />
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label htmlFor="inputCity">City</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="inputCity"
+                    />
+                  </div>
+                  <div className="form-group col-md-4">
+                    <label htmlFor="inputState">State</label>
+                    <select id="inputState" className="form-control">
+                      <option selected>Choose...</option>
+                      <option>NY</option>
+                    </select>
+                  </div>
+                  <div className="form-group col-md-2">
+                    <label htmlFor="inputZip">Zip</label>
+                    <input type="text" className="form-control" id="inputZip" />
+                  </div>
+                </div>
+                <label>Country</label>
+                <input type="text" className="form-control mb-2" required />
+                <label>Phone Number</label>
+                <input
+                  type="tel"
+                  pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+                  className="form-control mb-2"
+                  required
+                />
+              </div>
             </div>
           </div>
+
+          <div className="panel panel-info">
+            <h3 className="panel-heading">Payment Method</h3>
+            <div className="panel-body">
+              <div className="form-group">
+                <label>Card Number</label>
+                <input type="text" className="form-control mb-2" required />
+                <label>Name on card</label>
+                <input type="text" className="form-control mb-2" required />
+                <label>Expiration date</label>
+                <input type="text" className="form-control mb-2" required />
+              </div>
+            </div>
+          </div>
+
+          <button type="submit">Checkout</button>
         </div>
-      </div>
-      <button>Place your order</button>
-    </div>
-  );
-};
+      </form>
+    );
+  }
+}
 
-const mapStateToProps = ({cart}) => ({cart});
+const mapStateToProps = ({cart, userDetails}) => ({cart, userDetails});
 
-export default connect(mapStateToProps)(Checkout);
+const mapDispatchToProps = dispatch => ({
+  fetchCart: () => dispatch(fetchCart()),
+  addOrder: order => dispatch(addOrder(order)),
+  updateUserDetails: id => dispatch(updateUserDetails(id)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Checkout);
