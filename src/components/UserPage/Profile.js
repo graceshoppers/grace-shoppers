@@ -37,7 +37,10 @@ class Profile extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.userDetails !== this.props.userDetails) {
+    if (
+      JSON.stringify(JSON.stringify(prevProps.userDetails)) !==
+      JSON.stringify(JSON.stringify(this.props.userDetails))
+    ) {
       const {
         id,
         firstName,
@@ -79,7 +82,6 @@ class Profile extends Component {
 
   render() {
     if (!Object.keys(this.props.userDetails).length) return <div />;
-
     const {
       firstName,
       lastName,
