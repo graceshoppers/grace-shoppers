@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {NavLink} from 'react-router-dom';
 import {editUser} from '../../redux-store/actions/user-actions';
 import {updateUserDetails} from '../../redux-store/actions/auth-actions';
+import AdminDashboard from '../AdminDashboard/AdminDashboard'
 
 import './UserPage.css';
 
@@ -271,6 +272,9 @@ class Profile extends Component {
             );
           })}
         </div>
+
+        {/* Integrates in Admin Dashboard for admin users */}
+        {this.props.userDetails.isAdmin?<AdminDashboard />:""}
       </div>
     );
   }
