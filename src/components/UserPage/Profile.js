@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {NavLink} from 'react-router-dom';
 import {editUser} from '../../redux-store/actions/user-actions';
 import {updateUserDetails} from '../../redux-store/actions/auth-actions';
-import AdminDashboard from '../AdminDashboard/AdminDashboard';
 
 import './UserPage.css';
 
@@ -24,8 +23,12 @@ class Profile extends Component {
   componentDidMount() {
     if (this.props.userDetails) {
       const {
-        userDetails: {id, firstName, lastName, email, addresses},
-      } = this.props;
+        id,
+        firstName,
+        lastName,
+        email,
+        addresses,
+      } = this.props.userDetails;
       this.setState({id, firstName, lastName, email, addresses});
     }
   }
@@ -33,8 +36,12 @@ class Profile extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.userDetails !== this.props.userDetails) {
       const {
-        userDetails: {id, firstName, lastName, email, addresses},
-      } = this.props;
+        id,
+        firstName,
+        lastName,
+        email,
+        addresses,
+      } = this.props.userDetails;
       this.setState({id, firstName, lastName, email, addresses});
     }
   }
@@ -250,12 +257,12 @@ class Profile extends Component {
                   {addressLine2}
                   <br />
                   {city}
-                  <br/>
+                  <br />
                   {state} {zip}
                   <br />
                   {country}
                   <br />
-                  Phone Number: {phoneNumber.substring(0,12)}
+                  Phone Number: {phoneNumber.substring(0, 12)}
                   <br />
                   Additional Instructions:{' '}
                   {additionalInstruction.substring(0, 18) + '...'}
@@ -274,9 +281,6 @@ class Profile extends Component {
             );
           })}
         </div>
-
-        {/* Integrates in Admin Dashboard for admin users */}
-        {this.props.userDetails.isAdmin ? <AdminDashboard /> : ''}
       </div>
     );
   }

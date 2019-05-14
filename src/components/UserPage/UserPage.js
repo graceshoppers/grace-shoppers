@@ -16,7 +16,7 @@ const UserPage = props => {
 
   return (
     <div className="d-flex flex-column">
-      <div className='d-flex justify-content-evenly'>
+      <div className="d-flex justify-content-evenly">
         <NavLink to="/userpage/profile" style={{textDecoration: 'none'}}>
           <div className="option-card">View Account Information</div>
         </NavLink>
@@ -27,7 +27,7 @@ const UserPage = props => {
       <button
         className="btn btn-danger"
         onClick={logoutUser}
-        style={{width: '100px', marginLeft:'10px'}}
+        style={{width: '100px', marginLeft: '10px'}}
       >
         Logout
       </button>
@@ -39,7 +39,7 @@ const mapStateToProps = ({userDetails}) => ({userDetails});
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   logoutUser: () =>
-    dispatch(logoutUser()).then(() => ownProps.history.goBack()),
+    dispatch(logoutUser()).then(() => ownProps.history.push('/')),
   getUserDetails: () => dispatch(getUserDetails()),
 });
 

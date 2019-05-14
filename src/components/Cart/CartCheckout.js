@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 
 const CartCheckout = props => {
   const {userDetails} = props;
-  if (!Object.keys(userDetails).length) props.history.push('/login');
 
   return (
     <div className="col-md-4">
